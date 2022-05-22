@@ -4,7 +4,7 @@ const Default = (props) => {
   const { children, sx, ...other } = props;
 
   return (
-    <Toolbar sx={{ height: 100, ...sx }} {...other}>
+    <Toolbar sx={{ ...sx }} {...other}>
       {children}
     </Toolbar>
   );

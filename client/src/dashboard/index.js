@@ -1,17 +1,35 @@
 import * as React from "react";
+import { useTranslation } from "react-i18next";
 
 import { Drawer, IconButton, ListItem, Text, Divider, Box, AppBar, Toolbar, List, CssBaseline } from "../components";
 import style from "./style";
 
-const defMenu = [
-  ["Inbox", "Starred", "Send email", "Drafts"],
-  ["All mail", "Trash", "Spam"],
-];
+const defMenu = [["dashboard.Andrey", "dashboard.GRAND", "dashboard.Виктор", "dashboard.Виктория"]];
 
-const local = "dashboard";
+const ListItems = (props) => {
+  const { item } = props;
+
+  const { t } = useTranslation();
+
+  if (!Array.isArray(item)) {
+    return null;
+  }
+  return (
+    <>
+      <Divider />
+      <List>
+        {item.map((text, index) => {
+          const data = { text: t(text), open, textIcon: index % 2 === 0 ? "inbox" : "looks" };
+          return <ListItem key={text} {...data} />;
+        })}
+      </List>
+    </>
+  );
+};
 
 export default function MiniDrawer() {
   const [open, setOpen] = React.useState(false);
+  const { t } = useTranslation();
 
   const handleDrawerOpen = () => {
     setOpen((prev) => !prev);
@@ -22,25 +40,15 @@ export default function MiniDrawer() {
       <CssBaseline />
       <AppBar position="fixed" sx={style.appBar}>
         <Toolbar>
-          <IconButton onClick={handleDrawerOpen} textIcon="home" name={`${local}.menu`} />
-          <Text variant="h6" caption="Mini variant drawer" />
+          <IconButton onClick={handleDrawerOpen} textIcon="home" name={t(`dashboard.menu`)} />
+          <Text variant="h6" caption={t(`dashboard.menu`)} />
         </Toolbar>
       </AppBar>
       <Drawer open={open}>
         <Toolbar />
-        {defMenu.map((item) => {
-          return (
-            <>
-              <Divider />
-              <List>
-                {item.map((text, index) => {
-                  const data = { text, open, textIcon: index % 2 === 0 ? "inbox" : "looks" };
-                  return <ListItem key={text} {...data} />;
-                })}
-              </List>
-            </>
-          );
-        })}
+        {defMenu.map((item, index) => (
+          <ListItems key={index} item={item} />
+        ))}
       </Drawer>
       <Box component="main" sx={style.boxMain}>
         <Toolbar sx={{ mb: 1 }} />
