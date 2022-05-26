@@ -1,12 +1,11 @@
+const { Markup } = require("telegraf");
+
 const test = (ctx) => {
-  ctx
-    .reply("dddd")
-    .then((data) => {
-      console.log(data);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  return ctx.reply("Привет youtube", {
+    caption: "Caption",
+    parse_mode: "Markdown",
+    ...Markup.inlineKeyboard([Markup.button.webApp("Купи что нибудь", "https://test.sacred.us.to/")]),
+  });
 };
 
 module.exports = (bot) => {
