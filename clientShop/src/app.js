@@ -1,4 +1,5 @@
 import { useTelegramWebApp, useIsTelegramWebAppReady } from "react-telegram-webapp";
+import { sendMessagePost } from "./api";
 
 const Default = () => {
   const isReady = useIsTelegramWebAppReady();
@@ -8,8 +9,9 @@ const Default = () => {
   }
 
   const handleOnClick = () => {
-    console.log(tel.initData);
-    tel.MainButton.isVisible ? tel.MainButton.hide() : tel.MainButton.show();
+    sendMessagePost(tel.initDataUnsafe);
+    // console.log(tel.initDataUnsafe);
+    // tel.MainButton.isVisible ? tel.MainButton.hide() : tel.MainButton.show();
   };
 
   // console.log(tel, isReady);
