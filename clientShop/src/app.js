@@ -1,31 +1,52 @@
-import { useTelegramWebApp, useIsTelegramWebAppReady } from "react-telegram-webapp";
-import { sendMessagePost } from "./api";
+import { useEffect, useCallback } from "react";
+import {
+  useTelegramWebApp,
+  useIsTelegramWebAppReady,
+} from "react-telegram-webapp";
+import { Box } from "@mui/material";
+import { Items } from "./components";
+
+const items = [
+  { id: 1, caption: "Boby Boba" },
+  { id: 2, caption: "Andrey" },
+  { id: 3, caption: "GRAND" },
+  { id: 4, caption: "1" },
+  { id: 5, caption: "2" },
+  { id: 6, caption: "3" },
+  { id: 6, caption: "3" },
+  { id: 6, caption: "3" },
+  { id: 6, caption: "3" },
+];
 
 const Default = () => {
   const isReady = useIsTelegramWebAppReady();
+
   const tel = useTelegramWebApp();
-  if (isReady) {
-    tel.MainButton.show().onClick(() => tel.close());
-  }
 
-  const handleOnClick = () => {
-    sendMessagePost(tel.initDataUnsafe);
-    // console.log(tel.initDataUnsafe);
-    // tel.MainButton.isVisible ? tel.MainButton.hide() : tel.MainButton.show();
-  };
+  const handleOnClick = useCallback(() => {
+    console.log("ddd");
+  }, []);
 
-  // console.log(tel, isReady);
+  useEffect(() => {
+    if (isReady) {
+      tel.MainButton.setParams({
+        color: "rgb(49, 181, 69)",
+        text: "Привет Boby BOba",
+        is_visible: true,
+        is_active: true,
+      })
+        // .showProgress(true)
+        .onClick(() => {
+          handleOnClick();
+        });
+    }
+  }, [isReady]);
+
   if (isReady)
     return (
-      <>
-        <button onClick={handleOnClick}>toggle main button</button>
-        <br />
-        <br />
-        {JSON.stringify(tel.themeParams, null, 2)}
-        <br />
-        <br />
-        {JSON.stringify(tel.initDataUnsafe, null, 2)}
-      </>
+      <Box sx={{ width: "100%" }}>
+        <Items items={items} />
+      </Box>
     );
 
   return <div />;

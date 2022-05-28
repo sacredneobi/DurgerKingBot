@@ -13,7 +13,11 @@ const bot = new Telegraf(process.env.BOT_ID);
 loader({ path: "./middleware", type: "middleware" }, bot);
 loader({ path: "./commands", type: "command" }, bot);
 
-bot.telegram.setMyCommands(commands.sort((left, right) => left.description.localeCompare(right.description)));
+bot.telegram.setMyCommands(
+  commands.sort((left, right) =>
+    left.description.localeCompare(right.description)
+  )
+);
 
 bot.start((ctx) => ctx.reply("Welcome"));
 
