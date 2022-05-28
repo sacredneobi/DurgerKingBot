@@ -17,7 +17,8 @@ const check = (options) => {
   return true;
 };
 
-const defExclude = (file) => file.indexOf(".") !== 0 && file !== "index.js" && file.slice(-3) === ".js";
+const defExclude = (file) =>
+  file.indexOf(".") !== 0 && file !== "index.js" && file.slice(-3) === ".js";
 const arrayExclude = (exclude) => {
   return (file) => !compareStringInArray(file, exclude);
 };
@@ -28,14 +29,17 @@ const arrayExclude = (exclude) => {
  * @returns {}
  */
 
-module.exports = (options, data) => {
+module.exports = (options, data, getData) => {
   if (!check(options)) return;
 
   fs.readdirSync(options.path)
     .filter(options.exclude ? arrayExclude(options.exclude) : defExclude)
     .forEach((file) => {
       let moduleName = path.basename(file, ".js");
-      if (options.moduleNameExtExclude && typeof options.moduleNameExtExclude === "string") {
+      if (
+        options.moduleNameExtExclude &&
+        typeof options.moduleNameExtExclude === "string"
+      ) {
         moduleName = path.basename(file, options.moduleNameExtExclude);
       }
       if (options.moduleNameCb && typeof options.moduleNameCb === "function") {
@@ -45,10 +49,19 @@ module.exports = (options, data) => {
       try {
         const module = require(`../${options.path}/${file}`);
         if (typeof module === "function") {
-          module(data);
-          console.log(`✅ ${options.type ? options.type : "module"}: ${moduleName}`);
+          if (typeof getData === "function") {
+            module(getData(moduleName));
+          } else {
+            module(data);
+          }
+          console.log(
+            `✅ ${options.type ? options.type : "module"}: ${moduleName}`
+          );
         } else {
-          getErrorMessage(moduleName, "Error load module export is not function");
+          getErrorMessage(
+            `${options.type}.${moduleName}`,
+            "Error load module export is not function"
+          );
         }
       } catch (error) {
         getErrorMessage(moduleName, error.message);

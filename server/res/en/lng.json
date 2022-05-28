@@ -1,0 +1,11 @@
+{
+  "dashboard": { "menu": "YOUTUBE" },
+  "routes": {
+    "settings": "Settings",
+    "translation": "Translation",
+    "Andrey": "Hello Andrey",
+    "GRAND": "Hello GRAND",
+    "Виктор": "Hello Виктор",
+    "Виктория": "Hello Виктория"
+  }
+}

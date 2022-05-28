@@ -1,6 +1,2 @@
-POST http://test.sacred.us.to:4000/api/
+GET http://localhost:3000/locales/en/lng.json
 content-type: application/json;
-
-{
-  "data": "eee"
-}

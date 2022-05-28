@@ -1,31 +1,28 @@
 import * as React from "react";
 import { useTranslation } from "react-i18next";
 
-import { Drawer, IconButton, ListItem, Text, Divider, Box, AppBar, Toolbar, List, CssBaseline } from "../components";
+import {
+  Drawer,
+  IconButton,
+  Text,
+  Box,
+  AppBar,
+  Toolbar,
+  CssBaseline,
+  Routers,
+} from "../components";
 import style from "./style";
 
-const defMenu = [["dashboard.Andrey", "dashboard.GRAND", "dashboard.Виктор", "dashboard.Виктория"]];
-
-const ListItems = (props) => {
-  const { item } = props;
-
-  const { t } = useTranslation();
-
-  if (!Array.isArray(item)) {
-    return null;
-  }
-  return (
-    <>
-      <Divider />
-      <List>
-        {item.map((text, index) => {
-          const data = { text: t(text), open, textIcon: index % 2 === 0 ? "inbox" : "looks" };
-          return <ListItem key={text} {...data} />;
-        })}
-      </List>
-    </>
-  );
-};
+const defMenu = [
+  { caption: "Andrey", icon: "directions_walk" },
+  { caption: "GRAND", icon: "self_improvement" },
+  { caption: "Виктор", icon: "emoji_people" },
+  { caption: "Виктория", icon: "pool" },
+];
+const defSettings = [
+  { caption: "settings", icon: "tune" },
+  { caption: "translation", icon: "translate" },
+];
 
 export default function MiniDrawer() {
   const [open, setOpen] = React.useState(false);
@@ -40,19 +37,26 @@ export default function MiniDrawer() {
       <CssBaseline />
       <AppBar position="fixed" sx={style.appBar}>
         <Toolbar>
-          <IconButton onClick={handleDrawerOpen} textIcon="home" name={t(`dashboard.menu`)} />
+          <IconButton
+            onClick={handleDrawerOpen}
+            textIcon="home"
+            name={t(`dashboard.menu`)}
+          />
           <Text variant="h6" caption={t(`dashboard.menu`)} />
         </Toolbar>
       </AppBar>
       <Drawer open={open}>
         <Toolbar />
-        {defMenu.map((item, index) => (
-          <ListItems key={index} item={item} />
-        ))}
+        <Routers items={defMenu} />
+        <Routers items={defSettings} fixedBottom />
       </Drawer>
       <Box component="main" sx={style.boxMain}>
         <Toolbar sx={{ mb: 1 }} />
-        <Text paragraph noWrap={false} caption={"Lorem ipsum dolor sit " + "."} />
+        <Text
+          paragraph
+          noWrap={false}
+          caption={"Lorem ipsum dolor sit " + "."}
+        />
         <Text
           paragraph
           noWrap={false}
