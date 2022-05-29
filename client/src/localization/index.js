@@ -5,7 +5,7 @@ import Backend from "i18next-http-backend";
 // import axios from "axios";
 
 const backendOptions = {
-  loadPath: "/locales/{{lng}}/",
+  loadPath: "/api/locales/{{lng}}",
 
   customHeaders: {
     "Access-Control-Allow-Origin": "*",

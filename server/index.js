@@ -4,6 +4,7 @@ const loader = require("./utils/loader");
 const { commands } = require("./utils/telegrafProto");
 const express = require("express");
 const { Router } = require("express");
+const sleep = require("./utils/sleep");
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
@@ -15,7 +16,16 @@ loader({ path: "./middleware", type: "middleware" }, bot);
 loader({ path: "./commands", type: "command" }, bot);
 loader({ path: "./controllers", type: "controller" }, null, (moduleName) => {
   const router = Router();
-  app.use(`/${moduleName}`, router);
+  app.use(
+    `/api/${moduleName}`,
+    async (req, res, next) => {
+      // if (moduleName !== "locales") {
+      //   await sleep(3000);
+      // }
+      next();
+    },
+    router
+  );
   return router;
 });
 

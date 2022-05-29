@@ -9,10 +9,11 @@ import AppBar from "./appBar";
 import Toolbar from "./toolBar";
 import List from "./list";
 import CssBaseline from "./cssBaseLine";
-import Routers from "./routers";
+import Navigation from "./navigation";
+import ContentRouter from "./contentRouter";
 
 export {
-  Routers,
+  Navigation,
   Drawer,
   IconButton,
   ListItem,
@@ -24,4 +25,5 @@ export {
   Toolbar,
   List,
   CssBaseline,
+  ContentRouter,
 };

@@ -6,5 +6,9 @@ const createPoll = (ctx) => {
 };
 
 module.exports = (bot) => {
-  // bot.newCommand({ command: "create_poll", description: "Создать опрос" }, true, createPoll);
+  bot.newCommand(
+    { command: "create_poll", description: "Создать опрос" },
+    true,
+    createPoll
+  );
 };

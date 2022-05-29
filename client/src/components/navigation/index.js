@@ -30,9 +30,9 @@ const Default = (props) => {
           const data = {
             text: t(`routes.${item.caption}`),
             open,
-            textIcon: item.icon,
+            textIcon: item.icon ? item.icon : "warning",
           };
-          return <ListItem key={item.caption} {...data} />;
+          return <ListItem key={item.caption} {...data} to={item.name} />;
         })}
       </List>
     </div>
