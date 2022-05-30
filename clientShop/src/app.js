@@ -4,18 +4,29 @@ import {
   useIsTelegramWebAppReady,
 } from "react-telegram-webapp";
 import { Box } from "@mui/material";
-import { Items } from "./components";
+import { GridItem } from "./components";
+import {
+  burger,
+  cake,
+  coke,
+  cookie,
+  donut,
+  flan,
+  fries,
+  hotdog,
+  pizza,
+} from "./res/icons";
 
 const items = [
-  { id: 1, caption: "Boby Boba" },
-  { id: 2, caption: "Andrey" },
-  { id: 3, caption: "GRAND" },
-  { id: 4, caption: "1" },
-  { id: 5, caption: "2" },
-  { id: 6, caption: "3" },
-  { id: 6, caption: "3" },
-  { id: 6, caption: "3" },
-  { id: 6, caption: "3" },
+  { id: 1, caption: "Boby Boba", icon: burger },
+  { id: 2, caption: "Andrey", icon: cake },
+  { id: 3, caption: "GRAND", icon: coke },
+  { id: 4, caption: "Джабраил", icon: cookie },
+  { id: 5, caption: "Антон", icon: donut },
+  { id: 6, caption: "Виктория", icon: flan },
+  { id: 6, caption: "Виктор", icon: fries },
+  { id: 6, caption: "3", icon: hotdog },
+  { id: 6, caption: "3", icon: pizza },
 ];
 
 const Default = () => {
@@ -35,7 +46,7 @@ const Default = () => {
         is_visible: true,
         is_active: true,
       })
-        // .showProgress(true)
+        .showProgress(true)
         .onClick(() => {
           handleOnClick();
         });
@@ -44,8 +55,8 @@ const Default = () => {
 
   if (isReady)
     return (
-      <Box sx={{ width: "100%" }}>
-        <Items items={items} />
+      <Box sx={{ margin: 1 }}>
+        <GridItem items={items} />
       </Box>
     );
 

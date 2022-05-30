@@ -1,3 +1,3 @@
-import Items from "./items";
+import GridItem from "./items";
 
-export { Items };
+export { GridItem };
