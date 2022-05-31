@@ -6,7 +6,7 @@ const test = (ctx) => {
     caption: "Caption",
     parse_mode: "Markdown",
     ...Markup.inlineKeyboard([
-      Markup.button.webApp("Купи что нибудь", `https://test.sacred.us.to/?chat_id=${ctx.chat.id}`),
+      Markup.button.webApp("Купи что нибудь", `https://test.sacred.us.to/`),
     ]),
   });
 };
