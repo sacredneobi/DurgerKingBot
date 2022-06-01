@@ -1,33 +1,36 @@
 import { useState, useEffect } from "react";
 import { Badge } from "@mui/material";
-import { styled } from "@mui/material/styles";
 
 const keyFrame = {
   "0%": {
-    transform: "scale(.8)",
+    transform: "scale(1.2)",
+  },
+  "50%": {
+    transform: "scale(1.6)",
   },
   "100%": {
-    transform: "scale(1.4)",
+    transform: "scale(1.2)",
   },
 };
 
-const styleBadge = { height: 28, borderRadius: 14, fontSize: 18 };
-
-const StyledBadge = styled(Badge)(() => ({
-  "& .MuiBadge-badge": {
-    ...styleBadge,
-    animation: "1.0s ease 1s reverse both ripple",
-  },
-  "@keyframes ripple": keyFrame,
-}));
-
-const StyledBadge2 = styled(Badge)(() => ({
-  "& .MuiBadge-badge": {
-    ...styleBadge,
-    animation: "1.0s ease 1s reverse both ripple2",
-  },
-  "@keyframes ripple2": keyFrame,
-}));
+const animationBadge = (swipe) => {
+  const def = {
+    borderRadius: 14,
+    marginRight: 1,
+    top: 4,
+    "& span": {
+      backgroundColor: "#f8a917",
+      color: "#fff",
+      fontWeight: "700",
+    },
+    alignSelf: "flex-end",
+    animation: "0.2s ease 0.5s running both",
+  };
+  if (swipe) {
+    return { ...def, animation: def.animation + " ripple" };
+  }
+  return { ...def, animation: def.animation + " ripple2" };
+};
 
 const Default = (props) => {
   const { counter } = props;
@@ -36,25 +39,26 @@ const Default = (props) => {
   const [show, setShow] = useState(false);
 
   useEffect(() => {
-    if (counter !== count) {
+    if (counter !== count && (counter !== 1 || count > counter)) {
       setShow((prev) => !prev);
       setCount(counter);
     }
   }, [counter]);
 
-  const def = { badgeContent: counter, color: "primary" };
+  const def = { badgeContent: counter };
 
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      {counter ? (
-        show ? (
-          <StyledBadge {...def} />
-        ) : (
-          <StyledBadge2 {...def} />
-        )
-      ) : null}
+    <>
+      <Badge
+        {...def}
+        sx={{
+          ...animationBadge(show),
+          "@keyframes ripple": keyFrame,
+          "@keyframes ripple2": keyFrame,
+        }}
+      />
       {props.children}
-    </div>
+    </>
   );
 };
 

@@ -6,11 +6,11 @@ const test = (ctx) => {
     caption: "Caption",
     parse_mode: "Markdown",
     ...Markup.inlineKeyboard([
-      Markup.button.webApp("Купи что нибудь", `https://test.sacred.us.to/`),
+      Markup.button.webApp("Купи что нибудь", `https://bot.sacred.us.to/`),
     ]),
   });
 };
 
 module.exports = (bot) => {
-  bot.newCommand({ command: "test", description: "Тестовые команды" }, test);
+  bot.newCommand({ command: "buy", description: "Магазин подписчиков" }, test);
 };

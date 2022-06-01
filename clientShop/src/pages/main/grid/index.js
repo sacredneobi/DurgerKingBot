@@ -4,13 +4,14 @@ import Item from "./item";
 import { rootBox } from "./styles";
 
 const Default = (props) => {
-  const { items = [] } = props;
+  const { items = [], ...other } = props;
 
   return (
     <Grid
       container
       columns={{ xs: 3, sm: 4, md: 6, lg: 8, xl: 12 }}
       justifyContent="flex-start"
+      {...other}
     >
       {items.map((item, index) => {
         return (

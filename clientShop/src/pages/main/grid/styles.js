@@ -34,6 +34,9 @@ const containerButton = (show, add = false) => {
     height,
     maxHeight: height,
     padding: "unset",
+    "&:hover": {
+      backgroundColor: add ? "#f8a917" : "#e64d44",
+    },
     backgroundColor: add ? "#f8a917" : "#e64d44",
   };
 
@@ -42,14 +45,13 @@ const containerButton = (show, add = false) => {
       ...def,
       flexBasis: show ? "100%" : "45%",
     };
-  } else {
-    return {
-      ...def,
-      flexBasis: show ? "0%" : "45%",
-      visibility: show ? "hidden" : "visible",
-      opacity: show ? 0 : 1,
-    };
   }
+  return {
+    ...def,
+    flexBasis: show ? "0%" : "45%",
+    visibility: show ? "hidden" : "visible",
+    opacity: show ? 0 : 1,
+  };
 };
 
 const containerButtonIconDefault = { fontSize: 35 };

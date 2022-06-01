@@ -5,6 +5,7 @@ import {
 } from "react-telegram-webapp";
 import { Box } from "@mui/material";
 import Grid from "./grid";
+import { Pagination } from "../../components";
 import {
   burger,
   cake,
@@ -35,11 +36,12 @@ const Default = () => {
   const tel = useTelegramWebApp();
 
   const handleOnClick = useCallback(() => {
-    console.log("ddd");
-  }, []);
+    console.log(tel);
+  }, [tel]);
 
   useEffect(() => {
     if (isReady) {
+      tel.expand(true);
       tel.MainButton.setParams({
         color: "rgb(49, 181, 69)",
         text: "Привет Boby Boba",
@@ -51,12 +53,27 @@ const Default = () => {
           handleOnClick();
         });
     }
-  }, [isReady]);
+  }, [isReady, tel]);
 
   if (isReady)
     return (
-      <Box sx={{ margin: 1 }}>
-        <Grid items={items} />
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          height: "100vh",
+          justifyContent: "space-between",
+        }}
+      >
+        <Grid items={items} sx={{ overflow: "auto" }} />
+        <Pagination
+          sx={{
+            position: "sticky",
+            margin: 1,
+            "& .MuiPagination-ul": { justifyContent: "center" },
+            "& button": { backgroundColor: "#f8a917" },
+          }}
+        />
       </Box>
     );
 
