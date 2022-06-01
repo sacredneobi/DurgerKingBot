@@ -4,7 +4,7 @@ import {
   useIsTelegramWebAppReady,
 } from "react-telegram-webapp";
 import { Box } from "@mui/material";
-import { GridItem } from "./components";
+import Grid from "./grid";
 import {
   burger,
   cake,
@@ -15,7 +15,7 @@ import {
   fries,
   hotdog,
   pizza,
-} from "./res/icons";
+} from "../../res/icons";
 
 const items = [
   { id: 1, caption: "Boby Boba", icon: burger },
@@ -25,8 +25,8 @@ const items = [
   { id: 5, caption: "Антон", icon: donut },
   { id: 6, caption: "Виктория", icon: flan },
   { id: 6, caption: "Виктор", icon: fries },
-  { id: 6, caption: "3", icon: hotdog },
-  { id: 6, caption: "3", icon: pizza },
+  { id: 6, caption: "Антон", icon: hotdog },
+  { id: 6, caption: "Ivan", icon: pizza },
 ];
 
 const Default = () => {
@@ -42,7 +42,7 @@ const Default = () => {
     if (isReady) {
       tel.MainButton.setParams({
         color: "rgb(49, 181, 69)",
-        text: "Привет Boby BOba",
+        text: "Привет Boby Boba",
         is_visible: true,
         is_active: true,
       })
@@ -56,7 +56,7 @@ const Default = () => {
   if (isReady)
     return (
       <Box sx={{ margin: 1 }}>
-        <GridItem items={items} />
+        <Grid items={items} />
       </Box>
     );
 

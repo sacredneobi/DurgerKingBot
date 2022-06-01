@@ -42,8 +42,6 @@ const Default = (props) => {
     }
   }, [counter]);
 
-  console.log(show, count);
-
   const def = { badgeContent: counter, color: "primary" };
 
   return (
