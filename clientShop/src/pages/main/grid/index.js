@@ -3,16 +3,15 @@ import { Box } from "../../../components";
 import Item from "./item";
 
 const Default = (props) => {
-  const { items = [], xs, ...other } = props;
+  const { items = [], sx, ...other } = props;
 
   return (
-    <Box sx={{ padding: 2 }}>
+    <Box sx={{ ...sx, padding: 2 }}>
       <Grid
         container
         columns={{ xs: 3, sm: 4, md: 6, lg: 8, xl: 12 }}
         justifyContent="flex-start"
         spacing={2}
-        xs={{ ...xs }}
         {...other}
       >
         {items.map((item, index) => {
