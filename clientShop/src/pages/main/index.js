@@ -28,6 +28,11 @@ const items = [
   { id: 6, caption: "Виктор", icon: fries },
   { id: 6, caption: "Антон", icon: hotdog },
   { id: 6, caption: "Ivan", icon: pizza },
+  {
+    id: 6,
+    caption: "NOUVEAU PARIS",
+    icon: pizza,
+  },
 ];
 
 const Default = () => {
@@ -66,12 +71,11 @@ const Default = () => {
         }}
       >
         <Grid items={items} sx={{ overflow: "auto" }} />
+        <div style={{ flexGrow: 1 }} />
         <Pagination
+          center
           sx={{
-            position: "sticky",
             margin: 1,
-            "& .MuiPagination-ul": { justifyContent: "center" },
-            "& button": { backgroundColor: "#f8a917" },
           }}
         />
       </Box>

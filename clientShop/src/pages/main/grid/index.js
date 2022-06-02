@@ -1,28 +1,29 @@
 import { Grid } from "@mui/material";
 import { Box } from "../../../components";
 import Item from "./item";
-import { rootBox } from "./styles";
 
 const Default = (props) => {
-  const { items = [], ...other } = props;
+  const { items = [], xs, ...other } = props;
 
   return (
-    <Grid
-      container
-      columns={{ xs: 3, sm: 4, md: 6, lg: 8, xl: 12 }}
-      justifyContent="flex-start"
-      {...other}
-    >
-      {items.map((item, index) => {
-        return (
-          <Grid key={index} item xs={1}>
-            <Box sx={rootBox}>
+    <Box sx={{ padding: 2 }}>
+      <Grid
+        container
+        columns={{ xs: 3, sm: 4, md: 6, lg: 8, xl: 12 }}
+        justifyContent="flex-start"
+        spacing={2}
+        xs={{ ...xs }}
+        {...other}
+      >
+        {items.map((item, index) => {
+          return (
+            <Grid key={index} item xs={1}>
               <Item {...item} />
-            </Box>
-          </Grid>
-        );
-      })}
-    </Grid>
+            </Grid>
+          );
+        })}
+      </Grid>
+    </Box>
   );
 };
 

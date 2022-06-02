@@ -6,10 +6,11 @@ import {
   containerButton,
   rootContainer,
 } from "./styles";
+import { Skeleton } from "@mui/material";
 import Button from "./button";
 
 const Default = (props) => {
-  const { caption, icon } = props;
+  const { caption, icon, loading } = props;
 
   const [counter, setCounter] = useState(0);
 
@@ -18,6 +19,10 @@ const Default = (props) => {
   };
 
   const isZero = counter === 0;
+
+  if (loading) {
+    return <Skeleton variant="rectangular" width="100%" height="100%" />;
+  }
 
   return (
     <Box sx={rootContainer}>
