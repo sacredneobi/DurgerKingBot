@@ -47,7 +47,12 @@
         }
       ],
       "no-duplicate-imports": "warn",
-      "no-unused-vars": "warn",
+      "no-unused-vars": [
+        "warn",
+        {
+          "args": "none"
+        }
+      ],
       "object-curly-spacing": [
         "warn",
         "always"
