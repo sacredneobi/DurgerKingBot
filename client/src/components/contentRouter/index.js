@@ -11,7 +11,6 @@ const Default = (props) => {
     <Routes>
       <Route path="/" element={<div>MAIN</div>} />
       {routers.map((item) => {
-        console.log();
         return (
           <Route key={item.name} path={item.name} element={<div>1</div>} />
         );

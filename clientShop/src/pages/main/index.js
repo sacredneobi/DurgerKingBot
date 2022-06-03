@@ -35,7 +35,7 @@ const items = [
   },
 ];
 
-const Default = () => {
+const Default = (props) => {
   const isReady = useIsTelegramWebAppReady();
 
   const tel = useTelegramWebApp();

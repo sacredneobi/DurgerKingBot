@@ -33,7 +33,42 @@
   "eslintConfig": {
     "extends": [
       "eslint:recommended"
-    ]
+    ],
+    "rules": {
+      "eol-last": "error",
+      "jsx-quotes": [
+        "warn",
+        "prefer-double"
+      ],
+      "max-len": [
+        "warn",
+        {
+          "code": 120
+        }
+      ],
+      "no-duplicate-imports": "warn",
+      "no-unused-vars": "warn",
+      "object-curly-spacing": [
+        "warn",
+        "always"
+      ],
+      "quotes": [
+        "warn",
+        "double"
+      ],
+      "react/jsx-filename-extension": [
+        "error",
+        {
+          "extensions": [
+            ".js",
+            ".jsx",
+            ".ts",
+            ".tsx"
+          ]
+        }
+      ],
+      "semi": "warn"
+    }
   },
   "browserslist": {
     "production": [
