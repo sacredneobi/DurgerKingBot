@@ -2,7 +2,15 @@ import { IconButton } from "@mui/material";
 import Icon from "../icon";
 
 const Default = (props) => {
-  const { help = "button", textIcon, icon, onClick, children, ...other } = props;
+  const {
+    help = "button",
+    textIcon,
+    icon,
+    onClick,
+    children,
+    iconSx,
+    ...other
+  } = props;
   const MyIcon = icon;
 
   const handleOnClick = (event) => {
@@ -23,7 +31,7 @@ const Default = (props) => {
       {...other}
     >
       {icon && <MyIcon />}
-      {textIcon && <Icon textIcon={textIcon} />}
+      {textIcon && <Icon textIcon={textIcon} sx={{ ...iconSx }} />}
       {children}
     </IconButton>
   );

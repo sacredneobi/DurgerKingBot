@@ -9,7 +9,7 @@ const Default = (props) => {
     <Box sx={{ ...sx, padding: 2 }}>
       <Grid
         container
-        columns={{ xs: 3, sm: 4, md: 6, lg: 8, xl: 12 }}
+        columns={{ xs: 3, sm: 4, md: 4, lg: 4, xl: 4 }}
         justifyContent="flex-start"
         spacing={2}
         {...other}

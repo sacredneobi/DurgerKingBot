@@ -1,2 +1,0 @@
-GET http://localhost:4000/locales/en
-content-type: application/json;

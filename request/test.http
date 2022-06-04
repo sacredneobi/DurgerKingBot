@@ -1,2 +1,0 @@
-GET http://localhost:3000/locales/en/lng.json
-content-type: application/json;

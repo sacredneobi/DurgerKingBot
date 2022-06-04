@@ -1,11 +1,13 @@
-import { useEffect, useCallback } from "react";
+import { useEffect } from "react";
 import {
   useTelegramWebApp,
   useIsTelegramWebAppReady,
 } from "react-telegram-webapp";
 import { Box } from "@mui/material";
 import Grid from "./grid";
-import { Pagination } from "../../components";
+import Bottom from "./bottom";
+import { root, grid, baseLine } from "./styles";
+import Search from "./search";
 import {
   burger,
   cake,
@@ -40,44 +42,36 @@ const Default = (props) => {
 
   const tel = useTelegramWebApp();
 
-  const handleOnClick = useCallback(() => {
-    console.log(tel);
-  }, [tel]);
+  // const handleOnClick = useCallback(() => {
+  //   console.log(tel);
+  // }, [tel]);
 
   useEffect(() => {
     if (isReady) {
-      tel.expand(true);
-      tel.MainButton.setParams({
-        color: "rgb(49, 181, 69)",
-        text: "Привет Boby Boba",
-        is_visible: true,
-        is_active: true,
-      })
-        .showProgress(true)
-        .onClick(() => {
-          handleOnClick();
-        });
+      // tel.expand(true);
+      // tel.MainButton.setParams({
+      //   color: "rgb(49, 181, 69)",
+      //   text: "Привет Boby Boba",
+      //   is_visible: true,
+      //   is_active: true,
+      // })
+      //   .showProgress(true)
+      //   .onClick(() => {
+      //     handleOnClick();
+      //   });
     }
   }, [isReady, tel]);
 
   if (isReady)
     return (
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "column",
-          height: "100vh",
-          justifyContent: "space-between",
-        }}
-      >
-        <Grid items={items} sx={{ overflow: "auto" }} />
-        <div style={{ flexGrow: 1 }} />
-        <Pagination
-          center
-          sx={{
-            margin: 1,
-          }}
+      <Box sx={root}>
+        <Grid items={items} sx={grid} />
+        <Bottom
+          search={(props) => (
+            <Search {...props} sx={{ marginLeft: 2, marginRight: 1 }} />
+          )}
         />
+        <Box sx={{ ...baseLine, height: 20 }} />
       </Box>
     );
 

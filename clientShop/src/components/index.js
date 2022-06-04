@@ -14,6 +14,7 @@ import ContentRouter from "./contentRouter";
 import Badge from "./badge";
 import Avatar from "./avatar";
 import Pagination from "./pagination";
+import Button from "./button";
 
 export {
   Navigation,
@@ -32,4 +33,5 @@ export {
   Badge,
   Avatar,
   Pagination,
+  Button,
 };
