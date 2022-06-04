@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "http://test.sacred.us.to:4000",
   "dependencies": {
+    "@chatui/core": "^1.4.1",
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "@mui/icons-material": "^5.6.2",
@@ -23,6 +24,7 @@
     "react-i18next": "^11.16.9",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "react-use-websocket": "^4.2.0",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -34,7 +36,47 @@
   "eslintConfig": {
     "extends": [
       "eslint:recommended"
-    ]
+    ],
+    "rules": {
+      "eol-last": "error",
+      "jsx-quotes": [
+        "warn",
+        "prefer-double"
+      ],
+      "max-len": [
+        "warn",
+        {
+          "code": 120
+        }
+      ],
+      "no-duplicate-imports": "warn",
+      "no-unused-vars": [
+        "warn",
+        {
+          "args": "none"
+        }
+      ],
+      "object-curly-spacing": [
+        "warn",
+        "always"
+      ],
+      "quotes": [
+        "warn",
+        "double"
+      ],
+      "react/jsx-filename-extension": [
+        "error",
+        {
+          "extensions": [
+            ".js",
+            ".jsx",
+            ".ts",
+            ".tsx"
+          ]
+        }
+      ],
+      "semi": "warn"
+    }
   },
   "browserslist": {
     "production": [

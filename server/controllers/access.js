@@ -4,7 +4,8 @@ const defMenu = [
   { caption: "Виктор", icon: "emoji_people" },
   { caption: "Виктория", icon: "pool" },
   { caption: "Лута", icon: "sensor_occupied" },
-  { caption: "ddddd" },
+  { name: "chats", caption: "chats", icon: "forum" },
+  { name: "test", caption: "test", icon: "cruelty_free" },
 ];
 const defSettings = [
   { name: "translation", caption: "translation", icon: "translate" },

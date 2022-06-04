@@ -10,11 +10,19 @@ const Default = (props) => {
   return (
     <Routes>
       <Route path="/" element={<div>MAIN</div>} />
-      {routers.map((item) => {
-        return (
-          <Route key={item.name} path={item.name} element={<div>1</div>} />
-        );
-      })}
+      {routers.map((item, index) => (
+        <Route
+          key={item.name ? item.name : index}
+          path={item.name}
+          element={
+            typeof item.component === "function" ? (
+              item.component()
+            ) : (
+              <div>ERROR COMPONENT</div>
+            )
+          }
+        />
+      ))}
     </Routes>
   );
 };

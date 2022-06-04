@@ -7,6 +7,9 @@ const { Router } = require("express");
 const sleep = require("./utils/sleep");
 
 const app = express();
+
+var expressWs = require("express-ws")(app);
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -37,7 +40,33 @@ bot.telegram.setMyCommands(
 
 bot.start((ctx) => ctx.reply("Welcome"));
 
-bot.on("message", (ctx) => console.log(ctx.message));
+app.ws("/test_ws", function (ws, req) {
+  ws.on("message", function (msg) {
+    ws.send("ping: " + msg);
+  });
+  console.log("socket client connect");
+});
+
+var aWss = expressWs.getWss("/test_ws");
+
+bot.on("message", (ctx) => {
+  const user = ctx.message.from;
+  // console.log(ctx.message);
+  let userName = user.first_name ? user.first_name : "";
+  userName = userName + (user.last_name ? " " + user.last_name : "");
+  userName = userName + (user.username ? ` (${user.username})` : "");
+
+  const data = {
+    userName,
+    message: ctx.message.text,
+    id: `${ctx.message.chat.id}.${ctx.message.message_id}`,
+  };
+
+  aWss.clients.forEach(function (client) {
+    client.send(JSON.stringify(data));
+  });
+});
+
 bot.launch();
 
 app.post("/api/", (req, res) => {
