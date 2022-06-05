@@ -2,7 +2,7 @@
   "name": "telegrambotgui",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://test.sacred.us.to:4000",
+  "proxy": "http://127.0.0.1:4000",
   "dependencies": {
     "@chatui/core": "^1.4.1",
     "@emotion/react": "^11.9.0",
