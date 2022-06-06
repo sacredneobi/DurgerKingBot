@@ -8,6 +8,14 @@ const def = (db, DataTypes, options) => {
     },
     options
   );
+  model.associate = (models) => {
+    model.belongsTo(models.good, {
+      foreignKey: "goodId",
+      as: "good",
+      onUpdate: "NO ACTION",
+      onDelete: "CASCADE",
+    });
+  };
   return model;
 };
 

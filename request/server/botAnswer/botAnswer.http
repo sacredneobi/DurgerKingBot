@@ -1,0 +1,6 @@
+POST http://localhost:4000/api/botAnswer
+Content-Type: application/json
+
+{
+  "test" : 1
+}

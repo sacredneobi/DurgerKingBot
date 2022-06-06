@@ -14,21 +14,9 @@ const def = (db, DataTypes, options) => {
       onUpdate: "NO ACTION",
       onDelete: "CASCADE",
     });
-    model.belongsTo(models.price, {
-      foreignKey: "priceId",
-      as: "price",
-      onUpdate: "NO ACTION",
-      onDelete: "CASCADE",
-    });
     model.belongsTo(models.warehouse, {
       foreignKey: "warehouseId",
       as: "warehouse",
-      onUpdate: "NO ACTION",
-      onDelete: "CASCADE",
-    });
-    model.belongsTo(models.addonProps, {
-      foreignKey: "addonPropsId",
-      as: "addonProps",
       onUpdate: "NO ACTION",
       onDelete: "CASCADE",
     });

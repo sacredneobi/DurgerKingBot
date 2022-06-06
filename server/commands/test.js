@@ -1,7 +1,7 @@
 const { Markup } = require("telegraf");
 
 const test = (ctx) => {
-  console.log(ctx.message);
+  console.log(ctx.message.from);
   return ctx.reply("Привет youtube", {
     caption: "Caption",
     parse_mode: "Markdown",
@@ -13,4 +13,5 @@ const test = (ctx) => {
 
 module.exports = (bot) => {
   bot.newCommand({ command: "buy", description: "Магазин подписчиков" }, test);
+  bot.command("buy", test);
 };

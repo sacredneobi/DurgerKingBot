@@ -30,6 +30,17 @@
                 "deletedAt": {
                     "field": "deletedAt",
                     "seqType": "Sequelize.DATE"
+                },
+                "goodId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "goods",
+                        "key": "id"
+                    },
+                    "onDelete": "CASCADE",
+                    "onUpdate": "NO ACTION",
+                    "field": "goodId",
+                    "seqType": "Sequelize.INTEGER"
                 }
             },
             "indexes": []
@@ -196,17 +207,6 @@
                     "field": "articleId",
                     "seqType": "Sequelize.INTEGER"
                 },
-                "priceId": {
-                    "allowNull": true,
-                    "references": {
-                        "model": "prices",
-                        "key": "id"
-                    },
-                    "onDelete": "CASCADE",
-                    "onUpdate": "NO ACTION",
-                    "field": "priceId",
-                    "seqType": "Sequelize.INTEGER"
-                },
                 "warehouseId": {
                     "allowNull": true,
                     "references": {
@@ -216,17 +216,6 @@
                     "onDelete": "CASCADE",
                     "onUpdate": "NO ACTION",
                     "field": "warehouseId",
-                    "seqType": "Sequelize.INTEGER"
-                },
-                "addonPropsId": {
-                    "allowNull": true,
-                    "references": {
-                        "model": "addonProps",
-                        "key": "id"
-                    },
-                    "onDelete": "CASCADE",
-                    "onUpdate": "NO ACTION",
-                    "field": "addonPropsId",
                     "seqType": "Sequelize.INTEGER"
                 }
             },
@@ -299,6 +288,17 @@
                 "deletedAt": {
                     "field": "deletedAt",
                     "seqType": "Sequelize.DATE"
+                },
+                "goodId": {
+                    "allowNull": true,
+                    "references": {
+                        "model": "goods",
+                        "key": "id"
+                    },
+                    "onDelete": "CASCADE",
+                    "onUpdate": "NO ACTION",
+                    "field": "goodId",
+                    "seqType": "Sequelize.INTEGER"
                 }
             },
             "indexes": []
@@ -417,6 +417,6 @@
             "indexes": []
         }
     },
-    "exists": false,
-    "revision": 1
+    "exists": true,
+    "revision": 2
 }

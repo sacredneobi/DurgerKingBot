@@ -50,7 +50,7 @@ module.exports = (options, data, getData) => {
         const module = require(`../${options.path}/${file}`);
         if (typeof module === "function") {
           if (typeof getData === "function") {
-            module(getData(moduleName));
+            module(getData(moduleName), data);
           } else {
             module(data);
           }

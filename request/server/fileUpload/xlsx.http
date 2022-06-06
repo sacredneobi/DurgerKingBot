@@ -1,0 +1,9 @@
+POST http://localhost:4000/api/loadListGood HTTP/1.1
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="1.xlsx"
+Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+
+< ./1.xlsx
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
