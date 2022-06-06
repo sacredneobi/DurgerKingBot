@@ -1,4 +1,3 @@
-import translation from "./translation";
-import chats from "./chats";
+import Main from "./main";
 
-export default [translation, chats];
+export { Main };

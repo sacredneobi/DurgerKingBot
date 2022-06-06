@@ -1,3 +1,3 @@
-import { useAccessGet } from "./access";
+import { post as sendMessagePost } from "./sendMessage";
 
-export { useAccessGet };
+export { sendMessagePost };

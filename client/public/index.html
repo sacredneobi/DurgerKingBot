@@ -10,10 +10,6 @@
       content="Web site created using create-react-app"
     />
     <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
     <link
@@ -24,7 +20,19 @@
       crossorigin
     />
 
-    <title>React App</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        background-color: var(--tg-theme-bg-color, #ffffff);
+        color: var(--tg-theme-text-color, #222222);
+        font-size: 16px;
+        margin: 0;
+        padding: 0;
+        color-scheme: var(--tg-color-scheme);
+      }
+    </style>
+
+    <title>Telegram Bot marketplaces</title>
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>

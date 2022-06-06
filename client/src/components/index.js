@@ -11,6 +11,10 @@ import List from "./list";
 import CssBaseline from "./cssBaseLine";
 import Navigation from "./navigation";
 import ContentRouter from "./contentRouter";
+import Badge from "./badge";
+import Avatar from "./avatar";
+import Pagination from "./pagination";
+import Button from "./button";
 
 export {
   Navigation,
@@ -26,4 +30,8 @@ export {
   List,
   CssBaseline,
   ContentRouter,
+  Badge,
+  Avatar,
+  Pagination,
+  Button,
 };
