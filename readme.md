@@ -1,6 +1,7 @@
 Проект реализуемый на:
 
 YouTube канале https://www.youtube.com/channel/UCuDZdzBT2Xd7ex6EjL3aL4w
+
 Telegram канале https://t.me/sacred_dev
 
 - [ ] Телеграм бот
