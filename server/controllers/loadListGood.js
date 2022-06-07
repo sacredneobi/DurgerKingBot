@@ -13,7 +13,8 @@ const createOrReturn = async (model, data, insertData) => {
     }
     return item.id;
   }
-  return (await model.create(insertData ? insertData : data)).id;
+  const newItem = await model.create(insertData ? insertData : data);
+  return newItem.id;
 };
 
 const getArticle = (caption) => {
@@ -45,10 +46,10 @@ const post = (req, res) => {
   sampleFile.mv(uploadPath, async (err) => {
     if (err) return res.status(500).send(err);
 
-    await readXlsxFile(uploadPath).then((rows) => {
+    await readXlsxFile(uploadPath).then(async (rows) => {
       for (let index = 1; index < rows.length; index++) {
         const element = rows[index];
-        createGood(element);
+        await createGood(element);
       }
     });
     res.send("File uploaded!");

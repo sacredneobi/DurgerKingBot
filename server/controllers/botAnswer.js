@@ -16,6 +16,6 @@ const post = (bot) => {
   };
 };
 
-module.exports = (router, bot) => {
+module.exports = (router, moduleName, bot) => {
   router.post("/", post(bot));
 };

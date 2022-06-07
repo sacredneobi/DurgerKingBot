@@ -1,0 +1,7 @@
+POST http://localhost:4000/api/goods
+Content-Type: application/json
+
+{
+  "caption" :"Test good 4",
+  "articleId": 14460
+}

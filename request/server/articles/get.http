@@ -1,0 +1,2 @@
+GET http://localhost:4000/api/articles?limit=5&offset=0
+Content-Type: application/json

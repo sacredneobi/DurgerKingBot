@@ -1,0 +1,8 @@
+PUT http://localhost:4000/api/goods
+Content-Type: application/json
+
+{
+  "id": 94162,
+  "caption" : "Привет Youtube 2",
+  "articleId" : 14461
+}
