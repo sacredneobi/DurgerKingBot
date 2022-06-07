@@ -32,6 +32,8 @@ const arrayExclude = (exclude) => {
 module.exports = (options, data, getData) => {
   if (!check(options)) return;
 
+  if (!fs.existsSync(options.path)) return;
+
   fs.readdirSync(options.path)
     .filter(options.exclude ? arrayExclude(options.exclude) : defExclude)
     .forEach((file) => {
