@@ -15,6 +15,7 @@ import Badge from "./badge";
 import Avatar from "./avatar";
 import Pagination from "./pagination";
 import Button from "./button";
+import Loading from "./loading";
 
 export {
   Navigation,
@@ -34,4 +35,5 @@ export {
   Avatar,
   Pagination,
   Button,
+  Loading,
 };

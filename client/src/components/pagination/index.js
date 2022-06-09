@@ -8,6 +8,8 @@ export default function (props) {
     center = false,
     sx,
     size = 30,
+    count = 0,
+    page = 0,
     ...other
   } = props;
 
@@ -15,10 +17,11 @@ export default function (props) {
 
   return (
     <Pagination
-      count={600}
+      size="small"
+      count={count}
+      page={page}
       variant="outlined"
       shape="rounded"
-      size="large"
       sx={{
         "& .MuiPagination-ul": style,
         "& .MuiPaginationItem-ellipsis": {
@@ -30,7 +33,6 @@ export default function (props) {
         ...sx,
       }}
       renderItem={(item) => {
-        console.log(item);
         return (
           <PaginationItem
             {...item}

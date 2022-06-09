@@ -14,9 +14,9 @@ const Default = (props) => {
         spacing={2}
         {...other}
       >
-        {items.map((item, index) => {
+        {items.map((item) => {
           return (
-            <Grid key={index} item xs={1}>
+            <Grid key={item.id} item xs={1}>
               <Item {...item} />
             </Grid>
           );

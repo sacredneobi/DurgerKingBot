@@ -3,48 +3,23 @@ import {
   useTelegramWebApp,
   useIsTelegramWebAppReady,
 } from "react-telegram-webapp";
-import { Box } from "@mui/material";
+import { Box, Loading } from "../../components";
+import { useGoodGet } from "../../api";
 import Grid from "./grid";
 import Bottom from "./bottom";
 import { root, grid, baseLine } from "./styles";
 import Search from "./search";
-import {
-  burger,
-  cake,
-  coke,
-  cookie,
-  donut,
-  flan,
-  fries,
-  hotdog,
-  pizza,
-} from "../../res/icons";
 
-const items = [
-  { id: 1, caption: "Boby Boba", icon: burger },
-  { id: 2, caption: "Andrey", icon: cake },
-  { id: 3, caption: "GRAND", icon: coke },
-  { id: 4, caption: "Джабраил", icon: cookie },
-  { id: 5, caption: "Антон", icon: donut },
-  { id: 6, caption: "Виктория", icon: flan },
-  { id: 6, caption: "Виктор", icon: fries },
-  { id: 6, caption: "Антон", icon: hotdog },
-  { id: 6, caption: "Ivan", icon: pizza },
-  {
-    id: 6,
-    caption: "NOUVEAU PARIS",
-    icon: pizza,
-  },
-];
+const countPerPage = 15;
 
 const Default = (props) => {
   const isReady = useIsTelegramWebAppReady();
 
-  const tel = useTelegramWebApp();
+  const { countPage, items, usePage, page, loading } = useGoodGet(countPerPage);
 
-  // const handleOnClick = useCallback(() => {
-  //   console.log(tel);
-  // }, [tel]);
+  if (loading) console.log(loading);
+
+  const tel = useTelegramWebApp();
 
   useEffect(() => {
     if (isReady) {
@@ -65,13 +40,22 @@ const Default = (props) => {
   if (isReady)
     return (
       <Box sx={root}>
-        <Grid items={items} sx={grid} />
-        <Bottom
-          search={(props) => (
-            <Search {...props} sx={{ marginLeft: 2, marginRight: 1 }} />
-          )}
-        />
-        <Box sx={{ ...baseLine, height: 20 }} />
+        {loading ? (
+          <Loading />
+        ) : (
+          <>
+            <Grid items={items} sx={grid} />
+            <Box sx={{ ...baseLine }} />
+            <Bottom
+              search={(props) => (
+                <Search {...props} sx={{ marginLeft: 2, marginRight: 1 }} />
+              )}
+              page={page}
+              count={countPage}
+              onSetPage={usePage}
+            />
+          </>
+        )}
       </Box>
     );
 

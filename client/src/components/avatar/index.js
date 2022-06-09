@@ -1,13 +1,15 @@
-import { Avatar } from "@mui/material";
+import { Avatar, Fade } from "@mui/material";
 
 const Default = (props) => {
   const { icon, sizeImage, ...other } = props;
   return (
-    <Avatar
-      src={icon}
-      {...other}
-      sx={{ height: sizeImage, width: sizeImage }}
-    />
+    <Fade in={true} timeout={{ enter: 600 }}>
+      <Avatar
+        src={icon}
+        {...other}
+        sx={{ height: sizeImage, width: sizeImage }}
+      />
+    </Fade>
   );
 };
 

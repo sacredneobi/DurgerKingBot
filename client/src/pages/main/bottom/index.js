@@ -10,7 +10,7 @@ import {
 } from "./styles";
 
 const Default = (props) => {
-  const { search } = props;
+  const { search, count, page, onSetPage, ...other } = props;
 
   const [showSearch, setShowSearch] = useState(false);
 
@@ -19,13 +19,23 @@ const Default = (props) => {
   };
 
   return (
-    <Box sx={root}>
+    <Box sx={root} {...other}>
       {search && showSearch ? (
         search()
       ) : (
         <>
           <Icon sx={buttonInvisible} />
-          <Pagination center sx={pagination} />
+          <Pagination
+            center
+            sx={pagination}
+            count={count}
+            page={page}
+            onChange={(event, page) => {
+              if (typeof onSetPage === "function") {
+                onSetPage(page);
+              }
+            }}
+          />
         </>
       )}
       <Box sx={buttonContainer}>

@@ -6,14 +6,14 @@ const rootBox = {
 const rootTypography = {
   variant: "button",
   gutterBottom: true,
-  sx: { marginTop: 1 },
-  noWrap: true,
+  sx: { marginTop: 1, flexGrow: 1, textAlign: "center" },
 };
 
 const rootContainer = {
   flexDirection: "column",
   alignItems: "center",
   display: "flex",
+  height: "100%",
   justifyContent: "space-between",
 };
 

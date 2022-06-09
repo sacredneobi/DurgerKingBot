@@ -29,7 +29,16 @@ const Default = (props) => {
       <Badge counter={counter}>
         <Avatar src={icon} sizeImage={80} />
       </Badge>
-      <Text {...rootTypography} caption={caption} />
+      <Box
+        sx={{
+          marginTop: 1,
+          flexGrow: 1,
+          display: "flex",
+          alignItems: "center",
+        }}
+      >
+        <Text {...rootTypography} caption={caption} wrap />
+      </Box>
       <Box sx={rootContainerButton}>
         <Button
           textIcon="remove"
