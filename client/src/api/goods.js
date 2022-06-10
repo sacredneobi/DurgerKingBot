@@ -35,11 +35,15 @@ const useGet = (countPerPage = 0) => {
   const [countPage, setCountPage] = useState(0);
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(1);
+  const [search, setSearch] = useState(null);
 
   const [{ data, loading }] = useAxios(
-    `/api/goods?limit=${countPerPage}&offset=${
-      page * (countPerPage ? countPerPage : 0)
-    }`
+    {
+      url: `/api/goods?limit=${countPerPage}&offset=${
+        (page - 1) * (countPerPage ? countPerPage : 0)
+      }${search ? `&search=${search}` : ""}`,
+    },
+    { useCache: false }
   );
 
   useEffect(() => {
@@ -59,12 +63,21 @@ const useGet = (countPerPage = 0) => {
 
   const usePage = useCallback(
     (page) => {
-      setPage(page ? page : 0);
+      setPage(page ? page : 1);
     },
     [countPerPage]
   );
 
-  return { countPage, items, loading, usePage, page };
+  const useSearch = useCallback((value) => {
+    setSearch((prev) => {
+      if (prev !== value) {
+        setPage(1);
+      }
+      return value === "" ? null : value;
+    });
+  }, []);
+
+  return { countPage, items, loading, usePage, page, useSearch };
 };
 
 export { useGet };

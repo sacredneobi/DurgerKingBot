@@ -9,6 +9,7 @@ const Default = (props) => {
     onClick,
     children,
     iconSx,
+    edge = "start",
     ...other
   } = props;
   const MyIcon = icon;
@@ -19,15 +20,20 @@ const Default = (props) => {
     }
   };
 
+  const style =
+    edge !== "start"
+      ? null
+      : {
+          marginRight: 5,
+        };
+
   return (
     <IconButton
       color="inherit"
       aria-label={help}
-      edge="start"
+      edge={edge}
       onClick={handleOnClick}
-      sx={{
-        marginRight: 5,
-      }}
+      sx={style}
       {...other}
     >
       {icon && <MyIcon />}

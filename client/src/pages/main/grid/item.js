@@ -21,7 +21,7 @@ const Default = (props) => {
   const isZero = counter === 0;
 
   if (loading) {
-    return <Skeleton variant="rectangular" width="100%" height="100%" />;
+    return <Skeleton variant="rectangular" width="100%" height="200px" />;
   }
 
   return (
@@ -37,7 +37,7 @@ const Default = (props) => {
           alignItems: "center",
         }}
       >
-        <Text {...rootTypography} caption={caption} wrap />
+        <Text {...rootTypography} caption={caption} />
       </Box>
       <Box sx={rootContainerButton}>
         <Button

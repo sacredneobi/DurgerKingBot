@@ -1,11 +1,21 @@
-const root = { display: "flex", flexDirection: "row", alignItems: "center" };
+const root = {
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  minWidth: 400,
+};
 
 const buttonInvisible = {
   fontSize: 29,
   margin: (theme) => theme.spacing(1, 0, 1, 2),
 };
 
-const buttonContainer = { margin: (theme) => theme.spacing(1, 2, 1, 0) };
+const buttonContainer = {
+  margin: (theme) => theme.spacing(1, 1, 1, 1),
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+};
 
 const buttonIcon = {
   fontSize: 29,
@@ -15,8 +25,20 @@ const buttonIcon = {
   backgroundColor: "#f8a917",
 };
 
+const buttonIconLoading = {
+  fontSize: 29,
+  color: "#f8a917",
+};
+
 const pagination = {
   flexGrow: 1,
 };
 
-export { root, buttonInvisible, buttonContainer, buttonIcon, pagination };
+export {
+  root,
+  buttonInvisible,
+  buttonContainer,
+  buttonIcon,
+  pagination,
+  buttonIconLoading,
+};

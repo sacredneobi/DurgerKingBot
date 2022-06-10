@@ -1,5 +1,6 @@
 const models = require("../db/models");
-const { HasMany } = require("sequelize");
+const { HasMany, Op } = require("sequelize");
+const sleep = require("../utils/sleep");
 
 const model = models.good;
 
@@ -16,7 +17,13 @@ const post = (req, res, promiseError) => {
     .catch(promiseError);
 };
 
-const get = (req, res, promiseError) => {
+const get = async (req, res, promiseError) => {
+  // await sleep(5000);
+
+  const search = req.query?.search
+    ? { caption: { [Op.iLike]: `%${req.query?.search}%` } }
+    : null;
+
   model
     .findAndCountAll({
       attributes: {
@@ -51,6 +58,7 @@ const get = (req, res, promiseError) => {
       ],
       order: [["id", "ASC"]],
       ...req.query,
+      where: search,
     })
     .then((data) => {
       res.status(200).send(data);

@@ -10,14 +10,13 @@ import Bottom from "./bottom";
 import { root, grid, baseLine } from "./styles";
 import Search from "./search";
 
-const countPerPage = 15;
+const countPerPage = 20;
 
 const Default = (props) => {
   const isReady = useIsTelegramWebAppReady();
 
-  const { countPage, items, usePage, page, loading } = useGoodGet(countPerPage);
-
-  if (loading) console.log(loading);
+  const { countPage, items, usePage, page, loading, useSearch } =
+    useGoodGet(countPerPage);
 
   const tel = useTelegramWebApp();
 
@@ -43,19 +42,18 @@ const Default = (props) => {
         {loading ? (
           <Loading />
         ) : (
-          <>
-            <Grid items={items} sx={grid} />
-            <Box sx={{ ...baseLine }} />
-            <Bottom
-              search={(props) => (
-                <Search {...props} sx={{ marginLeft: 2, marginRight: 1 }} />
-              )}
-              page={page}
-              count={countPage}
-              onSetPage={usePage}
-            />
-          </>
+          <Grid items={loading ? [] : items} sx={grid} />
         )}
+        <Box sx={{ ...baseLine }} />
+        <Bottom
+          search={(props) => (
+            <Search {...props} sx={{ marginLeft: 1, marginRight: 1 }} />
+          )}
+          onSearch={useSearch}
+          page={page}
+          count={countPage}
+          onSetPage={usePage}
+        />
       </Box>
     );
 
