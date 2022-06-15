@@ -1,10 +1,15 @@
 const models = require("../db/models");
+const { Op } = require("sequelize");
 
 const model = models.article;
 
 const post = (req, res) => {};
 
 const get = (req, res) => {
+  const search = req.query?.search
+    ? { caption: { [Op.iLike]: `%${req.query?.search}%` } }
+    : null;
+
   model
     .findAndCountAll({
       attributes: {
@@ -12,6 +17,7 @@ const get = (req, res) => {
       },
       order: [["id", "ASC"]],
       ...req.query,
+      where: search,
     })
     .then((data) => {
       res.status(200).send(data);

@@ -20,9 +20,18 @@ const post = (req, res, promiseError) => {
 const get = async (req, res, promiseError) => {
   // await sleep(5000);
 
-  const search = req.query?.search
+  const searchCaption = req.query?.search
     ? { caption: { [Op.iLike]: `%${req.query?.search}%` } }
     : null;
+
+  const searchArticle = req.query?.articleId
+    ? { articleId: req.query?.articleId }
+    : null;
+
+  const search =
+    searchArticle || searchCaption
+      ? { ...searchCaption, ...searchArticle }
+      : null;
 
   model
     .findAndCountAll({

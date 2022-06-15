@@ -1,37 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import useAxios from "axios-hooks";
-import {
-  burger,
-  cake,
-  coke,
-  cookie,
-  donut,
-  flan,
-  fries,
-  hotdog,
-  pizza,
-} from "../res/icons";
 
-const img = [
-  burger,
-  cake,
-  coke,
-  cookie,
-  donut,
-  flan,
-  fries,
-  hotdog,
-  pizza,
-  cookie,
-  donut,
-  flan,
-  fries,
-  hotdog,
-  pizza,
-  coke,
-];
-
-const useGet = (countPerPage = 0, articleId) => {
+const useGet = (countPerPage = 0) => {
   const [countPage, setCountPage] = useState(0);
   const [items, setItems] = useState([]);
   const [page, setPage] = useState(1);
@@ -39,7 +9,7 @@ const useGet = (countPerPage = 0, articleId) => {
 
   const [{ data, loading }] = useAxios(
     {
-      url: `/api/goods?articleId=${articleId}&limit=${countPerPage}&offset=${
+      url: `/api/articles?limit=${countPerPage}&offset=${
         (page - 1) * (countPerPage ? countPerPage : 0)
       }${search ? `&search=${search}` : ""}`,
     },
@@ -53,11 +23,7 @@ const useGet = (countPerPage = 0, articleId) => {
           (data?.count ? data.count : 0) / (countPerPage ? countPerPage : 0)
         )
       );
-      setItems(
-        data.rows
-          ? data.rows.map((item, index) => ({ ...item, icon: img[index] }))
-          : []
-      );
+      setItems(data.rows ? data.rows : []);
     }
   }, [data]);
 

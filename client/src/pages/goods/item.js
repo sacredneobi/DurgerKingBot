@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { Badge, Box, Text, Avatar } from "../../../components";
-import {
-  rootTypography,
-  rootContainerButton,
-  containerButton,
-  rootContainer,
-} from "./styles";
+import { Badge, Box, Text, Avatar } from "../../components";
 import { Skeleton } from "@mui/material";
-import Button from "./button";
+import {
+  rootContainerButton,
+  rootContainer,
+  rootTypography,
+  containerButton,
+} from "./styles";
+import Button from "../addons/grid/button";
 
 const Default = (props) => {
   const { caption, icon, loading } = props;

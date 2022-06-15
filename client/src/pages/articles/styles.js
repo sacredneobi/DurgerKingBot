@@ -1,26 +1,7 @@
-const rootBox = {
-  padding: (theme) => theme.spacing(0.75),
-  margin: (theme) => theme.spacing(0.75),
-};
-
-const rootTypography = {
-  variant: "button",
-  gutterBottom: true,
-  sx: { marginTop: 1, flexGrow: 1, textAlign: "center" },
-};
-
-const rootContainer = {
+const root = {
+  display: "flex",
   flexDirection: "column",
-  alignItems: "center",
-  display: "flex",
-  height: "100%",
-  justifyContent: "space-between",
-};
-
-const rootContainerButton = {
-  width: "100%",
-  minHeight: 25,
-  display: "flex",
+  height: "100vh",
   justifyContent: "space-between",
 };
 
@@ -54,13 +35,36 @@ const containerButton = (show, add = false) => {
   };
 };
 
-const containerButtonIconDefault = { fontSize: 35 };
+const rootTypography = {
+  variant: "button",
+  gutterBottom: true,
+  sx: { marginTop: 0, flexGrow: 1, textAlign: "center" },
+};
+
+const rootContainer = {
+  flexDirection: "column",
+  alignItems: "center",
+  display: "flex",
+  height: "100%",
+  justifyContent: "space-between",
+};
+
+const rootContainerButton = {
+  width: "100%",
+  minHeight: 25,
+  display: "flex",
+  justifyContent: "space-between",
+};
+
+const grid = { overflow: "auto" };
+const baseLine = { flexGrow: 1 };
 
 export {
-  rootBox,
-  rootTypography,
+  root,
+  grid,
+  baseLine,
   rootContainerButton,
-  containerButton,
-  containerButtonIconDefault,
   rootContainer,
+  rootTypography,
+  containerButton,
 };

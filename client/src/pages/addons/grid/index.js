@@ -1,9 +1,10 @@
 import { Grid } from "@mui/material";
 import { Box } from "../../../components";
-import Item from "./item";
 
 const Default = (props) => {
-  const { items = [], sx, ...other } = props;
+  const { renderItem, items = [], sx, ...other } = props;
+
+  const Item = renderItem ? renderItem : (props) => <div {...props} />;
 
   return (
     <Box sx={{ ...sx, padding: 2 }}>
