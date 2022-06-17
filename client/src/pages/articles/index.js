@@ -9,11 +9,21 @@ import Item from "./item";
 const countPerPage = 20;
 
 const Default = (props) => {
+  const { showPayment, setShow } = props;
+
   const { countPage, items, usePage, page, loading, useSearch } =
     useArticleGet(countPerPage);
 
   return (
-    <Box sx={root}>
+    <Box
+      sx={{
+        ...root,
+        maxHeight: showPayment ? 0 : "100vh",
+        transition: "max-height 0.3s ease-out, opacity 0.3s ease-out",
+        visibility: !showPayment ? "visible" : "hidden",
+        opacity: !showPayment ? 1 : 0,
+      }}
+    >
       {loading ? (
         <Loading />
       ) : (
@@ -28,6 +38,7 @@ const Default = (props) => {
         search={(props) => (
           <Search {...props} sx={{ marginLeft: 1, marginRight: 1 }} />
         )}
+        setShow={setShow}
         onSearch={useSearch}
         page={page}
         count={countPage}

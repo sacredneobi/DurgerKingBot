@@ -9,6 +9,7 @@ import hotdog from "./hotdog.png";
 import icecream from "./icecream.png";
 import pizza from "./pizza.png";
 import popcorn from "./popcorn.png";
+import bottle from "./bottle.webp";
 
 export {
   burger,
@@ -22,4 +23,5 @@ export {
   pizza,
   popcorn,
   icecream,
+  bottle,
 };

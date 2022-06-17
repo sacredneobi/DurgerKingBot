@@ -1,8 +1,9 @@
 const root = {
   display: "flex",
   flexDirection: "column",
-  height: "100vh",
   justifyContent: "space-between",
+  flexGrow: 1,
+  width: "100%",
 };
 
 const containerButton = (show, add = false) => {

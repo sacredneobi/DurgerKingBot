@@ -10,11 +10,13 @@ import {
   fries,
   hotdog,
   pizza,
+  bottle,
 } from "../res/icons";
 
 const img = [
   burger,
   cake,
+  bottle,
   coke,
   cookie,
   donut,

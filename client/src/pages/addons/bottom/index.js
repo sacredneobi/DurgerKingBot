@@ -10,7 +10,7 @@ import {
 } from "./styles";
 
 const Default = (props) => {
-  const { search, count, page, onSetPage, onSearch, ...other } = props;
+  const { search, count, page, onSetPage, onSearch, setShow, ...other } = props;
 
   const [showSearch, setShowSearch] = useState(false);
   const [searchValue, setSearchValue] = useState("");
@@ -34,10 +34,18 @@ const Default = (props) => {
     }
   };
 
+  const handleOnClickPayment = () => {
+    setShow((prev) => !prev);
+  };
+
   return (
     <Box sx={root} {...other}>
       <Box sx={buttonContainer}>
-        <Icon textIcon="sync" sx={buttonIconLoading} />
+        <Icon
+          textIcon="sync"
+          sx={buttonIconLoading}
+          onClick={handleOnClickPayment}
+        />
       </Box>
       {search && showSearch ? (
         search({
