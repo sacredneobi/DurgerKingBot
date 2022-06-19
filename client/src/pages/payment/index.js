@@ -1,7 +1,9 @@
 import { Box } from "../../components";
+import { useContext } from "react";
 import Item from "./item";
 import Header from "./header";
 import Bottom from "./bottom";
+import { ShoppingCart } from "../../context";
 
 const items = [
   { caption: "Ivan", count: 11.2, price: 10.22 },
@@ -13,6 +15,8 @@ const items = [
 
 const Default = (props) => {
   const { show, setShow } = props;
+
+  const shoppingCart = useContext(ShoppingCart);
 
   const handleOnClick = () => {
     // setShow((prev) => !prev);
@@ -45,9 +49,12 @@ const Default = (props) => {
           paddingBottom: 2,
         }}
       >
-        {items.map((item, index, arr) => (
-          <Item key={index} {...item} isLast={arr.length - 1 === index} />
-        ))}
+        {shoppingCart
+          .filter((item) => item.count > 0)
+          .map((item, index) => ({ ...item, caption: items[index]?.caption }))
+          .map((item, index, arr) => (
+            <Item key={index} {...item} isLast={arr.length - 1 === index} />
+          ))}
       </Box>
       <Bottom setShow={setShow} />
     </Box>

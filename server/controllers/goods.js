@@ -20,17 +20,19 @@ const post = (req, res, promiseError) => {
 const get = async (req, res, promiseError) => {
   // await sleep(5000);
 
-  const searchCaption = req.query?.search
-    ? { caption: { [Op.iLike]: `%${req.query?.search}%` } }
+  const { search, articleId, id, ...other } = req.query;
+
+  const searchCaption = search
+    ? { caption: { [Op.iLike]: `%${search}%` } }
     : null;
 
-  const searchArticle = req.query?.articleId
-    ? { articleId: req.query?.articleId }
-    : null;
+  const searchArticle = articleId ? { articleId } : null;
 
-  const search =
-    searchArticle || searchCaption
-      ? { ...searchCaption, ...searchArticle }
+  const searchId = id ? { id } : null;
+
+  const where =
+    searchArticle || searchCaption || searchId
+      ? { ...searchCaption, ...searchArticle, ...searchId }
       : null;
 
   model
@@ -66,8 +68,8 @@ const get = async (req, res, promiseError) => {
         },
       ],
       order: [["id", "ASC"]],
-      ...req.query,
-      where: search,
+      ...other,
+      where: where,
     })
     .then((data) => {
       res.status(200).send(data);

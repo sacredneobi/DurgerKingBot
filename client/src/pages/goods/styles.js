@@ -57,7 +57,7 @@ const rootContainerButton = {
   justifyContent: "space-between",
 };
 
-const grid = { overflow: "auto" };
+const grid = { overflowX: "hidden", overflowY: "auto" };
 const baseLine = { flexGrow: 1 };
 
 export {

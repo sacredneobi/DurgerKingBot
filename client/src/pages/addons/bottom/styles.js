@@ -2,7 +2,9 @@ const root = {
   display: "flex",
   flexDirection: "row",
   alignItems: "center",
-  minWidth: 400,
+  // minWidth: 400,
+  // overflowY: "hidden",
+  // overflowX: "auto",
 };
 
 const buttonInvisible = {
@@ -25,20 +27,8 @@ const buttonIcon = {
   backgroundColor: "#f8a917",
 };
 
-const buttonIconLoading = {
-  fontSize: 29,
-  color: "#f8a917",
-};
-
 const pagination = {
   flexGrow: 1,
 };
 
-export {
-  root,
-  buttonInvisible,
-  buttonContainer,
-  buttonIcon,
-  pagination,
-  buttonIconLoading,
-};
+export { root, buttonInvisible, buttonContainer, buttonIcon, pagination };

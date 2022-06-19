@@ -10,12 +10,12 @@ import { useSearchParams } from "react-router-dom";
 import Button from "../addons/grid/button";
 
 const Default = (props) => {
-  const { caption, loading, id } = props;
-  let [, setSearchParams] = useSearchParams();
+  const { caption, loading, id, page } = props;
+  const [, setSearchParams] = useSearchParams();
   // let location = useLocation();
 
   const handleOnClick = () => {
-    setSearchParams({ articleId: id });
+    setSearchParams({ articleId: id, pageArticle: page });
   };
 
   if (loading) {

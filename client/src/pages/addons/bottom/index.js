@@ -1,19 +1,24 @@
 import { useState } from "react";
 import { ButtonBase } from "@mui/material";
 import { Box, Pagination, Icon } from "../../../components";
-import {
-  root,
-  buttonIconLoading,
-  buttonContainer,
-  buttonIcon,
-  pagination,
-} from "./styles";
+import { useSearchParams } from "react-router-dom";
+import { root, buttonContainer, buttonIcon, pagination } from "./styles";
 
 const Default = (props) => {
-  const { search, count, page, onSetPage, onSearch, setShow, ...other } = props;
+  const {
+    search,
+    count,
+    page,
+    onSetPage,
+    onSearch,
+    setShow,
+    showBack,
+    ...other
+  } = props;
 
   const [showSearch, setShowSearch] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const handleOnClick = () => {
     if (showSearch) {
@@ -38,14 +43,27 @@ const Default = (props) => {
     setShow((prev) => !prev);
   };
 
+  const handleOnClickBack = () => {
+    setSearchParams(
+      searchParams.get("pageArticle")
+        ? {
+            pageArticle: searchParams.get("pageArticle"),
+          }
+        : {}
+    );
+  };
+
   return (
     <Box sx={root} {...other}>
       <Box sx={buttonContainer}>
-        <Icon
-          textIcon="sync"
-          sx={buttonIconLoading}
-          onClick={handleOnClickPayment}
-        />
+        <ButtonBase
+          onClick={showBack ? handleOnClickBack : handleOnClickPayment}
+        >
+          <Icon
+            textIcon={showBack ? "reply" : ""}
+            sx={showBack ? buttonIcon : null}
+          />
+        </ButtonBase>
       </Box>
       {search && showSearch ? (
         search({

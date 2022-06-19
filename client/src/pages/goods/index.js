@@ -5,8 +5,10 @@ import Bottom from "../addons/bottom";
 import { root, grid, baseLine } from "./styles";
 import Search from "../addons/search";
 import Item from "./item";
+import { useEffect, useContext } from "react";
+import { ShoppingCart } from "../../context";
 
-const countPerPage = 5;
+const countPerPage = 10;
 
 const Default = (props) => {
   const { articleId, showPayment, setShow } = props;
@@ -15,6 +17,20 @@ const Default = (props) => {
     countPerPage,
     articleId
   );
+
+  const shoppingCart = useContext(ShoppingCart);
+
+  useEffect(() => {
+    return () => {
+      console.log("save");
+      if (shoppingCart.length !== 0) {
+        localStorage.setItem(
+          "shoppingCart",
+          JSON.stringify(shoppingCart, null, 2)
+        );
+      }
+    };
+  }, [shoppingCart]);
 
   return (
     <Box
@@ -40,6 +56,7 @@ const Default = (props) => {
         search={(props) => (
           <Search {...props} sx={{ marginLeft: 1, marginRight: 1 }} />
         )}
+        showBack
         setShow={setShow}
         onSearch={useSearch}
         page={page}

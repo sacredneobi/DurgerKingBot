@@ -2,8 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import useAxios from "axios-hooks";
 
 const useGet = (countPerPage = 0) => {
-  const [countPage, setCountPage] = useState(0);
-  const [items, setItems] = useState([]);
+  const [answer, setAnswer] = useState({ countPage: 0, items: [] });
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState(null);
 
@@ -18,12 +17,12 @@ const useGet = (countPerPage = 0) => {
 
   useEffect(() => {
     if (data) {
-      setCountPage(
-        Math.ceil(
+      setAnswer((prev) => ({
+        countPage: Math.ceil(
           (data?.count ? data.count : 0) / (countPerPage ? countPerPage : 0)
-        )
-      );
-      setItems(data.rows ? data.rows : []);
+        ),
+        items: data.rows ? data.rows : [],
+      }));
     }
   }, [data]);
 
@@ -43,7 +42,14 @@ const useGet = (countPerPage = 0) => {
     });
   }, []);
 
-  return { countPage, items, loading, usePage, page, useSearch };
+  return {
+    countPage: answer?.countPage,
+    items: answer?.items,
+    loading,
+    usePage,
+    page,
+    useSearch,
+  };
 };
 
 export { useGet };

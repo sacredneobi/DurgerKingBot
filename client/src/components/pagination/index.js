@@ -33,6 +33,9 @@ export default function (props) {
         ...sx,
       }}
       renderItem={(item) => {
+        if (item.type === "next" || item.type === "previous") {
+          return null;
+        }
         return (
           <PaginationItem
             {...item}

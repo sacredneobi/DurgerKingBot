@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Box, Loading } from "../../components";
 import { useArticleGet } from "../../api";
 import Grid from "../addons/grid";
@@ -9,10 +10,16 @@ import Item from "./item";
 const countPerPage = 20;
 
 const Default = (props) => {
-  const { showPayment, setShow } = props;
+  const { showPayment, setShow, defPage } = props;
 
   const { countPage, items, usePage, page, loading, useSearch } =
     useArticleGet(countPerPage);
+
+  useEffect(() => {
+    if (defPage && defPage !== page) {
+      usePage(defPage);
+    }
+  }, [defPage]);
 
   return (
     <Box
@@ -30,7 +37,7 @@ const Default = (props) => {
         <Grid
           items={loading ? [] : items}
           sx={grid}
-          renderItem={(props) => <Item {...props} />}
+          renderItem={(props) => <Item {...props} page={page} />}
         />
       )}
       <Box sx={{ ...baseLine }} />
