@@ -1,3 +1,4 @@
 import ShoppingCart from "./shoppingCart";
+import MainButton from "./mainButton";
 
-export { ShoppingCart };
+export { ShoppingCart, MainButton };

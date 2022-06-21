@@ -14,7 +14,7 @@ const items = [
 ];
 
 const Default = (props) => {
-  const { show, setShow } = props;
+  const { show, ...other } = props;
 
   const shoppingCart = useContext(ShoppingCart);
 
@@ -38,7 +38,7 @@ const Default = (props) => {
       }}
       onClick={handleOnClick}
     >
-      <Header setShow={setShow} />
+      <Header {...other} />
       <Box
         sx={{
           display: "flex",
@@ -56,7 +56,7 @@ const Default = (props) => {
             <Item key={index} {...item} isLast={arr.length - 1 === index} />
           ))}
       </Box>
-      <Bottom setShow={setShow} />
+      <Bottom />
     </Box>
   );
 };

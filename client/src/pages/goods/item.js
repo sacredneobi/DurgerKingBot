@@ -38,12 +38,13 @@ function areEqual(prev, next) {
     prev.id === next.id &&
     prev.type === next.type &&
     prev.icon === next.icon &&
-    prev.caption === next.caption
+    prev.caption === next.caption &&
+    prev.showShoppingCart === next.showShoppingCart
   );
 }
 
 const Default = memo((props) => {
-  const { caption, icon, loading, type, id } = props;
+  const { caption, icon, loading, type, id, showShoppingCart } = props;
 
   const shoppingCart = useContext(ShoppingCart);
   const [counter, setCounter] = useState(finCountDef(id, shoppingCart));
@@ -55,6 +56,9 @@ const Default = memo((props) => {
     setCounter((prev) => {
       const count = add ? prev + 1 : prev - 1 < 0 ? 0 : prev - 1;
       setItemCount(id, shoppingCart, count);
+      if (typeof showShoppingCart === "function") {
+        showShoppingCart(true, false);
+      }
       return count;
     });
   };

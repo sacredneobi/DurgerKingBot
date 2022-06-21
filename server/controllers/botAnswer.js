@@ -5,13 +5,23 @@ const post = (bot) => {
     };
   }
   return (req, res) => {
-    // const { query_id } = req.body;
-    // bot.telegram.answerWebAppQuery(query_id, {
-    //   type: "article",
-    //   id: query_id,
-    //   title: "YOUTUBE",
-    //   input_message_content: { message_text: "ПРИВЕТ МИР" },
-    // });
+    const { query_id, goods, user } = req.body;
+    bot.telegram
+      .answerWebAppQuery(query_id, {
+        type: "article",
+        id: query_id,
+        title: "YOUTUBE",
+        input_message_content: {
+          message_text: `ПРИВЕТ МИР\n\n${goods
+            .map((item) => `${item.id} x ${item.count}`)
+            .join("\n")}`,
+        },
+      })
+      .then((data) => {
+        if (user) {
+          bot.telegram.sendMessage(user.id, "Спасибо за заказ");
+        }
+      });
     res.status(200).send({ done: true });
   };
 };

@@ -11,7 +11,7 @@ import { ShoppingCart } from "../../context";
 const countPerPage = 10;
 
 const Default = (props) => {
-  const { articleId, showPayment, setShow } = props;
+  const { articleId, showPayment, setShow, showShoppingCart } = props;
 
   const { countPage, items, usePage, page, loading, useSearch } = useGoodGet(
     countPerPage,
@@ -22,7 +22,6 @@ const Default = (props) => {
 
   useEffect(() => {
     return () => {
-      console.log("save");
       if (shoppingCart.length !== 0) {
         localStorage.setItem(
           "shoppingCart",
@@ -48,7 +47,9 @@ const Default = (props) => {
         <Grid
           items={loading ? [] : items}
           sx={grid}
-          renderItem={(props) => <Item {...props} />}
+          renderItem={(props) => (
+            <Item {...props} showShoppingCart={showShoppingCart} />
+          )}
         />
       )}
       <Box sx={{ ...baseLine }} />

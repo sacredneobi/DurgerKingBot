@@ -19,5 +19,10 @@ loader({ path: "./controllers", type: "controller" }, bot, (moduleName) => {
 
 bot.telegram.setMyCommands(commands);
 
+// bot.use((ctx, next) => {
+//   console.log(ctx);
+//   next();
+// });
+
 bot.launch();
 app.listen(4000);

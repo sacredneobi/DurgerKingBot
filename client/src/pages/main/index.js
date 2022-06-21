@@ -1,14 +1,65 @@
 import { useSearchParams } from "react-router-dom";
-import { useState, memo } from "react";
+import { useState, memo, useContext, useEffect, useCallback } from "react";
 import { Box } from "../../components";
 import Goods from "../goods";
 import Article from "../articles";
 import Payment from "../payment";
 import { ShoppingCart } from "../../context";
+import {
+  useTelegramWebApp,
+  useIsTelegramWebAppReady,
+} from "react-telegram-webapp";
+import { post } from "../../api/sendMessage";
 
 const Default = (props) => {
   const [searchParams] = useSearchParams();
-  const [showPayment, setShowPayment] = useState(true);
+  const shoppingCart = useContext(ShoppingCart);
+  const [showPayment, setShowPayment] = useState(
+    shoppingCart.filter((item) => item.count > 0).length > 0
+  );
+  const isReady = useIsTelegramWebAppReady();
+  const telegram = useTelegramWebApp();
+
+  const showShoppingCart = useCallback(() => {
+    if (isReady) {
+      telegram.MainButton.setParams({
+        color: "rgb(49, 181, 69)",
+        text: "VIEW ORDER",
+        is_visible: shoppingCart.filter((item) => item.count > 0).length > 0,
+        is_active: true,
+      });
+      // .showProgress(true)
+    }
+  }, [isReady, telegram, showPayment]);
+
+  useEffect(() => {
+    if (isReady) {
+      telegram.expand(true);
+      const handleOnClick = () => {
+        // showPayment ? telegram.sendData("TEST") : setShowPayment(true);
+        showPayment
+          ? post({
+              ...telegram.initDataUnsafe,
+              goods: shoppingCart.filter((item) => item.count > 0),
+            })
+          : setShowPayment(true);
+      };
+      telegram.MainButton.onClick(handleOnClick);
+
+      if (showPayment) {
+        telegram.MainButton.setParams({
+          color: "rgb(49, 181, 69)",
+          text: "Payment $9 999.99",
+          is_visible: true,
+          is_active: true,
+        });
+      }
+
+      return () => {
+        telegram.MainButton.offClick(handleOnClick);
+      };
+    }
+  }, [isReady, telegram, showPayment]);
 
   return (
     <Box
@@ -18,6 +69,7 @@ const Default = (props) => {
         flexDirection: "column",
         flexWrap: "nowrap",
         alignItems: "center",
+        overflow: "hidden",
       }}
     >
       {searchParams.get("articleId") ? (
@@ -25,6 +77,7 @@ const Default = (props) => {
           articleId={searchParams.get("articleId")}
           showPayment={showPayment}
           setShow={setShowPayment}
+          showShoppingCart={showShoppingCart}
         />
       ) : (
         <Article
@@ -37,7 +90,11 @@ const Default = (props) => {
           }
         />
       )}
-      <Payment show={showPayment} setShow={setShowPayment} />
+      <Payment
+        show={showPayment}
+        setShow={setShowPayment}
+        showShoppingCart={showShoppingCart}
+      />
     </Box>
   );
 };
@@ -52,7 +109,10 @@ const Main = memo((props) => {
     : [];
 
   return (
-    <ShoppingCart.Provider value={data} name="MAIN CONTEXT">
+    <ShoppingCart.Provider
+      value={data.filter((item) => item.count > 0)}
+      name="MAIN CONTEXT"
+    >
       <Default {...props} />
     </ShoppingCart.Provider>
   );

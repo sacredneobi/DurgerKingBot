@@ -2,11 +2,14 @@ import { Typography, Button } from "@mui/material";
 import { Box } from "../../components";
 
 const Default = (props) => {
-  const { setShow } = props;
+  const { setShow, showShoppingCart } = props;
 
   const handleOnClick = () => {
     if (typeof setShow === "function") {
       setShow(false);
+    }
+    if (typeof showShoppingCart === "function") {
+      showShoppingCart(true);
     }
   };
   return (
