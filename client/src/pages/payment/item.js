@@ -2,6 +2,7 @@ import { Box, Avatar, Badge } from "../../components";
 import { bottle } from "../../res/icons";
 import { Skeleton, Divider, Typography } from "@mui/material";
 import { useGoodGetById } from "../../api";
+import { convertToPrice } from "../../utils";
 
 const Loading = (props) => {
   return (
@@ -10,7 +11,7 @@ const Loading = (props) => {
 };
 
 const Default = (props) => {
-  const { count, isLast, id } = props;
+  const { count, isLast, id, sale = 0.0 } = props;
 
   const { item, loading } = useGoodGetById(id);
 
@@ -63,7 +64,7 @@ const Default = (props) => {
             </Box>
             <Box>
               <Typography noWrap sx={{ fontWeight: "bold" }}>
-                {item.price}
+                {convertToPrice(sale * count)}
               </Typography>
             </Box>
           </>

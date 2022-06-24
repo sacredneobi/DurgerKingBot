@@ -10,6 +10,7 @@ import {
   useIsTelegramWebAppReady,
 } from "react-telegram-webapp";
 import { post } from "../../api/sendMessage";
+import { convertToPrice } from "../../utils";
 
 const Default = (props) => {
   const [searchParams] = useSearchParams();
@@ -38,7 +39,11 @@ const Default = (props) => {
       const handleOnClick = () => {
         // showPayment ? telegram.sendData("TEST") : setShowPayment(true);
         showPayment
-          ? post({
+          ? // Отправка при использовании keyboardButton (Markup.keyboard) в телеграмме
+            // ? telegram.sendData(
+            //     JSON.stringify({ ...telegram.initDataUnsafe, test: 100 })
+            //   )
+            post({
               ...telegram.initDataUnsafe,
               goods: shoppingCart.filter((item) => item.count > 0),
             })
@@ -49,7 +54,12 @@ const Default = (props) => {
       if (showPayment) {
         telegram.MainButton.setParams({
           color: "rgb(49, 181, 69)",
-          text: "Payment $9 999.99",
+          text: `Payment ${convertToPrice(
+            shoppingCart.reduce(
+              (prev, next) => prev + next.sale * next.count,
+              0
+            )
+          )}`,
           is_visible: true,
           is_active: true,
         });

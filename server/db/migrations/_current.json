@@ -155,7 +155,7 @@
                     "field": "orderId",
                     "seqType": "Sequelize.INTEGER"
                 },
-                "goodIdId": {
+                "goodId": {
                     "allowNull": true,
                     "references": {
                         "model": "goods",
@@ -163,7 +163,7 @@
                     },
                     "onDelete": "CASCADE",
                     "onUpdate": "NO ACTION",
-                    "field": "goodIdId",
+                    "field": "goodId",
                     "seqType": "Sequelize.INTEGER"
                 }
             },
@@ -418,5 +418,5 @@
         }
     },
     "exists": true,
-    "revision": 2
+    "revision": 4
 }

@@ -1,7 +1,30 @@
 const { Markup } = require("telegraf");
+const models = require("../db/models");
 
-const test = (ctx) => {
+const client = models.client;
+
+const test = async (ctx) => {
   console.log(ctx.message.from);
+
+  const { id, first_name: first, last_name: last } = ctx.message.from;
+
+  const clientItem = await client.findOne({ where: { chatId: String(id) } });
+  if (!clientItem) {
+    await client.create({
+      first,
+      last,
+      chatId: String(id),
+    });
+  } else {
+    await client.update(
+      {
+        first,
+        last,
+      },
+      { where: { chatId: id } }
+    );
+  }
+
   return ctx.reply("Привет youtube", {
     caption: "Caption",
     parse_mode: "Markdown",

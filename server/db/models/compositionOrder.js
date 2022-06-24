@@ -17,7 +17,7 @@ const def = (db, DataTypes, options) => {
       onDelete: "CASCADE",
     });
     model.belongsTo(models.good, {
-      foreignKey: "goodIdId",
+      foreignKey: "goodId",
       as: "good",
       onUpdate: "NO ACTION",
       onDelete: "CASCADE",

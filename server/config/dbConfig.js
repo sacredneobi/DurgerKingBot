@@ -9,7 +9,9 @@ const dev = {
   host: process.env.DEV_HOST,
   port: process.env.DEV_PORT,
   dialect: process.env.DEV_DIALECT,
-  logging: (msg) => {},
+  logging: (msg) => {
+    // console.log(msg);
+  },
   define: { createdAt: false },
 };
 

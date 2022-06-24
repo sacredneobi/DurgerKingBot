@@ -10,6 +10,7 @@ import {
 import { useSearchParams } from "react-router-dom";
 import Button from "../addons/grid/button";
 import { ShoppingCart } from "../../context";
+import { convertToPrice } from "../../utils";
 
 const findItem = (id, shoppingCart) => {
   const find = shoppingCart.filter((itemCart) => itemCart.id === id);
@@ -22,14 +23,15 @@ const finCountDef = (id, shoppingCart) => {
   return data.item?.count ? data.item.count : 0;
 };
 
-const setItemCount = (id, shoppingCart, count) => {
+const setItemCount = (id, shoppingCart, count, sale) => {
   const find = shoppingCart.filter((itemCart) => itemCart.id === id);
   if (find.length > 0) {
     find.forEach((item) => {
       item.count = count;
+      item.sale = sale;
     });
   } else {
-    shoppingCart.push({ id, count });
+    shoppingCart.push({ id, count, sale });
   }
 };
 
@@ -44,7 +46,15 @@ function areEqual(prev, next) {
 }
 
 const Default = memo((props) => {
-  const { caption, icon, loading, type, id, showShoppingCart } = props;
+  const {
+    caption,
+    icon,
+    loading,
+    type,
+    id,
+    showShoppingCart,
+    price: { sale = 0.0 } = {},
+  } = props;
 
   const shoppingCart = useContext(ShoppingCart);
   const [counter, setCounter] = useState(finCountDef(id, shoppingCart));
@@ -55,7 +65,7 @@ const Default = memo((props) => {
   const handleOnClick = (add) => () => {
     setCounter((prev) => {
       const count = add ? prev + 1 : prev - 1 < 0 ? 0 : prev - 1;
-      setItemCount(id, shoppingCart, count);
+      setItemCount(id, shoppingCart, count, sale);
       if (typeof showShoppingCart === "function") {
         showShoppingCart(true, false);
       }
@@ -90,10 +100,16 @@ const Default = memo((props) => {
             marginTop: 1,
             flexGrow: 1,
             display: "flex",
+            flexDirection: "column",
             alignItems: "center",
           }}
         >
           <Text {...rootTypography} caption={caption} />
+          <Text
+            {...rootTypography}
+            sx={{ fontWeight: "bold" }}
+            caption={convertToPrice(sale)}
+          />
         </Box>
         <Box sx={rootContainerButton}>
           <Button

@@ -1,5 +1,5 @@
 const models = require("../db/models");
-const { HasMany, Op } = require("sequelize");
+const { HasMany, HasOne, Op } = require("sequelize");
 const sleep = require("../utils/sleep");
 
 const model = models.good;
@@ -53,18 +53,19 @@ const get = async (req, res, promiseError) => {
           attributes: { exclude: ["createdAt", "updatedAt", "deletedAt"] },
         },
         {
-          association: new HasMany(model, models.price, {}),
+          association: new HasOne(model, models.price, {}),
           required: false,
           attributes: {
             exclude: [
               "goodId",
+              "id",
+              "description",
               "purchase",
               "createdAt",
               "updatedAt",
               "deletedAt",
             ],
           },
-          where: { id: 100 },
         },
       ],
       order: [["id", "ASC"]],
