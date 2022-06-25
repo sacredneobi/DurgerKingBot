@@ -1,5 +1,5 @@
 import burger from "./burger.png";
-import cake from "./cake.tgs";
+import cake from "./cake.json";
 import coke from "./coke.png";
 import cookie from "./cookie.png";
 import donut from "./donut.png";

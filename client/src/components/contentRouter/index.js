@@ -10,9 +10,19 @@ const Default = (props) => {
   return (
     <Routes>
       <Route path="/" element={<div>MAIN</div>} />
-      {routers.map((item) => {
+      {routers.map((item, index) => {
         return (
-          <Route key={item.name} path={item.name} element={<div>1</div>} />
+          <Route
+            key={index}
+            path={item.name}
+            element={
+              typeof item.component === "function" ? (
+                item.component()
+              ) : (
+                <div>NOT FOUND COMPONENT PAGE FOR "{item.name}"</div>
+              )
+            }
+          />
         );
       })}
     </Routes>

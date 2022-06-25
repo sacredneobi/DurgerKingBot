@@ -1,3 +1,6 @@
 import Main from "./main";
+import translation from "./translation";
 
-export { Main };
+const adminPages = [translation];
+
+export { Main, adminPages };

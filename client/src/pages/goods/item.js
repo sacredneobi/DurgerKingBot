@@ -11,6 +11,7 @@ import { useSearchParams } from "react-router-dom";
 import Button from "../addons/grid/button";
 import { ShoppingCart } from "../../context";
 import { convertToPrice } from "../../utils";
+import { useLottie } from "lottie-react";
 
 const findItem = (id, shoppingCart) => {
   const find = shoppingCart.filter((itemCart) => itemCart.id === id);
@@ -59,8 +60,22 @@ const Default = memo((props) => {
   const shoppingCart = useContext(ShoppingCart);
   const [counter, setCounter] = useState(finCountDef(id, shoppingCart));
   const [searchParams, setSearchParams] = useSearchParams();
+  const { View, goToAndPlay } = useLottie(
+    {
+      animationData: icon.isAnimate ? icon.img : null,
+      loop: false,
+      autoplay: false,
+    },
+    { height: 80 }
+  );
 
   const isNotBack = type !== "back";
+
+  const handleOnClickAnimation = () => {
+    if (icon.isAnimate) {
+      goToAndPlay(0);
+    }
+  };
 
   const handleOnClick = (add) => () => {
     setCounter((prev) => {
@@ -68,6 +83,9 @@ const Default = memo((props) => {
       setItemCount(id, shoppingCart, count, sale);
       if (typeof showShoppingCart === "function") {
         showShoppingCart(true, false);
+      }
+      if (icon.isAnimate && count > 0) {
+        goToAndPlay(0);
       }
       return count;
     });
@@ -93,7 +111,11 @@ const Default = memo((props) => {
     return (
       <Box sx={rootContainer}>
         <Badge counter={counter}>
-          <Avatar src={icon} sizeImage={80} />
+          {icon.isAnimate ? (
+            <div onClick={handleOnClickAnimation}>{View}</div>
+          ) : (
+            <Avatar src={icon.img} sizeImage={80} />
+          )}
         </Badge>
         <Box
           sx={{
