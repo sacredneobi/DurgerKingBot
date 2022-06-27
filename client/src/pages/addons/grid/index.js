@@ -1,5 +1,4 @@
-import { Grid } from "@mui/material";
-import { Box } from "../../../components";
+import { Box, Grid } from "@components";
 
 const Default = (props) => {
   const { renderItem, items = [], sx, ...other } = props;

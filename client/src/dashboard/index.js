@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import { useAccessGet } from "../api";
-import { correctRouter } from "../utils";
+import { useAccessGet } from "@api";
+import { correctRouter } from "@utils";
 
 import {
   Drawer,
@@ -14,7 +14,7 @@ import {
   CssBaseline,
   Navigation,
   ContentRouter,
-} from "../components";
+} from "@components";
 import style from "./style";
 
 export default function MiniDrawer(props) {

@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "allowSyntheticDefaultImports": false,
+    "baseUrl": "./",
+    "paths": {
+      "@utils/*": ["src/utils/*"],
+      "@utils": ["src/utils/"],
+      "@components/*": ["src/components/*"],
+      "@components": ["src/components/"],
+      "@api/*": ["src/api/*"],
+      "@api": ["src/api/"],
+      "@data/*": ["src/data/*"],
+      "@data/": ["src/data/"],
+      "@context/*": ["src/context/*"],
+      "@context/": ["src/context/"],
+      "@hooks/*": ["src/hooks/*"],
+      "@hooks": ["src/hooks/"]
+    }
+  },
+  "exclude": ["node_modules", "dist"]
+}

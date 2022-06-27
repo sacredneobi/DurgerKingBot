@@ -16,6 +16,10 @@ import Avatar from "./avatar";
 import Pagination from "./pagination";
 import Button from "./button";
 import Loading from "./loading";
+import Skeleton from "./skeleton";
+import OutlinedInput from "./outlinedInput";
+import Grid from "./grid";
+import ButtonBase from "./buttonBase";
 
 export {
   Navigation,
@@ -36,4 +40,8 @@ export {
   Pagination,
   Button,
   Loading,
+  Skeleton,
+  OutlinedInput,
+  Grid,
+  ButtonBase,
 };

@@ -1,34 +1,37 @@
-import { OutlinedInput } from "@mui/material";
-import { Box, IconButton } from "../../../components";
+import { Box, IconButton, OutlinedInput } from "@components";
+
+const isFunction = (fn) => {
+  return typeof fn === "function";
+};
 
 const Default = (props) => {
   const { sx, value = "", setValue, onSearch, onHide, ...other } = props;
 
   const handleOnChange = (event) => {
-    if (typeof setValue === "function") {
+    if (isFunction(setValue)) {
       setValue(event.target.value);
     }
   };
 
   const handleOnKeyUp = (event) => {
     if (event.key.toUpperCase() === "ENTER") {
-      if (typeof setValue === "function") {
+      if (isFunction(setValue)) {
         onSearch(value);
       }
-      if (typeof onHide === "function") {
+      if (isFunction(onHide)) {
         onHide();
       }
     }
   };
 
   const handleOnClear = () => {
-    if (typeof setValue === "function") {
+    if (isFunction(setValue)) {
       setValue("");
     }
-    if (typeof setValue === "function") {
+    if (isFunction(setValue)) {
       onSearch("");
     }
-    if (typeof onHide === "function") {
+    if (isFunction(onHide)) {
       onHide();
     }
   };
@@ -48,7 +51,11 @@ const Default = (props) => {
         autoFocus
         onKeyUp={handleOnKeyUp}
         onChange={handleOnChange}
-        sx={{ "& .MuiOutlinedInput-input": { color: "black" } }}
+        sx={{
+          "& .MuiOutlinedInput-input": {
+            color: "var(--tg-theme-text-color, #000)",
+          },
+        }}
         endAdornment={
           value !== "" && (
             <IconButton

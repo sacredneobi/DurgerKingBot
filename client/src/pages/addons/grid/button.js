@@ -1,11 +1,10 @@
-import { Button } from "@mui/material";
-import Icon from "../icon";
+import { Icon, Button } from "@components";
 
 const Default = (props) => {
   const { textIcon, ...other } = props;
   return (
     <Button variant="contained" {...other}>
-      <Icon textIcon={textIcon} />
+      <Icon textIcon={textIcon} sx={{ fontSize: 35 }} />
     </Button>
   );
 };

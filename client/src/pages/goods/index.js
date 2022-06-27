@@ -1,19 +1,23 @@
-import { Box, Loading } from "../../components";
-import { useGoodGet } from "../../api";
+import { Box, Loading } from "@components";
+import { ShoppingCart } from "@context";
+import { useGoodGet } from "@api";
 import Grid from "../addons/grid";
 import Bottom from "../addons/bottom";
 import { root, grid, baseLine } from "./styles";
 import Search from "../addons/search";
 import Item from "./item";
 import { useEffect, useContext } from "react";
-import { ShoppingCart } from "../../context";
-
-const countPerPage = 10;
 
 const Default = (props) => {
-  const { articleId, showPayment, setShow, showShoppingCart } = props;
+  const {
+    articleId,
+    showPayment,
+    setShow,
+    showShoppingCart,
+    countPerPage = 10,
+  } = props;
 
-  const { countPage, items, usePage, page, loading, useSearch } = useGoodGet(
+  const { countPage, items, loading, useSearch, usePage, page } = useGoodGet(
     countPerPage,
     articleId
   );
@@ -23,29 +27,18 @@ const Default = (props) => {
   useEffect(() => {
     return () => {
       if (shoppingCart.length !== 0) {
-        localStorage.setItem(
-          "shoppingCart",
-          JSON.stringify(shoppingCart, null, 2)
-        );
+        localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
       }
     };
   }, [shoppingCart]);
 
   return (
-    <Box
-      sx={{
-        ...root,
-        maxHeight: showPayment ? 0 : "100vh",
-        transition: "max-height 0.3s ease-out, opacity 0.3s ease-out",
-        visibility: !showPayment ? "visible" : "hidden",
-        opacity: !showPayment ? 1 : 0,
-      }}
-    >
+    <Box sx={root(showPayment)}>
       {loading ? (
         <Loading />
       ) : (
         <Grid
-          items={loading ? [] : items}
+          items={items}
           sx={grid}
           renderItem={(props) => (
             <Item {...props} showShoppingCart={showShoppingCart} />

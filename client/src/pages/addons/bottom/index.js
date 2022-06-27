@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { ButtonBase } from "@mui/material";
-import { Box, Pagination, Icon } from "../../../components";
+import { Box, Pagination, Icon, ButtonBase } from "@components";
 import { useSearchParams } from "react-router-dom";
 import { root, buttonContainer, buttonIcon, pagination } from "./styles";
 

@@ -1,5 +1,5 @@
 import Main from "./main";
-import translation from "./translation";
+import translation from "./admin/translation";
 
 const adminPages = [translation];
 

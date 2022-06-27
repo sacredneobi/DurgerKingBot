@@ -1,10 +1,14 @@
-const root = {
+const root = (showPayment) => ({
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",
   flexGrow: 1,
   width: "100%",
-};
+  maxHeight: showPayment ? 0 : "100vh",
+  transition: "max-height 0.3s ease-out, opacity 0.3s ease-out",
+  visibility: !showPayment ? "visible" : "hidden",
+  opacity: !showPayment ? 1 : 0,
+});
 
 const containerButton = (show, add = false) => {
   const height = 50;
@@ -60,6 +64,14 @@ const rootContainerButton = {
 const grid = { overflowX: "hidden", overflowY: "auto" };
 const baseLine = { flexGrow: 1 };
 
+const rootIcon = { height: 80, width: 80, fontSize: 77, color: "#bda1a1" };
+const textContainer = {
+  margin: 0,
+  flexGrow: 1,
+  display: "flex",
+  alignItems: "center",
+};
+
 export {
   root,
   grid,
@@ -68,4 +80,6 @@ export {
   rootContainer,
   rootTypography,
   containerButton,
+  rootIcon,
+  textContainer,
 };
