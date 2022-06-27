@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, memo } from "react";
 import { useTranslation } from "react-i18next";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import { useAccessGet } from "@api";
 import { correctRouter } from "@utils";
 
@@ -17,7 +16,11 @@ import {
 } from "@components";
 import style from "./style";
 
-export default function MiniDrawer(props) {
+function areEqual(prev, next) {
+  return true;
+}
+
+export default memo((props) => {
   const { adminPages = [] } = props;
 
   const [route, setRoute] = useState([]);
@@ -37,8 +40,7 @@ export default function MiniDrawer(props) {
     execute();
   }, []);
 
-  const matches = useMediaQuery("(min-width:500px)");
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const { t } = useTranslation();
 
   const handleDrawerOpen = () => {
@@ -51,28 +53,24 @@ export default function MiniDrawer(props) {
   return (
     <Box sx={style.root}>
       <CssBaseline />
-      {matches ? (
-        <AppBar position="fixed" sx={style.appBar}>
-          <Toolbar>
-            <IconButton
-              onClick={handleDrawerOpen}
-              textIcon="home"
-              name={t("dashboard.menu")}
-            />
-            <Text variant="h6" caption={t("dashboard.menu")} />
-          </Toolbar>
-        </AppBar>
-      ) : null}
-      {matches ? (
-        <Drawer open={open}>
-          <Toolbar />
-          <Navigation items={route} />
-          <Navigation items={routeSetting} fixedBottom />
-        </Drawer>
-      ) : null}
-      <Box component="main" sx={style.boxMain(matches)}>
+      <AppBar position="fixed" sx={style.appBar}>
+        <Toolbar>
+          <IconButton
+            onClick={handleDrawerOpen}
+            textIcon="home"
+            name={t("dashboard.menu")}
+          />
+          <Text variant="h6" caption={t("dashboard.menu")} />
+        </Toolbar>
+      </AppBar>
+      <Drawer open={open}>
+        <Toolbar />
+        <Navigation items={route} />
+        <Navigation items={routeSetting} fixedBottom />
+      </Drawer>
+      <Box component="main" sx={style.boxMain(true)}>
         <ContentRouter routers={[...route, ...routeSetting]} />
       </Box>
     </Box>
   );
-}
+}, areEqual);

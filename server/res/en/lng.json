@@ -3,14 +3,6 @@
   "routes": {
     "settings": "Settings",
     "translation": "Translation",
-    "Andrey": "Hello Andrey",
-    "GRAND": "Hello GRAND",
-    "Виктор": "Hello Виктор",
-    "Виктория": "Hello Виктория",
-    "Лута": "Hello Лута",
-    "D j": "Hello Джабраил",
-    "chats": "Chats from bot",
-    "test": "test ws",
-    "hstop": "Hello Тимофей"
+    "goods": "Список товаров"
   }
 }

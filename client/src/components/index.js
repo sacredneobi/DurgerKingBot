@@ -20,6 +20,7 @@ import Skeleton from "./skeleton";
 import OutlinedInput from "./outlinedInput";
 import Grid from "./grid";
 import ButtonBase from "./buttonBase";
+import Table from "./table";
 
 export {
   Navigation,
@@ -44,4 +45,5 @@ export {
   OutlinedInput,
   Grid,
   ButtonBase,
+  Table,
 };

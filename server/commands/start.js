@@ -3,8 +3,6 @@ const models = require("../db/models");
 const client = models.client;
 
 const def = async (ctx) => {
-  console.log(ctx.message.from);
-
   const { id, first_name: first, last_name: last } = ctx.message.from;
 
   const clientItem = await client.findOne({ where: { chatId: String(id) } });
