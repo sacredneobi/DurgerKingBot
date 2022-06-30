@@ -23,6 +23,7 @@ function areEqual(prev, next) {
 export default memo((props) => {
   const { adminPages = [] } = props;
 
+  const [open, setOpen] = useState(true);
   const [route, setRoute] = useState([]);
   const [routeSetting, setRouteSetting] = useState([]);
   const { execute, data, loading, error } = useAccessGet();
@@ -40,7 +41,6 @@ export default memo((props) => {
     execute();
   }, []);
 
-  const [open, setOpen] = React.useState(true);
   const { t } = useTranslation();
 
   const handleDrawerOpen = () => {

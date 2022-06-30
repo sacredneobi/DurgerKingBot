@@ -19,7 +19,7 @@ const Default = (props) => {
               typeof item.component === "function" ? (
                 item.component()
               ) : (
-                <div>NOT FOUND COMPONENT PAGE FOR "{item.name}"</div>
+                <div>{`NOT FOUND COMPONENT PAGE FOR "${item.name}"`}</div>
               )
             }
           />

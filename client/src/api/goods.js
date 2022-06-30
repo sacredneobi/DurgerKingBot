@@ -32,7 +32,7 @@ const img = [
   { isAnimate: false, img: coke },
 ];
 
-const useGet = (countPerPage = 0, articleId) => {
+const useGet = (countPerPage = 0, articleId, notIcon = false) => {
   const [answer, setAnswer] = useState({ countPage: 0, items: [] });
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState(null);
@@ -50,10 +50,10 @@ const useGet = (countPerPage = 0, articleId) => {
     if (data) {
       setAnswer((prev) => {
         const items = data.rows
-          ? data.rows.map((item, index) => ({ ...item, icon: img[index] }))
+          ? notIcon
+            ? data.rows
+            : data.rows.map((item, index) => ({ ...item, icon: img[index] }))
           : [];
-
-        // items.unshift({ id: 0, type: "back" });
 
         return {
           countPage: Math.ceil(
