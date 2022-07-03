@@ -6,6 +6,9 @@ const findRoute = (name = "", pages = []) => {
 };
 
 const def = (items, pages) => {
+  if (!items) {
+    return [];
+  }
   return items
     .map((item) => {
       if (typeof item === "object") {

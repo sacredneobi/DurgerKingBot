@@ -1,5 +1,6 @@
 import { IconButton } from "@mui/material";
 import Icon from "../icon";
+import { isFunc } from "@utils/";
 
 const Default = (props) => {
   const {
@@ -15,9 +16,7 @@ const Default = (props) => {
   const MyIcon = icon;
 
   const handleOnClick = (event) => {
-    if (typeof onClick === "function") {
-      onClick(event);
-    }
+    isFunc(onClick, event);
   };
 
   const style =

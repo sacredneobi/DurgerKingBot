@@ -24,22 +24,12 @@ export default memo((props) => {
   const { adminPages = [] } = props;
 
   const [open, setOpen] = useState(true);
-  const [route, setRoute] = useState([]);
-  const [routeSetting, setRouteSetting] = useState([]);
-  const { execute, data, loading, error } = useAccessGet();
+  const [access, setAccess] = useState({ route: [], routeSetting: [] });
+  const [callbackGet, loading] = useAccessGet({ correctRouter, adminPages });
 
   useEffect(() => {
-    if (data) {
-      setRoute(data.route ? correctRouter(data.route, adminPages) : []);
-      setRouteSetting(
-        data.routeSetting ? correctRouter(data.routeSetting, adminPages) : []
-      );
-    }
-  }, [data]);
-
-  useEffect(() => {
-    execute();
-  }, []);
+    callbackGet(setAccess);
+  }, [callbackGet]);
 
   const { t } = useTranslation();
 
@@ -48,7 +38,6 @@ export default memo((props) => {
   };
 
   if (loading) return <div style={style}>LOADING...</div>;
-  if (error) return <div style={style}>ERROR!</div>;
 
   return (
     <Box sx={style.root}>
@@ -65,11 +54,11 @@ export default memo((props) => {
       </AppBar>
       <Drawer open={open}>
         <Toolbar />
-        <Navigation items={route} />
-        <Navigation items={routeSetting} fixedBottom />
+        <Navigation items={access.route} />
+        <Navigation items={access.routeSetting} fixedBottom />
       </Drawer>
       <Box component="main" sx={style.boxMain(true)}>
-        <ContentRouter routers={[...route, ...routeSetting]} />
+        <ContentRouter routers={[...access.route, ...access.routeSetting]} />
       </Box>
     </Box>
   );

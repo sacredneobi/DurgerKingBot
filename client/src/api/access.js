@@ -1,15 +1,28 @@
-import useAxios from "axios-hooks";
+import { useCallback } from "react";
+import useParamsApi from "./useParamsAPI";
 
-const def = () => {
-  const [{ data, loading, error }, execute] = useAxios(
-    {
-      url: "/api/access",
-      method: "GET",
-    },
-    { manual: true }
-  );
+const def = (props) => {
+  const { correctRouter, adminPages } = props;
+  const { get, loading, response } = useParamsApi("/api/access");
 
-  return { execute, data, loading, error };
+  return [
+    useCallback(
+      (setData) => {
+        get("").then((data) => {
+          setData(
+            response.ok
+              ? {
+                  route: correctRouter(data.route, adminPages),
+                  routeSetting: correctRouter(data.routeSetting, adminPages),
+                }
+              : null
+          );
+        });
+      },
+      [response, get, correctRouter, adminPages]
+    ),
+    loading,
+  ];
 };
 
 export default def;

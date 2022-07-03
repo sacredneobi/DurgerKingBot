@@ -23,6 +23,8 @@ export default (props) => {
     telegram,
   } = useHooks();
 
+  const [callbackPost] = sendMessagePost();
+
   const showShoppingCart = useCallback(() => {
     if (isReady) {
       telegram.MainButton.setParams({
@@ -42,7 +44,7 @@ export default (props) => {
             // ? telegram.sendData(
             //     JSON.stringify({ ...telegram.initDataUnsafe, test: 100 })
             //   )
-            sendMessagePost({
+            callbackPost({
               ...telegram.initDataUnsafe,
               goods: shoppingCartFilter(shoppingCart),
             })

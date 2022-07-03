@@ -1,16 +1,13 @@
 import { Typography, Button } from "@mui/material";
 import { Box } from "../../components";
+import { isFunc } from "@utils/";
 
 const Default = (props) => {
   const { setShow, showShoppingCart } = props;
 
   const handleOnClick = () => {
-    if (typeof setShow === "function") {
-      setShow(false);
-    }
-    if (typeof showShoppingCart === "function") {
-      showShoppingCart(true);
-    }
+    isFunc(setShow, false);
+    isFunc(showShoppingCart, true);
   };
   return (
     <Box

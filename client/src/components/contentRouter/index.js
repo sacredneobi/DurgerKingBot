@@ -1,4 +1,6 @@
 import { Routes, Route } from "react-router-dom";
+import { isFuncDef } from "@utils/";
+import Box from "../box";
 
 const Default = (props) => {
   const { routers } = props;
@@ -15,13 +17,10 @@ const Default = (props) => {
           <Route
             key={index}
             path={item.name}
-            element={
-              typeof item.component === "function" ? (
-                item.component()
-              ) : (
-                <div>{`NOT FOUND COMPONENT PAGE FOR "${item.name}"`}</div>
-              )
-            }
+            element={isFuncDef(
+              item.component,
+              <Box>{`NOT FOUND COMPONENT PAGE FOR "${item.name}"`}</Box>
+            )}
           />
         );
       })}

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Box, Pagination, Icon, ButtonBase } from "@components";
 import { useSearchParams } from "react-router-dom";
 import { root, buttonContainer, buttonIcon, pagination } from "./styles";
+import { isFunc } from "@utils/";
 
 const Default = (props) => {
   const {
@@ -21,9 +22,7 @@ const Default = (props) => {
 
   const handleOnClick = () => {
     if (showSearch) {
-      if (typeof onSearch === "function") {
-        onSearch(searchValue);
-      }
+      isFunc(onSearch, searchValue);
     }
     setShowSearch((prev) => !prev);
   };
@@ -33,9 +32,7 @@ const Default = (props) => {
   };
 
   const handleOnSearch = (value) => {
-    if (typeof onSearch === "function") {
-      onSearch(value);
-    }
+    isFunc(onSearch, value);
   };
 
   const handleOnClickPayment = () => {
@@ -78,9 +75,7 @@ const Default = (props) => {
           count={count}
           page={page}
           onChange={(event, page) => {
-            if (typeof onSetPage === "function") {
-              onSetPage(page);
-            }
+            isFunc(onSetPage, page);
           }}
         />
       )}

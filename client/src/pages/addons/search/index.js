@@ -1,39 +1,24 @@
 import { Box, IconButton, OutlinedInput } from "@components";
-
-const isFunction = (fn) => {
-  return typeof fn === "function";
-};
+import { isFunc } from "@utils/";
 
 const Default = (props) => {
   const { sx, value = "", setValue, onSearch, onHide, ...other } = props;
 
   const handleOnChange = (event) => {
-    if (isFunction(setValue)) {
-      setValue(event.target.value);
-    }
+    isFunc(setValue, event.target.value);
   };
 
   const handleOnKeyUp = (event) => {
     if (event.key.toUpperCase() === "ENTER") {
-      if (isFunction(setValue)) {
-        onSearch(value);
-      }
-      if (isFunction(onHide)) {
-        onHide();
-      }
+      isFunc(onSearch, value);
+      isFunc(onHide);
     }
   };
 
   const handleOnClear = () => {
-    if (isFunction(setValue)) {
-      setValue("");
-    }
-    if (isFunction(setValue)) {
-      onSearch("");
-    }
-    if (isFunction(onHide)) {
-      onHide();
-    }
+    isFunc(onSearch, "");
+    isFunc(setValue, "");
+    isFunc(onHide);
   };
 
   const handleOnMouseDown = (event) => {

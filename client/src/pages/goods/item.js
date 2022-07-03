@@ -12,6 +12,7 @@ import {
 import Button from "../addons/grid/button";
 import { useLottie } from "lottie-react";
 import { finCountDef, setItemCount, areEqual } from "./utils";
+import { isFunc } from "@utils/";
 
 const Default = memo((props) => {
   const {
@@ -42,9 +43,7 @@ const Default = memo((props) => {
     setCounter((prev) => {
       const count = add ? prev + 1 : prev - 1 < 0 ? 0 : prev - 1;
       setItemCount(id, shoppingCart, count, sale);
-      if (typeof showShoppingCart === "function") {
-        showShoppingCart(true, false);
-      }
+      isFunc(showShoppingCart, true, false);
       if (icon.isAnimate && count === 1) {
         handleOnClickAnimation();
       }
