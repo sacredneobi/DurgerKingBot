@@ -5,6 +5,10 @@ import ShoppingCart, {
 } from "./shoppingCart";
 import MainButton from "./mainButton";
 import SelectGoods from "./selectGoods";
+import {
+  Context as GoodsContext,
+  useDefContext as useGoodsContext,
+} from "./goodsContext";
 
 export {
   ShoppingCart,
@@ -13,4 +17,6 @@ export {
   shoppingCartNotEmpty,
   shoppingCartFilter,
   shoppingCartCalcSum,
+  GoodsContext,
+  useGoodsContext,
 };

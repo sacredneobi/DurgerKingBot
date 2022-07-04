@@ -1,17 +1,20 @@
 import { memo } from "react";
 import { Text, IconButton, Box } from "@components";
 import { areEqualObject } from "@utils/areRender";
+import { useGoodsContext } from "@context";
 
 const Default = memo((props) => {
   const { caption, id } = props;
 
+  const { dialog } = useGoodsContext();
+
   const handleOnEdit = (event) => {
-    console.log("edit");
+    dialog.setIsShowEdit(true);
     event.stopPropagation();
   };
 
   const handleOnDelete = (event) => {
-    console.log("delete");
+    dialog.setIsShowDelete(true, { select: [{ caption, id }] });
     event.stopPropagation();
   };
 

@@ -1,10 +1,17 @@
 import { memo } from "react";
 import { Box, IconButton } from "@components";
 import { areEqualObject } from "@utils/areRender";
+import { useGoodsContext } from "@context";
 
 const Default = memo((props) => {
-  const handleOnClick = () => {
-    console.log("create new");
+  const { dialog } = useGoodsContext();
+
+  const handleOnDelete = () => {
+    dialog.setIsShowDelete(true, props);
+  };
+
+  const handleOnCreate = () => {
+    dialog.setIsShowCreate(true);
   };
 
   return (
@@ -16,10 +23,10 @@ const Default = memo((props) => {
       <IconButton
         textIcon="delete"
         color="error"
-        onClick={handleOnClick}
+        onClick={handleOnDelete}
         edge={false}
       />
-      <IconButton textIcon="add" onClick={handleOnClick} edge={false} />
+      <IconButton textIcon="add" onClick={handleOnCreate} edge={false} />
     </Box>
   );
 }, areEqualObject);

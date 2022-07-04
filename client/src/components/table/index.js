@@ -32,13 +32,21 @@ export default (props) => {
     setReload((prev) => !prev);
   }, []);
 
+  const handleOnClear = useCallback(() => {
+    select.forEach((item) => (item.checked = false));
+    setReload((prev) => !prev);
+  }, []);
+
   const countSelect = select.filter((item) => item.checked === true).length;
 
   return (
     <Box sx={styles.root}>
       {topContainer && (
         <Box sx={styles.top}>
-          {isFunc(topContainer)}
+          {isFunc(topContainer, {
+            select: select.filter((item) => item.checked === true),
+            onClear: handleOnClear,
+          })}
           <Divider flexItem />
         </Box>
       )}
