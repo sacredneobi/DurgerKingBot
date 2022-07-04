@@ -4,10 +4,16 @@ import { areEqualObject } from "@utils/areRender";
 import { useGoodsContext } from "@context";
 
 const Default = memo((props) => {
+  const { select, selectCount, onClear } = props;
+
   const { dialog } = useGoodsContext();
 
   const handleOnDelete = () => {
-    dialog.setIsShowDelete(true, props);
+    dialog.setIsShowDelete(true, {
+      select: select.map((item) => item.id),
+      onClear,
+      onGetText: () => select.map((item) => item.caption).join(",\n"),
+    });
   };
 
   const handleOnCreate = () => {
@@ -25,6 +31,7 @@ const Default = memo((props) => {
         color="error"
         onClick={handleOnDelete}
         edge={false}
+        disabled={selectCount === 0}
       />
       <IconButton textIcon="add" onClick={handleOnCreate} edge={false} />
     </Box>

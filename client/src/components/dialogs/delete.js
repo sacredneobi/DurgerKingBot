@@ -9,7 +9,7 @@ import {
 import { observer } from "mobx-react-lite";
 
 export default observer((props) => {
-  const { useContext, propsContext, onDelete } = props;
+  const { useContext, propsContext, caption, onDelete } = props;
 
   if (!propsContext || !useContext) {
     return null;
@@ -33,29 +33,31 @@ export default observer((props) => {
     const handleOnDelete = (item) => {
       handleOnClose();
       if (typeof onDelete === "function") {
-        onDelete(dialog.data.select.map((item) => item.id));
-      }
-      if (typeof dialog.data.onClear === "function") {
-        dialog.data.onClear();
+        onDelete(dialog.data);
       }
     };
 
+    let text = "Удалить элементы ?";
+    if (typeof dialog?.data?.onGetText === "function") {
+      text = dialog.data.onGetText();
+    }
+
     return (
-      <Dialog open onClose={handleOnClose}>
-        <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
-        </DialogTitle>
+      <Dialog open>
+        <DialogTitle id="alert-dialog-title">{caption}</DialogTitle>
         <DialogContent>
           <DialogContentText
             id="alert-dialog-description"
             sx={{ whiteSpace: "pre-line" }}
           >
-            {dialog.data.select.map((item) => item.caption).join(",\n")}
+            {text}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleOnDelete}>Delete</Button>
-          <Button onClick={handleOnClose} autoFocus>
+          <Button onClick={handleOnDelete} color="error" variant="contained">
+            Delete
+          </Button>
+          <Button onClick={handleOnClose} autoFocus variant="outlined">
             Cancel
           </Button>
         </DialogActions>

@@ -1,5 +1,6 @@
 import { useState, useCallback } from "react";
 import { useFetch } from "use-http";
+import useParamsApi from "./useParamsAPI";
 import {
   burger,
   cake,
@@ -12,6 +13,7 @@ import {
   pizza,
   bottle,
 } from "../res/icons";
+import { isFunc } from "@utils";
 
 const img = [
   { isAnimate: false, img: burger },
@@ -35,6 +37,7 @@ const img = [
 const useGet = (countPerPage = 0, articleId, notIcon = false) => {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState(null);
+  const [update, setUpdate] = useState(false);
 
   const { loading, data: { count: countPage = 0, rows = [] } = {} } = useFetch(
     `/api/goods?articleId=${articleId}&limit=${countPerPage}&offset=${
@@ -43,7 +46,7 @@ const useGet = (countPerPage = 0, articleId, notIcon = false) => {
     {
       data: [],
     },
-    [page, search]
+    [page, search, update]
   );
   const usePage = useCallback(
     (page) => {
@@ -61,16 +64,37 @@ const useGet = (countPerPage = 0, articleId, notIcon = false) => {
     });
   }, []);
 
+  const reload = () => {
+    setUpdate((prev) => !prev);
+  };
+
   return {
     loading,
     usePage,
     page,
     useSearch,
+    reload,
     countPage: Math.ceil(countPage / (countPerPage ? countPerPage : 0)),
     items: notIcon
       ? rows
       : rows.map((item, index) => ({ ...item, icon: img[index] })),
   };
+};
+
+const useDelete = (props = {}) => {
+  const { reload } = props;
+  const { del, loading, response } = useParamsApi("/api/goods");
+  return [
+    useCallback(
+      (value) => {
+        del("", value).then((data) => {
+          isFunc(reload);
+        });
+      },
+      [response, del, reload]
+    ),
+    loading,
+  ];
 };
 
 const useGetById = (id) => {
@@ -87,4 +111,4 @@ const useGetById = (id) => {
   };
 };
 
-export { useGet, useGetById };
+export { useGet, useGetById, useDelete };

@@ -14,7 +14,7 @@ const Default = memo((props) => {
   };
 
   const handleOnDelete = (event) => {
-    dialog.setIsShowDelete(true, { select: [{ caption, id }] });
+    dialog.setIsShowDelete(true, { select: id, onGetText: () => caption });
     event.stopPropagation();
   };
 

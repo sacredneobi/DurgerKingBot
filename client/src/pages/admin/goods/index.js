@@ -10,12 +10,12 @@ import { GoodsContext, useGoodsContext } from "@context/";
 import Dialogs from "./dialogs";
 
 const Goods = (props) => {
-  const goodsData = useGoodGet(10, 14457, true);
+  const { reload, ...other } = useGoodGet(10, 14457, true);
 
   return (
     <>
       <Table
-        {...goodsData}
+        {...other}
         userContext={SelectGoods}
         topContainer={(props) => <TopContainer {...props} />}
         itemsRender={{
@@ -24,7 +24,7 @@ const Goods = (props) => {
         }}
         showCheck
       />
-      <Dialogs useContext={useGoodsContext} />
+      <Dialogs useContext={useGoodsContext} reload={reload} />
     </>
   );
 };

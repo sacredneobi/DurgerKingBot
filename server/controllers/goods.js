@@ -117,7 +117,7 @@ const del = (req, res, promiseError) => {
   }
 
   model
-    .destroy({ where: { id: id } })
+    .destroy({ where: { id } })
     .then(() => {
       res.status(200).send({ id, message: "deleted" });
     })
