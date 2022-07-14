@@ -17,7 +17,7 @@ const Default = memo((props) => {
   };
 
   const handleOnCreate = () => {
-    dialog.setIsShowCreate(true);
+    dialog.setIsShowEdit(true);
   };
 
   return (

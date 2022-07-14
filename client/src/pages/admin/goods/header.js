@@ -9,7 +9,7 @@ const Default = memo((props) => {
   const { dialog } = useGoodsContext();
 
   const handleOnEdit = (event) => {
-    dialog.setIsShowEdit(true);
+    dialog.setIsShowEdit(true, { select: id });
     event.stopPropagation();
   };
 

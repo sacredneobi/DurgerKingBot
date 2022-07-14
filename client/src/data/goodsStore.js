@@ -4,7 +4,6 @@ export default class DrawerStore {
   constructor() {
     this._isShowDelete = false;
     this._isShowEdit = false;
-    this._isShowCreate = false;
     makeAutoObservable(this);
     this._data;
   }
@@ -17,10 +16,6 @@ export default class DrawerStore {
     return this._isShowEdit;
   }
 
-  get isShowCreate() {
-    return this._isShowCreate;
-  }
-
   get data() {
     return this._data;
   }
@@ -30,11 +25,8 @@ export default class DrawerStore {
     this._data = data;
   }
 
-  setIsShowEdit(value) {
+  setIsShowEdit(value, data) {
     this._isShowEdit = value;
-  }
-
-  setIsShowCreate(value) {
-    this._isShowCreate = value;
+    this._data = data;
   }
 }

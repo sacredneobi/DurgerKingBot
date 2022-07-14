@@ -1,29 +1,30 @@
-import { DialogDelete } from "@components";
 import { observer } from "mobx-react-lite";
+import Dialog from "./container";
 
 const Default = observer((props) => {
   const { useContext } = props;
   const { dialog = {} } = useContext ? useContext() : {};
 
-  if (dialog.isShowCreate) {
+  if (dialog.isShowEdit) {
     const handleOnClose = () => {
-      dialog.setIsShowCreate(false);
-      console.log("CLOSE");
+      dialog.setIsShowEdit(false);
     };
 
-    const handleOnDelete = (item) => {
+    const handleOnSave = (data) => {
       handleOnClose();
-      console.log("CREATE");
+      console.log("SAVE", data);
     };
 
     return (
-      <DialogDelete
+      <Dialog
+        id={dialog?.data?.select}
         onClose={handleOnClose}
-        onDelete={handleOnDelete}
-        text="СОЗДАНИЕ  YouTube"
+        onSave={handleOnSave}
+        text="РЕДАКТИРОВАНИЕ YouTube"
       />
     );
   }
+  return null;
 });
 
 export default Default;
