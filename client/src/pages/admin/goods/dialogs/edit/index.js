@@ -1,5 +1,5 @@
 import { observer } from "mobx-react-lite";
-import Dialog from "./container";
+import Dialog from "./dialog";
 
 const Default = observer((props) => {
   const { useContext } = props;

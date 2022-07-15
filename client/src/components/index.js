@@ -21,7 +21,9 @@ import OutlinedInput from "./outlinedInput";
 import Grid from "./grid";
 import ButtonBase from "./buttonBase";
 import Table from "./table";
-import { DialogDelete, DialogEmpty } from "./dialogs";
+import { DialogDelete, DialogTitle } from "./dialogs";
+import Select from "./select";
+import Input from "./input";
 
 export {
   Navigation,
@@ -48,5 +50,7 @@ export {
   ButtonBase,
   Table,
   DialogDelete,
-  DialogEmpty,
+  DialogTitle,
+  Select,
+  Input,
 };

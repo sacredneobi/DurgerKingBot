@@ -1,4 +1,4 @@
 import DialogDelete from "./delete";
-import DialogEmpty from "./empty";
+import DialogTitle from "./empty";
 
-export { DialogDelete, DialogEmpty };
+export { DialogDelete, DialogTitle };

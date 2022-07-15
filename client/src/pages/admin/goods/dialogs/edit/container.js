@@ -1,24 +1,58 @@
-import { DialogEmpty, Box } from "@components";
-import { isFunc } from "@utils";
-import { useEffect, useState } from "react";
-import {
-  TextField,
-  InputLabel,
-  MenuItem,
-  FormControl,
-  Select,
-} from "@mui/material";
+import { Box, Select, Input } from "@components";
+import { isFunc, checkInput } from "@utils";
+import { useCallback, useState, useEffect } from "react";
+import { DialogContent } from "@mui/material";
+import Actions from "./actions";
 
-const Container = (props) => {
-  const { isSave, onSave, id } = props;
+const items = [
+  { caption: "11111", value: 1 },
+  { caption: "22222", value: 2 },
+  { caption: "33333", value: 3 },
+  { caption: "44444", value: 4 },
+];
 
-  const [data, setData] = useState({ id });
+const Default = (props) => {
+  const { onClose, onSave, ...other } = props;
+
+  const [data, setData] = useState(other);
+  const [save, setSave] = useState(false);
+  const [error, setError] = useState({});
+
+  const validate = useCallback((data) => {
+    return checkInput(data, [
+      {
+        name: "caption",
+        maxLength: 30,
+        minLength: 3,
+        errorMessage: "Заголовок не должен быть больше 30 и меньше 3",
+      },
+      {
+        name: "description",
+        maxLength: 30,
+        minLength: 3,
+        errorMessage: "Описание не должен быть больше 30 и меньше 3",
+      },
+      {
+        name: "articleId",
+        isNull: true,
+        errorMessage: "Должен быть выбранный",
+      },
+    ]);
+  }, []);
+
+  const handleOnSave = useCallback(() => {
+    setSave((prev) => !prev);
+  }, []);
 
   useEffect(() => {
-    if (isSave) {
+    if (save) {
       isFunc(onSave, data);
     }
-  }, [isSave]);
+  }, [onSave, data, save]);
+
+  useEffect(() => {
+    setError(validate(data));
+  }, [data, validate]);
 
   const handleChange = (param) => {
     return (event) => {
@@ -30,68 +64,47 @@ const Container = (props) => {
   };
 
   return (
-    <Box
-      sx={{
-        padding: (theme) => theme.spacing(1, 0),
-        display: "flex",
-        flexDirection: "column",
-        gap: 2,
-        width: 400,
-      }}
-    >
-      <TextField
-        label="Caption"
-        helperText=""
-        value={data.caption ? data.caption : ""}
-        onChange={handleChange("caption")}
-      />
-      <TextField
-        label="Description"
-        helperText=""
-        value={data.description ? data.description : ""}
-        onChange={handleChange("description")}
-      />
-      <FormControl fullWidth>
-        <InputLabel id="article">Article</InputLabel>
-        <Select
-          id="article"
-          label="Article"
-          value={data.articleId ? data.articleId : ""}
-          onChange={handleChange("articleId")}
+    <>
+      <DialogContent>
+        <Box
+          sx={{
+            padding: (theme) => theme.spacing(1, 0),
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+            width: "100%",
+          }}
         >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
-    </Box>
-  );
-};
-
-const Default = (props) => {
-  const { onClose, ...other } = props;
-
-  const [isSave, setIsSave] = useState(false);
-
-  const handleOnSave = () => {
-    setIsSave(true);
-  };
-
-  const actions = [
-    {
-      onClick: onClose,
-      caption: "Cancel",
-      variant: "contained",
-      color: "error",
-    },
-    { onClick: handleOnSave, caption: "Save" },
-  ];
-
-  return (
-    <DialogEmpty
-      actions={actions}
-      container={<Container isSave={isSave} {...other} />}
-    />
+          <Input
+            name="caption"
+            caption="Заголовок"
+            error={error}
+            data={data}
+            handleChange={handleChange}
+          />
+          <Input
+            name="description"
+            caption="Описание"
+            error={error}
+            data={data}
+            handleChange={handleChange}
+          />
+          <Select
+            name="articleId"
+            caption="Артикул"
+            error={error}
+            data={data}
+            onChange={handleChange}
+            items={items}
+          />
+        </Box>
+      </DialogContent>
+      <Actions
+        handleOnSave={handleOnSave}
+        disabled={error.isError}
+        onClose={onClose}
+      />
+    </>
   );
 };
 
