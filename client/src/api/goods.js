@@ -111,4 +111,29 @@ const useGetById = (id) => {
   };
 };
 
-export { useGet, useGetById, useDelete };
+const useGetById2 = (props = {}) => {
+  const { get, loading, response } = useParamsApi("/api/goods");
+  return [
+    useCallback(
+      (id, setData) => {
+        get(`?id=${id}`).then((data) => {
+          if (response.ok) {
+            setData(
+              data.rows?.length > 0
+                ? {
+                    caption: data.rows[0].caption,
+                    articleId: data.rows[0].article,
+                    description: data.rows[0].description,
+                  }
+                : {}
+            );
+          }
+        });
+      },
+      [response, get]
+    ),
+    loading,
+  ];
+};
+
+export { useGet, useGetById, useGetById2, useDelete };

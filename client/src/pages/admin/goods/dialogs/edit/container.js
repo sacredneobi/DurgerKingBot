@@ -1,36 +1,31 @@
-import { Box, Select, Input } from "@components";
+import { Box, Input, Autocomplete, Container } from "@components";
 import { isFunc, checkInput } from "@utils";
 import { useCallback, useState, useEffect } from "react";
 import { DialogContent } from "@mui/material";
 import Actions from "./actions";
+import { useArticleGetAll, useGoodGetById2 } from "@api";
 
-const items = [
-  { caption: "11111", value: 1 },
-  { caption: "22222", value: 2 },
-  { caption: "33333", value: 3 },
-  { caption: "44444", value: 4 },
-];
+export default (props) => {
+  const { onClose, onSave, id } = props;
 
-const Default = (props) => {
-  const { onClose, onSave, ...other } = props;
-
-  const [data, setData] = useState(other);
+  const [data, setData] = useState({});
   const [save, setSave] = useState(false);
   const [error, setError] = useState({});
+  const [callbackGet, loading] = useGoodGetById2();
+
+  useEffect(() => {
+    if (id) {
+      callbackGet(id, setData);
+    }
+  }, [id, callbackGet]);
 
   const validate = useCallback((data) => {
     return checkInput(data, [
       {
         name: "caption",
-        maxLength: 30,
+        maxLength: 200,
         minLength: 3,
         errorMessage: "Заголовок не должен быть больше 30 и меньше 3",
-      },
-      {
-        name: "description",
-        maxLength: 30,
-        minLength: 3,
-        errorMessage: "Описание не должен быть больше 30 и меньше 3",
       },
       {
         name: "articleId",
@@ -54,14 +49,14 @@ const Default = (props) => {
     setError(validate(data));
   }, [data, validate]);
 
-  const handleChange = (param) => {
+  const handleChange = useCallback((param) => {
     return (event) => {
       setData((prev) => {
         prev[param] = event.target.value;
         return { ...prev };
       });
     };
-  };
+  }, []);
 
   return (
     <>
@@ -75,28 +70,20 @@ const Default = (props) => {
             width: "100%",
           }}
         >
-          <Input
-            name="caption"
-            caption="Заголовок"
-            error={error}
-            data={data}
-            handleChange={handleChange}
-          />
-          <Input
-            name="description"
-            caption="Описание"
-            error={error}
-            data={data}
-            handleChange={handleChange}
-          />
-          <Select
-            name="articleId"
-            caption="Артикул"
+          <Container
             error={error}
             data={data}
             onChange={handleChange}
-            items={items}
-          />
+            loading={loading}
+          >
+            <Input name="caption" caption="Заголовок" />
+            <Input name="description" caption="Описание" />
+            <Autocomplete
+              name="articleId"
+              caption="Артикул"
+              useGet={useArticleGetAll}
+            />
+          </Container>
         </Box>
       </DialogContent>
       <Actions
@@ -107,5 +94,3 @@ const Default = (props) => {
     </>
   );
 };
-
-export default Default;

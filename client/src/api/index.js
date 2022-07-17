@@ -2,9 +2,13 @@ import { post as sendMessagePost } from "./sendMessage";
 import {
   useGet as useGoodGet,
   useGetById as useGoodGetById,
+  useGetById2 as useGoodGetById2,
   useDelete as useGoodDelete,
 } from "./goods";
-import { useGet as useArticleGet } from "./articles";
+import {
+  useGet as useArticleGet,
+  useGetAll as useArticleGetAll,
+} from "./articles";
 import useAccessGet from "./access";
 
 export {
@@ -14,4 +18,6 @@ export {
   useGoodGetById,
   useAccessGet,
   useGoodDelete,
+  useArticleGetAll,
+  useGoodGetById2,
 };

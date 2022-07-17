@@ -24,6 +24,8 @@ import Table from "./table";
 import { DialogDelete, DialogTitle } from "./dialogs";
 import Select from "./select";
 import Input from "./input";
+import Autocomplete from "./autocomplete";
+import Container from "./container";
 
 export {
   Navigation,
@@ -53,4 +55,6 @@ export {
   DialogTitle,
   Select,
   Input,
+  Autocomplete,
+  Container,
 };

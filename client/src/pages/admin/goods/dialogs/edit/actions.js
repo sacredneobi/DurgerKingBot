@@ -1,9 +1,9 @@
-// import { memo } from "react";
+import { memo } from "react";
 import { Divider, Button } from "@components";
 import { DialogActions as MUIDialogActions } from "@mui/material";
-import testReRender, { areEqualObject } from "@utils/areRender";
+import { areEqualObject } from "@utils/areRender";
 
-const Default = testReRender((props) => {
+const Default = memo((props) => {
   const { onClose, handleOnSave, disabled } = props;
 
   const actions = [

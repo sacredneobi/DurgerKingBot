@@ -1,7 +1,12 @@
 import { TextField } from "@mui/material";
+import Skeleton from "../skeleton";
 
 const Default = (props) => {
-  const { name, error, handleChange, data, caption } = props;
+  const { name, error, onChange, data, caption, loading } = props;
+
+  if (loading) {
+    return <Skeleton height={56} />;
+  }
 
   return (
     <TextField
@@ -9,8 +14,8 @@ const Default = (props) => {
       label={caption}
       helperText={error[name]}
       fullWidth
-      value={data[name] ? data[name] : ""}
-      onChange={handleChange(name)}
+      value={data?.[name] || ""}
+      onChange={onChange(name)}
     />
   );
 };
