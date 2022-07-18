@@ -40,13 +40,15 @@ const useGet = (countPerPage = 0, articleId, notIcon = false) => {
   const [update, setUpdate] = useState(false);
 
   const { loading, data: { count: countPage = 0, rows = [] } = {} } = useFetch(
-    `/api/goods?articleId=${articleId}&limit=${countPerPage}&offset=${
+    `/api/goods?${
+      articleId ? `articleId=${articleId}&` : ""
+    }limit=${countPerPage}&offset=${
       (page - 1) * (countPerPage ? countPerPage : 0)
     }${search ? `&search=${search}` : ""}`,
     {
       data: [],
     },
-    [page, search, update]
+    [page, search, update, articleId]
   );
   const usePage = useCallback(
     (page) => {
@@ -136,4 +138,30 @@ const useGetById2 = (props = {}) => {
   ];
 };
 
-export { useGet, useGetById, useGetById2, useDelete };
+const usePost = () => {
+  const { post, loading, response } = useParamsApi("/api/goods");
+  return [
+    useCallback(
+      (data) => {
+        post("", data);
+      },
+      [response, post]
+    ),
+    loading,
+  ];
+};
+
+const useUpdate = () => {
+  const { put, loading, response } = useParamsApi("/api/goods");
+  return [
+    useCallback(
+      (data) => {
+        put("", data);
+      },
+      [response, put]
+    ),
+    loading,
+  ];
+};
+
+export { useGet, useGetById, useGetById2, useDelete, usePost, useUpdate };

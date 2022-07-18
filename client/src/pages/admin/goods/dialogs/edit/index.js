@@ -1,9 +1,14 @@
 import { observer } from "mobx-react-lite";
 import Dialog from "./dialog";
+import { isFunc } from "@utils";
+import { useGoodPost, useGoodUpdate } from "@api";
 
 const Default = observer((props) => {
-  const { useContext } = props;
+  const { useContext, reload } = props;
   const { dialog = {} } = useContext ? useContext() : {};
+
+  const [callbackPost] = useGoodPost();
+  const [callbackUpdate] = useGoodUpdate();
 
   if (dialog.isShowEdit) {
     const handleOnClose = () => {
@@ -11,8 +16,13 @@ const Default = observer((props) => {
     };
 
     const handleOnSave = (data) => {
+      if (data?.id) {
+        callbackUpdate(data);
+      } else {
+        callbackPost(data);
+      }
       handleOnClose();
-      console.log("SAVE", data);
+      isFunc(reload);
     };
 
     return (
@@ -20,7 +30,6 @@ const Default = observer((props) => {
         id={dialog?.data?.select}
         onClose={handleOnClose}
         onSave={handleOnSave}
-        text="РЕДАКТИРОВАНИЕ YouTube"
       />
     );
   }

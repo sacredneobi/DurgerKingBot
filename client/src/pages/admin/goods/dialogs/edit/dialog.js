@@ -5,7 +5,9 @@ import Container from "./container";
 const Default = (props) => {
   return (
     <Dialog open fullWidth maxWidth="md">
-      <DialogTitle onClose={props?.onClose}>Edit good</DialogTitle>
+      <DialogTitle onClose={props?.onClose}>
+        {props.id ? "Edit good" : "Create good"}
+      </DialogTitle>
       <Divider />
       <Container {...props} />
     </Dialog>

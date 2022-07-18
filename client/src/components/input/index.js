@@ -1,8 +1,30 @@
+import { useState } from "react";
 import { TextField } from "@mui/material";
 import Skeleton from "../skeleton";
 
 const Default = (props) => {
-  const { name, error, onChange, data, caption, loading } = props;
+  const {
+    name,
+    error,
+    onChange,
+    data,
+    caption,
+    loading,
+    changeOnEnter,
+    ...other
+  } = props;
+
+  const [inputData, setInputData] = useState("");
+
+  const handleOnKeyPress = (event) => {
+    if (event.charCode === 13) {
+      onChange(name)({ target: { value: inputData } });
+    }
+  };
+
+  const handleOnChange = (event) => {
+    setInputData(event.target.value);
+  };
 
   if (loading) {
     return <Skeleton height={56} />;
@@ -10,12 +32,14 @@ const Default = (props) => {
 
   return (
     <TextField
-      error={!!error[name]}
+      error={!!error?.[name]}
       label={caption}
-      helperText={error[name]}
+      helperText={error?.[name]}
       fullWidth
-      value={data?.[name] || ""}
-      onChange={onChange(name)}
+      onKeyPress={changeOnEnter ? handleOnKeyPress : null}
+      value={changeOnEnter ? inputData : data?.[name] || ""}
+      onChange={changeOnEnter ? handleOnChange : onChange(name)}
+      {...other}
     />
   );
 };

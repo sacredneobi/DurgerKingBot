@@ -41,7 +41,7 @@ export default (props) => {
 
   useEffect(() => {
     if (save) {
-      isFunc(onSave, data);
+      isFunc(onSave, { ...data, articleId: data?.articleId?.id, id });
     }
   }, [onSave, data, save]);
 

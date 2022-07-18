@@ -1,15 +1,16 @@
 import { useState, useEffect, Fragment, memo } from "react";
 import { TextField, CircularProgress, Autocomplete } from "@mui/material";
 import Skeleton from "../skeleton";
+import { isFunc } from "@utils";
 
 function areEqual(prev, next) {
   return (
     prev.useGet === next.useGet &&
     prev.name === next.name &&
-    prev.error[prev.name] === next.error[next.name] &&
+    prev.error?.[prev.name] === next.error?.[next.name] &&
     prev.caption === next.caption &&
     prev.onChange === next.onChange &&
-    prev.data[prev.name]?.caption === next.data[next.name]?.caption
+    prev.data?.[prev.name]?.caption === next.data?.[next.name]?.caption
   );
 }
 
@@ -22,6 +23,7 @@ export default memo((props) => {
     onChange,
     data,
     loading: ownerLoading,
+    onClear,
   } = props;
 
   const [callbackGet, loading, abort] = useGet ? useGet() : [null, false, null];
@@ -64,6 +66,9 @@ export default memo((props) => {
       options={options}
       value={value}
       onChange={(event, value) => {
+        if (!value) {
+          isFunc(onClear);
+        }
         setValue(value?.caption || null);
         if (typeof onChange === "function") {
           onChange(name)({
@@ -74,9 +79,9 @@ export default memo((props) => {
       renderInput={(params) => (
         <TextField
           {...params}
-          error={!!error[name]}
+          error={!!error?.[name]}
           label={caption}
-          helperText={error[name]}
+          helperText={error?.[name]}
           InputProps={{
             ...params.InputProps,
             endAdornment: (

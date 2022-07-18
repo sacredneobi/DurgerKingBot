@@ -4,6 +4,8 @@ import {
   useGetById as useGoodGetById,
   useGetById2 as useGoodGetById2,
   useDelete as useGoodDelete,
+  usePost as useGoodPost,
+  useUpdate as useGoodUpdate,
 } from "./goods";
 import {
   useGet as useArticleGet,
@@ -20,4 +22,6 @@ export {
   useGoodDelete,
   useArticleGetAll,
   useGoodGetById2,
+  useGoodPost,
+  useGoodUpdate,
 };
