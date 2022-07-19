@@ -3,12 +3,27 @@ const { Op } = require("sequelize");
 
 const model = models.article;
 
-const post = (req, res) => {};
+const post = (req, res, promiseError) => {
+  model
+    .create({ ...req.body })
+    .then((data) => {
+      const { id = -1, caption } = data;
+      res.status(200).send({ id, caption });
+    })
+    .catch(promiseError);
+};
 
 const get = (req, res) => {
-  const search = req.query?.search
-    ? { caption: { [Op.iLike]: `%${req.query?.search}%` } }
+  const { search, id, ...other } = req.query;
+
+  const searchCaption = search
+    ? { caption: { [Op.iLike]: `%${search}%` } }
     : null;
+
+  const searchId = id ? { id } : null;
+
+  const where =
+    searchCaption || searchId ? { ...searchCaption, ...searchId } : null;
 
   model
     .findAndCountAll({
@@ -16,17 +31,53 @@ const get = (req, res) => {
         exclude: ["createdAt", "updatedAt", "deletedAt"],
       },
       order: [["id", "ASC"]],
-      ...req.query,
-      where: search,
+      ...other,
+      where: where,
     })
     .then((data) => {
       res.status(200).send(data);
     });
 };
 
-const put = (req, res) => {};
+const put = (req, res, promiseError) => {
+  const { id, ...body } = req.body;
 
-const del = (req, res) => {};
+  if (!id) {
+    throw new Error("Not found id in body");
+  }
+
+  model
+    .update(body, { where: { id: id } })
+    .then(() => {
+      model
+        .findOne({
+          where: { id: id },
+          attributes: {
+            exclude: ["createdAt", "updatedAt", "deletedAt"],
+          },
+        })
+        .then((data) => {
+          res.status(200).send(data);
+        })
+        .catch(promiseError);
+    })
+    .catch(promiseError);
+};
+
+const del = (req, res, promiseError) => {
+  const { id } = req.body;
+
+  if (!id) {
+    throw new Error("Not found id in body");
+  }
+
+  model
+    .destroy({ where: { id } })
+    .then(() => {
+      res.status(200).send({ id, message: "deleted" });
+    })
+    .catch(promiseError);
+};
 
 const { checkMethod } = require("../utils");
 

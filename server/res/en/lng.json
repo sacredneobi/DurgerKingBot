@@ -3,6 +3,7 @@
   "routes": {
     "settings": "Settings",
     "translation": "Translation",
-    "goods": "Список товаров"
+    "goods": "Список товаров",
+    "articles": "Артиклы товаров"
   }
 }

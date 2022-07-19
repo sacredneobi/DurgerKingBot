@@ -1,4 +1,4 @@
-const defMenu = [{ name: "goods", caption: "goods", icon: "inventory_2" }];
+const defMenu = [{ name: "goods", caption: "goods", icon: "inventory_2" }, { name: "articles", caption: "articles", icon: "document_scanner" }];
 const defSettings = [
   { name: "translation", caption: "translation", icon: "translate" },
 ];

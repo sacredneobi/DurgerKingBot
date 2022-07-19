@@ -10,6 +10,10 @@ import {
 import {
   useGet as useArticleGet,
   useGetAll as useArticleGetAll,
+  useGetById as useArticleGetById,
+  useDelete as useArticleDelete,
+  usePost as useArticlePost,
+  useUpdate as useArticleUpdate,
 } from "./articles";
 import useAccessGet from "./access";
 
@@ -24,4 +28,8 @@ export {
   useGoodGetById2,
   useGoodPost,
   useGoodUpdate,
+  useArticleGetById,
+  useArticleDelete,
+  useArticlePost,
+  useArticleUpdate,
 };
