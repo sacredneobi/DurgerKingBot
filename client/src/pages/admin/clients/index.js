@@ -1,21 +1,21 @@
 import { memo } from "react";
 import { Table } from "@components";
-import { useArticleGet } from "@api";
+import { useClientsGet as useGet } from "@api";
 import { areEqualAlways } from "@utils/areRender";
-import { SelectArticles, ArticlesContext, useArticlesContext } from "@context";
+import { ClientsSelect, ClientsContext, useClientsContext } from "@context";
 import Header from "./header";
 import Details from "./details";
 import TopContainer from "./topContainer";
 import Dialogs from "./dialogs";
 
-const Articles = (props) => {
-  const { reload, useSearch, ...other } = useArticleGet(50, 1);
+const Clients = (props) => {
+  const { reload, useSearch, ...other } = useGet(50, 1);
 
   return (
     <>
       <Table
         {...other}
-        userContext={SelectArticles}
+        userContext={ClientsSelect}
         topContainer={(props) => (
           <TopContainer {...props} onSearch={useSearch} />
         )}
@@ -25,23 +25,23 @@ const Articles = (props) => {
         }}
         showCheck
       />
-      <Dialogs useContext={useArticlesContext} reload={reload} />
+      <Dialogs useContext={useClientsContext} reload={reload} />
     </>
   );
 };
 
-const ContextArticles = memo((props) => {
+const Main = memo((props) => {
   return (
-    <SelectArticles.Provider value={[]} name="SELECT FOR TABLE Articles">
-      <ArticlesContext>
-        <Articles />
-      </ArticlesContext>
-    </SelectArticles.Provider>
+    <ClientsSelect.Provider value={[]} name="SELECT FOR TABLE Clients">
+      <ClientsContext>
+        <Clients />
+      </ClientsContext>
+    </ClientsSelect.Provider>
   );
 }, areEqualAlways);
 
 const Default = (props) => {
-  return <ContextArticles />;
+  return <Main />;
 };
 
-export default { name: "Articles", component: Default };
+export default { name: "Clients", component: Default };

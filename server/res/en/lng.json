@@ -4,6 +4,8 @@
     "settings": "Settings",
     "translation": "Translation",
     "goods": "Список товаров",
-    "articles": "Артиклы товаров"
+    "articles": "Артикулы товаров",
+    "orders": "Список заказов",
+    "clients": "Список клиентов"
   }
 }

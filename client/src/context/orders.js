@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from "react";
-import Store from "@data/articlesStore";
+import { Orders } from "@data";
 
 const context = createContext(null);
 
@@ -9,7 +9,7 @@ const useDefContext = () => {
 
 const Context = (props) => {
   return (
-    <context.Provider value={{ dialog: new Store() }} name="ARTICLES CONTEXT">
+    <context.Provider value={{ dialog: new Orders() }} name="orders CONTEXT">
       {props.children}
     </context.Provider>
   );

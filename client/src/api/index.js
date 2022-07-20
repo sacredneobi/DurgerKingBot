@@ -15,6 +15,22 @@ import {
   usePost as useArticlePost,
   useUpdate as useArticleUpdate,
 } from "./articles";
+import {
+  useGet as useClientsGet,
+  useGetAll as useClientsGetAll,
+  useGetById as useClientsGetById,
+  useDelete as useClientsDelete,
+  usePost as useClientsPost,
+  useUpdate as useClientsUpdate,
+} from "./clients";
+import {
+  useGet as useOrdersGet,
+  useGetAll as useOrdersGetAll,
+  useGetById as useOrdersGetById,
+  useDelete as useOrdersDelete,
+  usePost as useOrdersPost,
+  useUpdate as useOrdersUpdate,
+} from "./orders";
 import useAccessGet from "./access";
 
 export {
@@ -32,4 +48,16 @@ export {
   useArticleDelete,
   useArticlePost,
   useArticleUpdate,
+  useClientsGet,
+  useClientsGetAll,
+  useClientsGetById,
+  useClientsDelete,
+  useClientsPost,
+  useClientsUpdate,
+  useOrdersGet,
+  useOrdersGetAll,
+  useOrdersGetById,
+  useOrdersDelete,
+  useOrdersPost,
+  useOrdersUpdate,
 };
