@@ -37,19 +37,19 @@ Telegram канале https://t.me/sacred_dev
   - [x] Добавить CRUD товаров
   - [x] Добавить CRUD артикулов
   - [x] Добавить CRUD клиентов
-  - [х] Добавить CRUD заказов
+  - [x] Добавить CRUD заказов
   - [ ] Добавить возможность редактирование цены и количества товара
   - [ ] Добавить отображение чатов в которых состоит бот для возможности рассылки рекламных сообщение
   - [ ] Добавить возможность редактирование состава заказа
 
 На стриме участвовали:
 
-- [х] Nikita Marchenko
-- [х] Marat o.o
-- [х] Dumitru BURAC
-- [х] SV Orion
-- [х] Ivan
-- [х] Don Kihot
+- [x] Nikita Marchenko
+- [x] Marat o.o
+- [x] Dumitru BURAC
+- [x] SV Orion
+- [x] Ivan
+- [x] Don Kihot
 - [ ] Jave
 - [ ] Евгений Karabel
 - [ ] Muzaffar Abidov
