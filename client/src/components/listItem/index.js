@@ -14,7 +14,7 @@ const VariantListItem = (props) => {
   const location = useLocation();
 
   if (to) {
-    const path = new Path(`/${to}`);
+    const path = new Path(`/admin/${to}`);
     return (
       <ListItem
         button

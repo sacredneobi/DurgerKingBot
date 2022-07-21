@@ -50,6 +50,10 @@ Telegram канале https://t.me/sacred_dev
 - [x] SV Orion
 - [x] Ivan
 - [x] Don Kihot
+- [x] VV
+- [x] Lucifer Morningstar
+- [x] Матвей Беликов
 - [ ] Jave
 - [ ] Евгений Karabel
 - [ ] Muzaffar Abidov
+- [ ] Валерий Tester

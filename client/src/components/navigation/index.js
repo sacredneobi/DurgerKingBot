@@ -1,12 +1,63 @@
 import { useTranslation } from "react-i18next";
-import ListItem from "../listItem";
+import MainListItem from "../listItem";
 import Divider from "../divider";
 import List from "../list";
+import IconButton from "../iconButton";
+
+const RootItem = (props) => {
+  const { onClick, rootOpen, ...other } = props;
+  return (
+    <MainListItem {...other} sx={{ display: "flex" }}>
+      <IconButton
+        textIcon={rootOpen ? "expand_more" : "expand_less"}
+        onClick={onClick}
+        edge={false}
+      />
+    </MainListItem>
+  );
+};
+
+const ListItem = (props) => {
+  const { caption, icon = "warning", name, route, level = 0 } = props;
+
+  const { t } = useTranslation();
+
+  const data = {
+    text: t(`routes.${caption}`),
+    open: true,
+    textIcon: icon,
+    to: name,
+  };
+
+  if (route) {
+    return (
+      <>
+        <List
+          level={level + 2}
+          collapse
+          rootItem={(props) => <RootItem {...props} {...data} />}
+        >
+          {route.map((item, index) => {
+            const { name: localName, ...other } = item;
+            return (
+              <ListItem
+                key={index}
+                {...other}
+                name={`${name}/${localName}`}
+                level={level + 1}
+              />
+            );
+          })}
+        </List>
+      </>
+    );
+  }
+
+  return <MainListItem {...data} />;
+};
 
 const Default = (props) => {
   const { items, fixedBottom } = props;
-
-  const { t } = useTranslation();
 
   if (!Array.isArray(items)) {
     return null;
@@ -26,14 +77,9 @@ const Default = (props) => {
     <div style={style}>
       <Divider />
       <List>
-        {items.map((item) => {
-          const data = {
-            text: t(`routes.${item.caption}`),
-            open,
-            textIcon: item.icon ? item.icon : "warning",
-          };
-          return <ListItem key={item.caption} {...data} to={item.name} />;
-        })}
+        {items.map((item, index) => (
+          <ListItem key={index} {...item} />
+        ))}
       </List>
     </div>
   );

@@ -17,7 +17,9 @@ const def = (items, pages) => {
         if (page) {
           data.component = page.component;
         }
-
+        if (Array.isArray(data.route)) {
+          data.route = def(data.route, pages);
+        }
         return data;
       }
       return null;

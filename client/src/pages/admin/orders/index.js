@@ -7,6 +7,7 @@ import Header from "./header";
 import Details from "./details";
 import TopContainer from "./topContainer";
 import Dialogs from "./dialogs";
+import { Outlet } from "react-router-dom";
 
 const Orders = (props) => {
   const { reload, useSearch, ...other } = useGet(50, 1);
@@ -26,6 +27,7 @@ const Orders = (props) => {
         showCheck
       />
       <Dialogs useContext={useOrdersContext} reload={reload} />
+      <Outlet />
     </>
   );
 };
