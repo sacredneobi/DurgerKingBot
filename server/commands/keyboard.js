@@ -1,7 +1,7 @@
 const { Markup } = require("telegraf");
 
-const test = (ctx) => {
-  ctx.reply("https://t.me/like");
+const test = async (ctx) => {
+  await ctx.reply("https://t.me/like");
   return ctx.reply("Привет youtube", {
     caption: "Caption",
     parse_mode: "Markdown",
