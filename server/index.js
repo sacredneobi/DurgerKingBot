@@ -27,5 +27,6 @@ bot.telegram.setMyCommands(commands);
 //   next();
 // });
 
+bot.catch(console.log)
 bot.launch();
 app.listen(4000);
