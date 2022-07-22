@@ -13,5 +13,5 @@ const test = async (ctx) => {
 };
 
 module.exports = (bot) => {
-  bot.newCommand({ command: "buttons", description: "Тест SendData" }, test);
+  // bot.newCommand({ command: "buttons", description: "Тест SendData" }, test);
 };

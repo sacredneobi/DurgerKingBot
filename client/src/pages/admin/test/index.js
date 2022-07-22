@@ -1,5 +1,8 @@
+import { useParams } from "react-router-dom";
+
 const Default = (props) => {
-  return <div>Привет</div>;
+  let params = useParams();
+  return <h1>Invoice {params.id}</h1>;
 };
 
-export default { name: "order", component: Default };
+export default { name: "order/:id", component: Default };

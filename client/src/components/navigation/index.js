@@ -9,7 +9,7 @@ const RootItem = (props) => {
   return (
     <MainListItem {...other} sx={{ display: "flex" }}>
       <IconButton
-        textIcon={rootOpen ? "expand_more" : "expand_less"}
+        textIcon={rootOpen ? "expand_less" : "expand_more"}
         onClick={onClick}
         edge={false}
       />

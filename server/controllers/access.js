@@ -6,7 +6,7 @@ const defMenu = [
     name: "orders",
     caption: "orders",
     icon: "production_quantity_limits",
-    route: [{ name: "order", caption: "order", icon: "receipt_long" }],
+    route: [{ name: "order/:id", caption: "order", icon: "receipt_long" }],
   },
 ];
 

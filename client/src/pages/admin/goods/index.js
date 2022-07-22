@@ -45,8 +45,4 @@ const ContextGoods = memo((props) => {
   );
 }, areEqualAlways);
 
-const Default = (props) => {
-  return <ContextGoods />;
-};
-
-export default { name: "goods", component: Default };
+export default { name: "goods", component: ContextGoods };

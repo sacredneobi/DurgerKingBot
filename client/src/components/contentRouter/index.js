@@ -1,5 +1,4 @@
-import { Routes, Route } from "react-router-dom";
-import { isFuncDef } from "@utils/";
+import { Routes, Route, useParams, Navigate } from "react-router-dom";
 import Box from "../box";
 
 const flat = (items, array, baseName) => {
@@ -14,6 +13,30 @@ const flat = (items, array, baseName) => {
   }
 };
 
+const checkParams = (params) => {
+  return Object.keys(params).some((item) => params[item] === `:${item}`);
+};
+
+const Render = (props) => {
+  const { item, name } = props;
+
+  let params = useParams();
+  if (checkParams(params)) {
+    return (
+      <Navigate to={`/admin/${params["*"].split("/")[0]}`} replace={true} />
+    );
+  }
+
+  if (item?.type) {
+    return <item.type />;
+  }
+  if (item) {
+    return item();
+  }
+
+  return <Box>{`NOT FOUND COMPONENT PAGE FOR "${name}"`}</Box>;
+};
+
 const Default = (props) => {
   const { routers } = props;
 
@@ -25,8 +48,6 @@ const Default = (props) => {
 
   flat(routers, items);
 
-  console.log(items);
-
   return (
     <Routes>
       <Route path="/" element={<div>MAIN</div>} />
@@ -35,10 +56,7 @@ const Default = (props) => {
           <Route
             key={index}
             path={item.name}
-            element={isFuncDef(
-              item.component,
-              <Box>{`NOT FOUND COMPONENT PAGE FOR "${item.name}"`}</Box>
-            )}
+            element={<Render name={item.name} item={item.component} />}
           />
         );
       })}
