@@ -44,7 +44,7 @@ Telegram канале https://t.me/sacred_dev
 
 На стриме участвовали:
 
-- [x] [x] Lucifer Morningstar
+- [x] 💨 Lucifer Morningstar
 - [x] Muzaffar Abidov
 - [x] Nikita Marchenko
 - [x] Marat o.o
