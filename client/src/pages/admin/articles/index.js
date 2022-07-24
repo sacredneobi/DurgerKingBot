@@ -30,7 +30,7 @@ const Articles = (props) => {
   );
 };
 
-const ContextArticles = memo((props) => {
+const Default = memo((props) => {
   return (
     <SelectArticles.Provider value={[]} name="SELECT FOR TABLE Articles">
       <ArticlesContext>
@@ -39,9 +39,5 @@ const ContextArticles = memo((props) => {
     </SelectArticles.Provider>
   );
 }, areEqualAlways);
-
-const Default = (props) => {
-  return <ContextArticles />;
-};
 
 export default { name: "Articles", component: Default };

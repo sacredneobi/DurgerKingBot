@@ -8,6 +8,7 @@ import SelectGoods from "./goodsSelect";
 import SelectArticles from "./articlesSelect";
 import ClientsSelect from "./clientsSelect";
 import OrdersSelect from "./ordersSelect";
+import OrderSelect from "./orderSelect";
 import {
   Context as GoodsContext,
   useDefContext as useGoodsContext,
@@ -24,6 +25,10 @@ import {
   Context as OrdersContext,
   useDefContext as useOrdersContext,
 } from "./orders";
+import {
+  Context as OrderContext,
+  useDefContext as useOrderContext,
+} from "./order";
 
 export {
   ShoppingCart,
@@ -43,4 +48,7 @@ export {
   OrdersContext,
   useOrdersContext,
   OrdersSelect,
+  OrderContext,
+  useOrderContext,
+  OrderSelect,
 };

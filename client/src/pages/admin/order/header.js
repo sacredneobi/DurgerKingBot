@@ -1,28 +1,20 @@
 import { memo } from "react";
 import { Text, IconButton, Box } from "@components";
 import { areEqualObject } from "@utils/areRender";
-import { useOrdersContext } from "@context";
-import { useNavigate } from "react-router-dom";
+import { useOrderContext as useContext } from "@context";
 
 const Default = memo((props) => {
-  const { client: { first, last } = {}, id } = props;
+  const { count, sale, id, good: { caption } = { good: "" } } = props;
 
-  const caption = `#${id} ${first ?? ""} ${last ?? ""}`;
-
-  const { dialog } = useOrdersContext();
-  const navigate = useNavigate();
+  const { dialog } = useContext();
 
   const handleOnEdit = (event) => {
-    navigate(`/admin/orders/order/${id}`);
-    // dialog.setIsShowEdit(true, { select: id });
+    dialog.setIsShowEdit(true, { select: id });
     event.stopPropagation();
   };
 
   const handleOnDelete = (event) => {
-    dialog.setIsShowDelete(true, {
-      select: id,
-      onGetText: () => caption,
-    });
+    dialog.setIsShowDelete(true, { select: id, onGetText: () => caption });
     event.stopPropagation();
   };
 
@@ -37,8 +29,12 @@ const Default = memo((props) => {
       }}
     >
       <Text sx={{ color: "text.secondary", flexGrow: 1 }} caption={caption} />
+      <Text
+        sx={{ flexShrink: 0, color: "text.secondary" }}
+        caption={`${sale.toFixed(2)}x${count}=${(count * sale).toFixed(2)}`}
+      />
       <IconButton
-        textIcon="shopping_cart_checkout"
+        textIcon="edit"
         color="primary"
         edge={false}
         onClick={handleOnEdit}

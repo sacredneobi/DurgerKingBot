@@ -35,7 +35,7 @@ const Goods = (props) => {
   );
 };
 
-const ContextGoods = memo((props) => {
+const Default = memo((props) => {
   return (
     <SelectGoods.Provider value={[]} name="SELECT FOR TABLE GOODS">
       <GoodsContext>
@@ -45,4 +45,4 @@ const ContextGoods = memo((props) => {
   );
 }, areEqualAlways);
 
-export default { name: "goods", component: ContextGoods };
+export default { name: "goods", component: Default };

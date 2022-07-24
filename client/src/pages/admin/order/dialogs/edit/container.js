@@ -1,9 +1,9 @@
-import { Box, Input, Container } from "@components";
+import { Box, Input, Autocomplete, Container } from "@components";
 import { isFunc, checkInput } from "@utils";
 import { useCallback, useState, useEffect } from "react";
 import { DialogContent } from "@mui/material";
 import Actions from "./actions";
-import { useArticleGetById } from "@api";
+import { useArticleGetAll, useGoodGetById2 } from "@api";
 
 export default (props) => {
   const { onClose, onSave, id } = props;
@@ -11,7 +11,7 @@ export default (props) => {
   const [data, setData] = useState({});
   const [save, setSave] = useState(false);
   const [error, setError] = useState({});
-  const [callbackGet, loading] = useArticleGetById();
+  const [callbackGet, loading] = useGoodGetById2();
 
   useEffect(() => {
     if (id) {
@@ -22,15 +22,31 @@ export default (props) => {
   const validate = useCallback((data) => {
     return checkInput(data, [
       {
-        name: "caption",
-        maxLength: {
-          val: 200,
-          errorMessage: "Заголовок не должен быть длиннее ${val} символов",
+        name: "count",
+        minValue: {
+          val: 0,
+          errorMessage: "Количество должно быть больше ${val}",
         },
-        minLength: {
-          val: 3,
-          errorMessage: "Заголовок не должен быть короче ${val} символов",
+        maxValue: {
+          val: 999999,
+          errorMessage: "Количество должно быть меньше ${val}",
         },
+      },
+      {
+        name: "sale",
+        minValue: {
+          val: 0,
+          errorMessage: "Стоимость должна быть больше ${val}",
+        },
+        maxValue: {
+          val: 999999,
+          errorMessage: "Стоимость должна быть меньше ${val}",
+        },
+      },
+      {
+        name: "goodId",
+        isNull: true,
+        errorMessage: "Должен быть выбранный",
       },
     ]);
   }, []);
@@ -41,7 +57,7 @@ export default (props) => {
 
   useEffect(() => {
     if (save) {
-      isFunc(onSave, { ...data, id });
+      isFunc(onSave, { ...data, articleId: data?.articleId?.id, id });
     }
   }, [onSave, data, save]);
 
@@ -76,8 +92,13 @@ export default (props) => {
             onChange={handleChange}
             loading={loading}
           >
-            <Input name="caption" caption="Заголовок" />
-            <Input name="description" caption="Описание" />
+            <Input name="count" caption="Количество" />
+            <Input name="sale" caption="Стоимость за единицу" />
+            <Autocomplete
+              name="goodId"
+              caption="Товар"
+              useGet={useArticleGetAll}
+            />
           </Container>
         </Box>
       </DialogContent>

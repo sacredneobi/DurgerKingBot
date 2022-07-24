@@ -23,14 +23,18 @@ export default (props) => {
     return checkInput(data, [
       {
         name: "caption",
-        maxLength: 200,
-        minLength: 3,
-        errorMessage: "Заголовок не должен быть больше 30 и меньше 3",
+        maxLength: {
+          val: 200,
+          errorMessage: "Заголовок не должен быть длиннее ${val} символов",
+        },
+        minLength: {
+          val: 3,
+          errorMessage: "Заголовок не должен быть короче ${val} символов",
+        },
       },
       {
         name: "articleId",
-        isNull: true,
-        errorMessage: "Должен быть выбранный",
+        isNotNull: { errorMessage: "Должен быть выбранный" },
       },
     ]);
   }, []);

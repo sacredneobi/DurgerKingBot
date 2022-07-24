@@ -32,7 +32,7 @@ const Orders = (props) => {
   );
 };
 
-const Main = memo((props) => {
+const Default = memo((props) => {
   return (
     <OrdersSelect.Provider value={[]} name="SELECT FOR TABLE Orders">
       <OrdersContext>
@@ -41,9 +41,5 @@ const Main = memo((props) => {
     </OrdersSelect.Provider>
   );
 }, areEqualAlways);
-
-const Default = (props) => {
-  return <Main />;
-};
 
 export default { name: "Orders", component: Default };

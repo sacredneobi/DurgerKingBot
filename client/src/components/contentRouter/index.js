@@ -60,6 +60,14 @@ const Default = (props) => {
           />
         );
       })}
+      <Route
+        path="*"
+        element={
+          <main style={{ padding: "1rem" }}>
+            <p>ERROR not found route</p>
+          </main>
+        }
+      />
     </Routes>
   );
 };

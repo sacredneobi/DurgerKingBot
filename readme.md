@@ -2,7 +2,7 @@
 
 YouTube канале https://www.youtube.com/c/SACREDDEVELOPER
 
-Telegram канале https://t.me/sacred_dev
+Telegram чат https://t.me/sacred_dev
 
 - [ ] Телеграм бот
   - [x] Отображение кнопки для открытия магазина
@@ -44,7 +44,7 @@ Telegram канале https://t.me/sacred_dev
 
 На стриме участвовали:
 
-- [x] 💨 Lucifer Morningstar
+- [x] 🍒🍒 Lucifer Morningstar
 - [x] Muzaffar Abidov
 - [x] Nikita Marchenko
 - [x] Marat o.o
@@ -53,6 +53,7 @@ Telegram канале https://t.me/sacred_dev
 - [x] Ivan
 - [x] Don Kihot
 - [x] VV
+- [x] Kofeek
 - [x] Матвей Беликов
 - [ ] Jave
 - [ ] Евгений Karabel

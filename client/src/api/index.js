@@ -1,3 +1,4 @@
+import useAccessGet from "./access";
 import { post as sendMessagePost } from "./sendMessage";
 import {
   useGet as useGoodGet,
@@ -31,7 +32,11 @@ import {
   usePost as useOrdersPost,
   useUpdate as useOrdersUpdate,
 } from "./orders";
-import useAccessGet from "./access";
+import {
+  useGetById as useOrderGetById,
+  useUpdate as useOrderUpdate,
+  useDelete as useOrderDelete,
+} from "./order";
 
 export {
   sendMessagePost,
@@ -60,4 +65,7 @@ export {
   useOrdersDelete,
   useOrdersPost,
   useOrdersUpdate,
+  useOrderGetById,
+  useOrderUpdate,
+  useOrderDelete,
 };
