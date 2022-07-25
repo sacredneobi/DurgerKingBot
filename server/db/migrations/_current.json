@@ -235,6 +235,10 @@
                     "field": "description",
                     "seqType": "Sequelize.TEXT"
                 },
+                "isPayment": {
+                    "field": "isPayment",
+                    "seqType": "Sequelize.BOOLEAN"
+                },
                 "updatedAt": {
                     "allowNull": false,
                     "field": "updatedAt",
@@ -418,5 +422,5 @@
         }
     },
     "exists": true,
-    "revision": 4
+    "revision": 5
 }

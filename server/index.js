@@ -23,10 +23,16 @@ loader(
 
 bot.telegram.setMyCommands(commands);
 
-// bot.use((ctx, next) => {
-//   next();
-// });
+bot.use((ctx, next) => {
+  // console.log(ctx);
+  next();
+});
 
-bot.catch(console.log)
+bot.on("pre_checkout_query", (ctx, test) => {
+  // console.log("payment", ctx.update.pre_checkout_query);
+  ctx.answerPreCheckoutQuery(true);
+});
+
+bot.catch(console.log);
 bot.launch();
 app.listen(4000);

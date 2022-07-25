@@ -4,6 +4,26 @@ const client = models.client;
 const order = models.order;
 const compositionOrder = models.compositionOrder;
 
+const getInvoice = (id, goods, orderId) => {
+  const invoice = {
+    chat_id: id,
+    provider_token: "632593626:TEST:sandbox_i49650467127",
+    start_parameter: "get_access", //Уникальный параметр глубинных ссылок. Если оставить поле пустым, переадресованные копии отправленного сообщения будут иметь кнопку «Оплатить», позволяющую нескольким пользователям производить оплату непосредственно из пересылаемого сообщения, используя один и тот же счет. Если не пусто, перенаправленные копии отправленного сообщения будут иметь кнопку URL с глубокой ссылкой на бота (вместо кнопки оплаты) со значением, используемым в качестве начального параметра.
+    title: "Привет YouTube",
+    description: "YouTube",
+    currency: "USD",
+    prices: goods.map((item) => ({
+      label: `${item.caption} x ${item.count}`,
+      amount: (item.sale * item.count * 100).toFixed(0),
+    })),
+    payload: {
+      orderId: orderId,
+    },
+  };
+
+  return invoice;
+};
+
 const post = (bot) => {
   if (!bot) {
     return (req, res) => {
@@ -33,6 +53,7 @@ const post = (bot) => {
     const orderItem = await order.create({
       clientId: clientItem.id,
       description: "From telegram bot",
+      isPayment: false,
     });
 
     if (orderItem) {
@@ -46,6 +67,8 @@ const post = (bot) => {
         });
       }
     }
+
+    return orderItem;
   };
 
   return (req, res) => {
@@ -70,10 +93,13 @@ const post = (bot) => {
         },
       })
       .then(async (data) => {
+        const order = await crateOrderAndUser(user, goods);
         if (user) {
-          bot.telegram.sendMessage(user.id, "Спасибо за заказ");
+          bot.telegram.sendInvoice(
+            user.id,
+            getInvoice(user.id, goods, order.id)
+          );
         }
-        await crateOrderAndUser(user, goods);
         res.status(200).send({ done: true });
       })
       .catch((error) => {
@@ -82,6 +108,14 @@ const post = (bot) => {
   };
 };
 
+const postSendInvoice = (bot) => {
+  return (req, res) => {
+    console.log("SendInvoice");
+    bot.telegram.sendInvoice(5316506208, getInvoice(5316506208));
+  };
+};
+
 module.exports = (router, moduleName, bot) => {
   router.post("/", post(bot));
+  router.post("/senInvoice", postSendInvoice(bot));
 };

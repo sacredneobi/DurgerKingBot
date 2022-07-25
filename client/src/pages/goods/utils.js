@@ -9,15 +9,16 @@ const finCountDef = (id, shoppingCart) => {
   return data.item?.count ? data.item.count : 0;
 };
 
-const setItemCount = (id, shoppingCart, count, sale) => {
+const setItemCount = (id, shoppingCart, count, sale, caption) => {
   const find = shoppingCart.filter((itemCart) => itemCart.id === id);
   if (find.length > 0) {
     find.forEach((item) => {
       item.count = count;
       item.sale = sale;
+      item.caption = caption;
     });
   } else {
-    shoppingCart.push({ id, count, sale });
+    shoppingCart.push({ id, count, sale, caption });
   }
 };
 

@@ -5,14 +5,6 @@ import Header from "./header";
 import Bottom from "./bottom";
 import { ShoppingCart } from "../../context";
 
-const items = [
-  { caption: "Ivan", count: 11.2, price: 10.22 },
-  { caption: "IndoorChampion", count: 11.2, price: 10.22 },
-  { caption: "Mikhail Popov", count: 11.2, price: 10.22 },
-  { caption: "Muzaffar Abidov", count: 11.2, price: 10.22 },
-  { caption: "Anton S", count: 11.2, price: 10.22 },
-];
-
 const Default = (props) => {
   const { show, ...other } = props;
 
@@ -51,7 +43,6 @@ const Default = (props) => {
       >
         {shoppingCart
           .filter((item) => item.count > 0)
-          .map((item, index) => ({ ...item, caption: items[index]?.caption }))
           .map((item, index, arr) => (
             <Item key={index} {...item} isLast={arr.length - 1 === index} />
           ))}

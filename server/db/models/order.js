@@ -3,6 +3,7 @@ const def = (db, DataTypes, options) => {
     "order",
     {
       description: DataTypes.TEXT,
+      isPayment: DataTypes.BOOLEAN,
     },
     options
   );

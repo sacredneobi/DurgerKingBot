@@ -42,7 +42,7 @@ const Default = memo((props) => {
   const handleOnClick = (add) => () => {
     setCounter((prev) => {
       const count = add ? prev + 1 : prev - 1 < 0 ? 0 : prev - 1;
-      setItemCount(id, shoppingCart, count, sale);
+      setItemCount(id, shoppingCart, count, sale, caption);
       isFunc(showShoppingCart, true, false);
       if (icon.isAnimate && count === 1) {
         handleOnClickAnimation();
