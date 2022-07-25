@@ -47,8 +47,8 @@ Telegram чат https://t.me/sacred_dev
 - [x] 🍒🍒 Lucifer Morningstar
 - [x] 🍌🍌 🔥 FIRELORD ZUKO 🔥 White Lotus
 - [x] 🥠🥠 Marchenko 🇺🇦
+- [x] 🍎🍎 Marat o.o
 - [x] Muzaffar Abidov
-- [x] Marat o.o
 - [x] Dumitru BURAC
 - [x] SV Orion
 - [x] Ivan
