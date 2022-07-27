@@ -1,8 +1,7 @@
 import { memo, useState, useCallback, useEffect } from "react";
-import { Box, IconButton, Autocomplete, Input } from "@components";
+import { Box, IconButton, Input } from "@components";
 import { areEqualObject } from "@utils/areRender";
 import { useOrderContext as useContext } from "@context";
-import { useArticleGetAll } from "@api";
 import { isFunc } from "@utils";
 
 const Default = memo((props) => {
@@ -19,10 +18,6 @@ const Default = memo((props) => {
       isFunc(onSearch, data?.search);
     }
   }, [data]);
-
-  const handleOnClear = useCallback(() => {
-    setArticleId(null);
-  }, []);
 
   const handleOnDelete = () => {
     dialog.setIsShowDelete(true, {
@@ -50,14 +45,6 @@ const Default = memo((props) => {
       sx={{ display: "flex", alignItems: "center", width: "100%" }}
       name="TOP CONTAINER"
     >
-      <Autocomplete
-        name="articleId"
-        caption="Артикул"
-        useGet={useArticleGetAll}
-        data={data}
-        onChange={handleChange}
-        onClear={handleOnClear}
-      />
       <Input
         sx={{ marginLeft: 1 }}
         name="search"

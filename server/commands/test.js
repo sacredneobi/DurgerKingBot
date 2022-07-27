@@ -29,7 +29,7 @@ const test = async (ctx) => {
     caption: "Caption",
     parse_mode: "Markdown",
     ...Markup.inlineKeyboard([
-      Markup.button.webApp("Купи что нибудь", `https://localhost.test`),
+      Markup.button.webApp("Лайк подписка :)", `https://sacred.sytes.net/`),
     ]),
   });
 };

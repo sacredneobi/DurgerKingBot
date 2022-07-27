@@ -11,10 +11,10 @@ export default (data = {}, validate = []) => {
     const { name, maxLength, minLength, isNotNull, minValue, maxValue } = item;
 
     const val = data[name] ? data[name] : "";
-    if (maxLength && val.length > maxLength.val) {
+    if (maxLength && val.trim().length > maxLength.val) {
       error[name] = convert({ val: maxLength.val }, maxLength.errorMessage);
     }
-    if (minLength && val.length < minLength.val) {
+    if (minLength && val.trim().length < minLength.val) {
       error[name] = convert({ val: minLength.val }, minLength.errorMessage);
     }
     if (minValue && minValue.val >= (parseFloat(val) ? parseFloat(val) : 0)) {

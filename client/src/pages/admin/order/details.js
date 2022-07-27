@@ -3,18 +3,11 @@ import { Text } from "@components";
 import { areEqualObject } from "@utils/areRender";
 
 const Default = memo((props) => {
-  const {
-    id,
-    expanded,
-    good: {
-      description,
-      article: { description: articleDescription, caption: articleCaption },
-    } = {
-      description: "",
-      caption: "",
-      article: { description: "", caption: "" },
-    },
-  } = props;
+  const { id, expanded } = props;
+
+  const description = props?.good?.description;
+  const articleDescription = props?.good?.article?.description;
+  const articleCaption = props?.good?.article?.caption;
 
   useEffect(() => {
     if (expanded) {

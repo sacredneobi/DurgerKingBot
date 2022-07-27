@@ -28,7 +28,6 @@ const Default = memo((props) => {
         padding: (them) => them.spacing(0, 1, 0, 1),
       }}
     >
-      <Text sx={{ flexShrink: 0 }} caption={id} />
       <Text sx={{ color: "text.secondary", flexGrow: 1 }} caption={caption} />
       <IconButton
         textIcon="edit"

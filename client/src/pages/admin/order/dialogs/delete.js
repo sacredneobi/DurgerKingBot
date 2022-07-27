@@ -1,11 +1,11 @@
 import { DialogDelete } from "@components";
 import { isFunc } from "@utils";
-import { useGoodDelete } from "@api";
+import { useGoodCompositionDelete as useDelete } from "@api";
 
 const Default = (props) => {
   const { reload, ...other } = props;
 
-  const [callbackDelete] = useGoodDelete({ reload });
+  const [callbackDelete] = useDelete({ reload });
 
   const handleOnDelete = function ({ select, onClear } = {}) {
     callbackDelete({ id: select });

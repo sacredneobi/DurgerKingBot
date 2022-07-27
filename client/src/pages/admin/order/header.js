@@ -4,7 +4,9 @@ import { areEqualObject } from "@utils/areRender";
 import { useOrderContext as useContext } from "@context";
 
 const Default = memo((props) => {
-  const { count, sale, id, good: { caption } = { good: "" } } = props;
+  const { count, sale, id, good } = props;
+
+  const { caption } = good ? good : {};
 
   const { dialog } = useContext();
 

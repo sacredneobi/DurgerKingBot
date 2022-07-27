@@ -37,6 +37,12 @@ import {
   useUpdate as useOrderUpdate,
   useDelete as useOrderDelete,
 } from "./order";
+import {
+  useGetById as useGoodCompositionGetById,
+  useUpdate as useGoodCompositionUpdate,
+  useDelete as useGoodCompositionDelete,
+  usePost as useGoodCompositionPost,
+} from "./goodComposition";
 
 export {
   sendMessagePost,
@@ -68,4 +74,8 @@ export {
   useOrderGetById,
   useOrderUpdate,
   useOrderDelete,
+  useGoodCompositionGetById,
+  useGoodCompositionUpdate,
+  useGoodCompositionDelete,
+  useGoodCompositionPost,
 };

@@ -1,50 +1,24 @@
 const models = require("../db/models");
-const { Op } = require("sequelize");
+const { Op, HasMany } = require("sequelize");
 
-const model = models.order;
-
-const post = (req, res, promiseError) => {
-  model
-    .create({ ...req.body })
-    .then((data) => {
-      const { id = -1, caption } = data;
-      res.status(200).send({ id, caption });
-    })
-    .catch(promiseError);
-};
+const model = models.compositionOrder;
 
 const get = (req, res) => {
-  const { search, id, ...other } = req.query;
-
-  const searchCaption = search
-    ? {
-        [Op.or]: [
-          { description: { [Op.iLike]: `%${search}%` } },
-          { [`$${models.client.name}.first$`]: { [Op.iLike]: `%${search}%` } },
-          { [`$${models.client.name}.last$`]: { [Op.iLike]: `%${search}%` } },
-          {
-            [`$${models.client.name}.description$`]: {
-              [Op.iLike]: `%${search}%`,
-            },
-          },
-        ],
-      }
-    : null;
+  const { id, ...other } = req.query;
 
   const searchId = id ? { id } : null;
 
-  const where =
-    searchCaption || searchId ? { ...searchCaption, ...searchId } : null;
+  const where = searchId ? { ...searchId } : null;
 
   model
-    .findAndCountAll({
+    .findOne({
       attributes: {
-        exclude: ["createdAt", "updatedAt", "deletedAt", "chatId", "clientId"],
+        exclude: ["createdAt", "updatedAt", "deletedAt", "clientId"],
       },
       include: [
         {
-          model: models.client,
-          as: "client",
+          model: models.good,
+          as: "good",
           attributes: {
             exclude: ["createdAt", "updatedAt", "deletedAt", "chatId"],
           },
@@ -102,7 +76,6 @@ const del = (req, res, promiseError) => {
 const { checkMethod } = require("../utils");
 
 module.exports = (router, moduleName) => {
-  router.post("/", checkMethod(post, moduleName));
   router.get("/", checkMethod(get, moduleName));
   router.put("/", checkMethod(put, moduleName));
   router.delete("/", checkMethod(del, moduleName));

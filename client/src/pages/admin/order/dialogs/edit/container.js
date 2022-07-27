@@ -1,17 +1,16 @@
-import { Box, Input, Autocomplete, Container } from "@components";
+import { Box, Input, Container } from "@components";
 import { isFunc, checkInput } from "@utils";
 import { useCallback, useState, useEffect } from "react";
 import { DialogContent } from "@mui/material";
 import Actions from "./actions";
-import { useArticleGetAll, useGoodGetById2 } from "@api";
+import { useGoodCompositionGetById as useGetById } from "@api";
 
 export default (props) => {
   const { onClose, onSave, id } = props;
-
   const [data, setData] = useState({});
   const [save, setSave] = useState(false);
   const [error, setError] = useState({});
-  const [callbackGet, loading] = useGoodGetById2();
+  const [callbackGet, loading] = useGetById();
 
   useEffect(() => {
     if (id) {
@@ -94,11 +93,11 @@ export default (props) => {
           >
             <Input name="count" caption="Количество" />
             <Input name="sale" caption="Стоимость за единицу" />
-            <Autocomplete
+            {/* <Autocomplete
               name="goodId"
               caption="Товар"
               useGet={useArticleGetAll}
-            />
+            /> */}
           </Container>
         </Box>
       </DialogContent>

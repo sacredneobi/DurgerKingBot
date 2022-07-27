@@ -1,14 +1,17 @@
 import { observer } from "mobx-react-lite";
 import Dialog from "./dialog";
 import { isFunc } from "@utils";
-import { useGoodPost, useGoodUpdate } from "@api";
+import {
+  useGoodCompositionPost as usePost,
+  useGoodCompositionUpdate as useUpdate,
+} from "@api";
 
 const Default = observer((props) => {
   const { useContext, reload } = props;
   const { dialog = {} } = useContext ? useContext() : {};
 
-  const [callbackPost] = useGoodPost();
-  const [callbackUpdate] = useGoodUpdate();
+  const [callbackPost] = usePost();
+  const [callbackUpdate] = useUpdate();
 
   if (dialog.isShowEdit) {
     const handleOnClose = () => {
