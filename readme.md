@@ -48,10 +48,10 @@ Telegram чат https://t.me/sacred_dev
 - [x] 🍌🍌 🔥 FIRELORD ZUKO 🔥 White Lotus
 - [x] 🥠🥠 Marchenko 🇺🇦
 - [x] 🍎🍎 Marat o.o
-- [x] Muzaffar Abidov
-- [x] Dumitru BURAC
-- [x] SV Orion
+- [x] 🍻🍻 SV Orion
+- [x] 🍊🍊 Muzaffar Abidov
 - [x] Ivan
+- [x] Dumitru BURAC
 - [x] Don Kihot
 - [x] VV
 - [x] Kofeek

@@ -1,4 +1,5 @@
 const models = require("../db/models");
+const axios = require("axios").default;
 
 const client = models.client;
 const order = models.order;
@@ -6,7 +7,6 @@ const compositionOrder = models.compositionOrder;
 
 const getInvoice = (id, goods, orderId) => {
   const invoice = {
-    chat_id: id,
     provider_token: "632593626:TEST:sandbox_i49650467127",
     start_parameter: "get_access", //Уникальный параметр глубинных ссылок. Если оставить поле пустым, переадресованные копии отправленного сообщения будут иметь кнопку «Оплатить», позволяющую нескольким пользователям производить оплату непосредственно из пересылаемого сообщения, используя один и тот же счет. Если не пусто, перенаправленные копии отправленного сообщения будут иметь кнопку URL с глубокой ссылкой на бота (вместо кнопки оплаты) со значением, используемым в качестве начального параметра.
     title: "Привет YouTube",
@@ -109,9 +109,21 @@ const post = (bot) => {
 };
 
 const postSendInvoice = (bot) => {
-  return (req, res) => {
-    console.log("SendInvoice");
-    bot.telegram.sendInvoice(5316506208, getInvoice(5316506208));
+  return async (req, res) => {
+    const { goods } = req.body;
+    axios
+      .post(
+        `https://api.telegram.org/bot${process.env.BOT_ID}/createInvoiceLink`,
+        getInvoice(100, Array.isArray(goods) ? goods : [], "TestOrder")
+      )
+      .then((response) => {
+        console.log(response.data);
+        res.status(200).send({ done: true, ...response.data });
+      })
+      .catch((error) => {
+        console.log(error);
+        res.status(500).send({ done: false, error: error.message });
+      });
   };
 };
 

@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from "react";
+import { useEffect, useCallback, useState } from "react";
 import { sendMessagePost } from "@api";
 import {
   shoppingCartNotEmpty,
@@ -24,6 +24,7 @@ export default (props) => {
   } = useHooks();
 
   const [callbackPost] = sendMessagePost();
+  const [payment, setPayment] = useState(null);
 
   const showShoppingCart = useCallback(() => {
     if (isReady) {
@@ -36,6 +37,16 @@ export default (props) => {
   }, [isReady, telegram, showPayment]);
 
   useEffect(() => {
+    if (isReady && payment?.result) {
+      telegram.openInvoice(payment.result, (status) => {
+        if (status === "paid") {
+          telegram.close();
+        }
+      });
+    }
+  }, [payment, telegram, isReady]);
+
+  useEffect(() => {
     if (isReady) {
       telegram.expand(true);
       const handleOnClick = () => {
@@ -44,10 +55,13 @@ export default (props) => {
             // ? telegram.sendData(
             //     JSON.stringify({ ...telegram.initDataUnsafe, test: 100 })
             //   )
-            callbackPost({
-              ...telegram.initDataUnsafe,
-              goods: shoppingCartFilter(shoppingCart),
-            })
+            callbackPost(
+              {
+                ...telegram.initDataUnsafe,
+                goods: shoppingCartFilter(shoppingCart),
+              },
+              setPayment
+            )
           : setShowPayment(true);
       };
       telegram.MainButton.onClick(handleOnClick);
