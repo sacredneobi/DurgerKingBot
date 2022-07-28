@@ -15,6 +15,7 @@ const VariantListItem = (props) => {
 
   if (to) {
     const path = new Path(`/admin/${to}`);
+
     return (
       <ListItem
         button

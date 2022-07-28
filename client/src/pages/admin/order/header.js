@@ -2,6 +2,7 @@ import { memo } from "react";
 import { Text, IconButton, Box } from "@components";
 import { areEqualObject } from "@utils/areRender";
 import { useOrderContext as useContext } from "@context";
+/*global someFunction*/
 
 const Default = memo((props) => {
   const { count, sale, id, good } = props;
@@ -11,8 +12,9 @@ const Default = memo((props) => {
   const { dialog } = useContext();
 
   const handleOnEdit = (event) => {
-    dialog.setIsShowEdit(true, { select: id });
-    event.stopPropagation();
+    someFunction({ select: id });
+    // dialog.setIsShowEdit(true, { select: id });
+    // event.stopPropagation();
   };
 
   const handleOnDelete = (event) => {

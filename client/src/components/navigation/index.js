@@ -6,6 +6,7 @@ import IconButton from "../iconButton";
 
 const RootItem = (props) => {
   const { onClick, rootOpen, ...other } = props;
+
   return (
     <MainListItem {...other} sx={{ display: "flex" }}>
       <IconButton
@@ -31,25 +32,24 @@ const ListItem = (props) => {
 
   if (route) {
     return (
-      <>
-        <List
-          level={level + 2}
-          collapse
-          rootItem={(props) => <RootItem {...props} {...data} />}
-        >
-          {route.map((item, index) => {
-            const { name: localName, ...other } = item;
-            return (
-              <ListItem
-                key={index}
-                {...other}
-                name={`${name}/${localName}`}
-                level={level + 1}
-              />
-            );
-          })}
-        </List>
-      </>
+      <List
+        level={level + 2}
+        collapse
+        to={name}
+        rootItem={(props) => <RootItem {...props} {...data} />}
+      >
+        {route.map((item, index) => {
+          const { name: localName, ...other } = item;
+          return (
+            <ListItem
+              key={index}
+              {...other}
+              name={`${name}/${localName}`}
+              level={level + 1}
+            />
+          );
+        })}
+      </List>
     );
   }
 

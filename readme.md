@@ -42,6 +42,22 @@ Telegram чат https://t.me/sacred_dev
   - [ ] Добавить отображение чатов в которых состоит бот для возможности рассылки рекламных сообщение
   - [ ] Добавить возможность редактирование состава заказа
 
+React use global declaration variables
+
+```sh
+//use in index.html
+<script>
+  function someFunction(data) {
+    console.log("sss", data);
+  }
+</script>
+
+//use in module.js
+
+/* global someFunction */
+someFunction("Привет YouTube");
+```
+
 На стриме участвовали:
 
 - [x] 🍒🍒 Lucifer Morningstar

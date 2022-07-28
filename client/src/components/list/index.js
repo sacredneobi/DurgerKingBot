@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { List, Collapse } from "@mui/material";
+import { useMatch, useResolvedPath } from "react-router-dom";
 
 const Default = (props) => {
   const {
@@ -8,10 +9,21 @@ const Default = (props) => {
     isOpen = false,
     collapse,
     rootItem,
+    to,
     ...other
   } = props;
 
-  const [open, setOpen] = useState(isOpen);
+  let isRenderOpen = isOpen;
+
+  if (to) {
+    let resolved = useResolvedPath(to);
+    let match = useMatch({ path: resolved.pathname, end: true });
+    let match2 = useMatch({ path: resolved.pathname, end: false });
+
+    isRenderOpen = !match && match2 ? true : isRenderOpen;
+  }
+
+  const [open, setOpen] = useState(isRenderOpen);
 
   const handleOnClick = (event) => {
     setOpen((prev) => !prev);
@@ -24,7 +36,7 @@ const Default = (props) => {
         {typeof rootItem === "function"
           ? rootItem({ onClick: handleOnClick, rootOpen: open })
           : null}
-        <Collapse in={open} timeout="auto" unmountOnExit>
+        <Collapse in={open} timeout="auto">
           <List sx={{ paddingLeft: level }} {...other}>
             {children}
           </List>
