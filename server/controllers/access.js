@@ -11,7 +11,9 @@ const defMenu = [
     name: "orders",
     caption: "orders",
     icon: "production_quantity_limits",
-    route: [{ name: "order/:id", caption: "order", icon: "receipt_long" }],
+    route: [
+      { name: "order/:id", caption: "order", icon: "shopping_cart_checkout" },
+    ],
   },
 ];
 

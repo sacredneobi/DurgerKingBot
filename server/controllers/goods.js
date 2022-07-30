@@ -8,10 +8,19 @@ const post = (req, res, promiseError) => {
   if (!req?.body?.articleId) {
     throw new Error("Not found articleId in body");
   }
+
+  const { price, ...other } = req.body;
+
   model
-    .create({ ...req.body })
-    .then((data) => {
+    .create({ ...other })
+    .then(async (data) => {
       const { id = -1, caption } = data;
+      const find = await models.price.findOne({ where: { goodId: id } });
+      if (find) {
+        models.price.update(price, { where: { id: find.id } });
+      } else {
+        models.price.create({ ...price, goodId: id });
+      }
       res.status(200).send({ id, caption });
     })
     .catch(promiseError);
@@ -79,7 +88,7 @@ const get = async (req, res, promiseError) => {
 };
 
 const put = (req, res, promiseError) => {
-  const { id, ...body } = req.body;
+  const { id, price, ...body } = req.body;
 
   if (!id) {
     throw new Error("Not found id in body");
@@ -101,7 +110,13 @@ const put = (req, res, promiseError) => {
             ],
           },
         })
-        .then((data) => {
+        .then(async (data) => {
+          const find = await models.price.findOne({ where: { goodId: id } });
+          if (find) {
+            models.price.update(price, { where: { id: find.id } });
+          } else {
+            models.price.create({ ...price, goodId: id });
+          }
           res.status(200).send(data);
         })
         .catch(promiseError);

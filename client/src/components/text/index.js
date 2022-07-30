@@ -5,7 +5,9 @@ const Default = (props) => {
   const { caption, checkRender, loading = false, ...other } = props;
 
   if (loading) {
-    return <Skeleton variant="text" {...other} sx={{ width: "100%" }} />;
+    return (
+      <Skeleton variant="text" {...other} sx={{ width: "100%", ...props.sx }} />
+    );
   }
 
   const item = (

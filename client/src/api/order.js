@@ -5,7 +5,7 @@ import { isFunc } from "@utils";
 const urlBase = "/api/order";
 
 const useGetById = (props = {}) => {
-  const { get, loading, response } = useParamsApi(urlBase);
+  const { get, loading, response, abort } = useParamsApi(urlBase);
   return [
     useCallback(
       (id, setData) => {
@@ -18,6 +18,7 @@ const useGetById = (props = {}) => {
       [response, get]
     ),
     loading,
+    abort,
   ];
 };
 

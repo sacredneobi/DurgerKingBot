@@ -1,3 +1,5 @@
+import { getValue } from "./utils";
+
 function convert(args, template) {
   return template.replace(/\$\{(\w+)\}/g, (m, n) => {
     return args[n] !== undefined && args[n] !== null ? args[n] : m;
@@ -10,7 +12,7 @@ export default (data = {}, validate = []) => {
   validate.forEach((item) => {
     const { name, maxLength, minLength, isNotNull, minValue, maxValue } = item;
 
-    const val = data[name] ? data[name] : "";
+    const val = getValue(data, name) ? getValue(data, name) : "";
     if (maxLength && val.trim().length > maxLength.val) {
       error[name] = convert({ val: maxLength.val }, maxLength.errorMessage);
     }

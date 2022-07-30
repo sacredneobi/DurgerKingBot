@@ -36,6 +36,17 @@ export default (props) => {
         name: "articleId",
         isNotNull: { errorMessage: "Должен быть выбранный" },
       },
+      {
+        name: "price.sale",
+        maxValue: {
+          val: 9999,
+          errorMessage: "Сумма не должна быть больше ${val}",
+        },
+        minValue: {
+          val: 0,
+          errorMessage: "Сумма не должна быть меньше ${val}",
+        },
+      },
     ]);
   }, []);
 
@@ -56,7 +67,15 @@ export default (props) => {
   const handleChange = useCallback((param) => {
     return (event) => {
       setData((prev) => {
-        prev[param] = event.target.value;
+        if (param === "price.sale") {
+          if (prev.price) {
+            prev.price.sale = event.target.value;
+          } else {
+            prev.price = { sale: event.target.value };
+          }
+        } else {
+          prev[param] = event.target.value;
+        }
         return { ...prev };
       });
     };
@@ -82,6 +101,7 @@ export default (props) => {
           >
             <Input name="caption" caption="Заголовок" />
             <Input name="description" caption="Описание" />
+            <Input name="price.sale" caption="Цена" />
             <Autocomplete
               name="articleId"
               caption="Артикул"

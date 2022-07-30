@@ -1,22 +1,28 @@
 import { memo } from "react";
-import { Text, IconButton, Box } from "@components";
+import { Text, IconButton, Box, Icon } from "@components";
 import { areEqualObject } from "@utils/areRender";
-import { useOrderContext as useContext } from "@context";
+import { useNavigate } from "react-router-dom";
 
-const Default = memo((props) => {
-  const { count, sale, id, good } = props;
-
-  const { caption } = good ? good : {};
-
-  const { dialog } = useContext();
-
-  const handleOnEdit = (event) => {
-    dialog.setIsShowEdit(true, { select: id });
-    event.stopPropagation();
+const getDate = (stringDate) => {
+  const fix = (value) => {
+    return String(value).padStart(2, "0");
   };
 
-  const handleOnDelete = (event) => {
-    dialog.setIsShowDelete(true, { select: id, onGetText: () => caption });
+  const date = new Date(stringDate);
+  return `${fix(date.getDate())}.${fix(
+    date.getMonth()
+  )}.${date.getFullYear()} ${fix(date.getHours())}:${fix(
+    date.getMinutes()
+  )}:${fix(date.getSeconds())}`;
+};
+
+const Default = memo((props) => {
+  const { id, saleSum, isPayment, updatedAt } = props;
+
+  const navigate = useNavigate();
+
+  const handleOnShowOrder = (event) => {
+    navigate(`/admin/orders/order/${id}`);
     event.stopPropagation();
   };
 
@@ -30,22 +36,32 @@ const Default = memo((props) => {
         padding: (them) => them.spacing(0, 1, 0, 1),
       }}
     >
-      <Text sx={{ color: "text.secondary", flexGrow: 1 }} caption={caption} />
+      <Box sx={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
+        <Text
+          sx={{ color: "text.secondary", flexGrow: 1 }}
+          caption={`Заказ #${id}`}
+        />
+        <Text
+          variant="caption"
+          display="block"
+          gutterBottom
+          sx={{ color: "text.secondary", flexGrow: 1 }}
+          caption={`${getDate(updatedAt)}`}
+        />
+      </Box>
       <Text
         sx={{ flexShrink: 0, color: "text.secondary" }}
-        caption={`${sale.toFixed(2)}x${count}=${(count * sale).toFixed(2)}`}
+        caption={`${saleSum.toFixed(2)} $`}
+      />
+      <Icon
+        textIcon={isPayment ? "paid" : "money_off"}
+        color={isPayment ? "success" : "error"}
       />
       <IconButton
-        textIcon="edit"
+        textIcon="shopping_cart_checkout"
         color="primary"
         edge={false}
-        onClick={handleOnEdit}
-      />
-      <IconButton
-        textIcon="delete"
-        color="error"
-        edge={false}
-        onClick={handleOnDelete}
+        onClick={handleOnShowOrder}
       />
     </Box>
   );

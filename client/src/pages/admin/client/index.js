@@ -17,12 +17,7 @@ const Main = (props) => {
   let { id } = useParams();
 
   const [client, setClient] = useState({});
-  // const [reload, setReload] = useState(true);
   const [callbackGet, loading] = useGet();
-
-  // const handleReload = useCallback(() => {
-  //   setReload((prev) => !prev);
-  // }, []);
 
   useEffect(() => {
     callbackGet(id, setClient);
@@ -32,16 +27,14 @@ const Main = (props) => {
     <>
       <Table
         loading={loading}
-        items={[]}
+        items={client?.orders ? client.orders : []}
         userContext={Select}
         topContainer={(props) => <TopContainer {...props} {...client} />}
         itemsRender={{
           header: (props) => <Header {...props} />,
           details: (props) => <Details {...props} />,
         }}
-        showCheck
       />
-      {/* <Dialogs useContext={useContext} reload={handleReload} id={id} /> */}
     </>
   );
 };

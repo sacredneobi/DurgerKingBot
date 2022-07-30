@@ -128,6 +128,7 @@ const useGetById2 = (props = {}) => {
                     caption: data.rows[0].caption,
                     articleId: data.rows[0].article,
                     description: data.rows[0].description,
+                    price: data.rows[0].price,
                   }
                 : {}
             );

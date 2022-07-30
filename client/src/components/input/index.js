@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { TextField } from "@mui/material";
 import Skeleton from "../skeleton";
+import { getValue } from "@utils/utils";
 
 const Default = (props) => {
   const {
@@ -37,7 +38,7 @@ const Default = (props) => {
       helperText={error?.[name]}
       fullWidth
       onKeyPress={changeOnEnter ? handleOnKeyPress : null}
-      value={changeOnEnter ? inputData : data?.[name] || ""}
+      value={changeOnEnter ? inputData : getValue(data, name) || ""}
       onChange={changeOnEnter ? handleOnChange : onChange(name)}
       {...other}
     />

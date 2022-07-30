@@ -27,6 +27,8 @@ const get = (req, res) => {
         subQuery: false,
         attributes: [
           "id",
+          "updatedAt",
+          "isPayment",
           [fn("SUM", col("compositionOrders.sale")), "saleSum"],
         ],
         group: ["order.id"],
@@ -37,9 +39,20 @@ const get = (req, res) => {
             attributes: [],
           },
         ],
+        order: [["updatedAt", "DESC"]],
+        // limit: 100,
       });
 
-      res.status(200).send({ id, first, last, description, orders });
+      const orderSum = orders.reduce(
+        (sum, item) =>
+          sum + (item.dataValues?.saleSum ? item.dataValues.saleSum : 0),
+        0
+      );
+      const orderAVGSum = orderSum / orders.length;
+
+      res
+        .status(200)
+        .send({ id, first, last, description, orders, orderSum, orderAVGSum });
     });
 };
 
