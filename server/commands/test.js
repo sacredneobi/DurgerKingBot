@@ -25,13 +25,17 @@ const test = async (ctx) => {
     );
   }
 
-  return ctx.reply("Привет youtube", {
-    caption: "Caption",
-    parse_mode: "Markdown",
-    ...Markup.inlineKeyboard([
-      Markup.button.webApp("Лайк подписка :)", `https://sacred.sytes.net/`),
-    ]),
-  });
+  return ctx
+    .reply("Привет youtube", {
+      caption: "Caption",
+      parse_mode: "Markdown",
+      ...Markup.inlineKeyboard([
+        Markup.button.webApp("Лайк подписка :)", `https://sacred.sytes.net/`),
+      ]),
+    })
+    .cath((error) => {
+      console.log("error test", error);
+    });
 };
 
 module.exports = (bot) => {

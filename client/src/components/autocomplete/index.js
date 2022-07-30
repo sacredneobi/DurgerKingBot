@@ -24,11 +24,13 @@ export default memo((props) => {
     data,
     loading: ownerLoading,
     onClear,
+    loadOnInput,
   } = props;
 
   const [callbackGet, loading, abort] = useGet ? useGet() : [null, false, null];
 
   const [open, setOpen] = useState(false);
+  const [inputValue, setInputValue] = useState("");
   const [options, setOptions] = useState([]);
   const [value, setValue] = useState(data?.[name]?.caption || null);
 
@@ -37,15 +39,23 @@ export default memo((props) => {
   }, [data?.[name]?.caption]);
 
   useEffect(() => {
-    if (open) {
-      if (typeof callbackGet === "function") {
-        callbackGet(setOptions);
-      }
-      if (typeof abort === "function") {
-        return abort;
+    if (!loadOnInput) {
+      if (open) {
+        if (typeof callbackGet === "function") {
+          callbackGet(setOptions);
+        }
+        if (typeof abort === "function") {
+          return abort;
+        }
       }
     }
-  }, [open]);
+  }, [open, loadOnInput]);
+
+  useEffect(() => {
+    if (loadOnInput) {
+      callbackGet(inputValue, setOptions);
+    }
+  }, [loadOnInput, inputValue]);
 
   if (ownerLoading) {
     return <Skeleton height={56} />;
@@ -62,9 +72,14 @@ export default memo((props) => {
         setOpen(false);
       }}
       isOptionEqualToValue={(option, value) => option.caption === value}
-      getOptionLabel={(option) => option.caption || value}
+      getOptionLabel={(option) => (option.caption || value) ?? "НЕТ ЗАГОЛОВКА"}
       options={options}
       value={value}
+      onInputChange={(event, value) => {
+        if (loadOnInput) {
+          setInputValue(value);
+        }
+      }}
       onChange={(event, value) => {
         if (!value) {
           isFunc(onClear);
@@ -76,25 +91,27 @@ export default memo((props) => {
           });
         }
       }}
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          error={!!error?.[name]}
-          label={caption}
-          helperText={error?.[name]}
-          InputProps={{
-            ...params.InputProps,
-            endAdornment: (
-              <Fragment>
-                {loading ? (
-                  <CircularProgress color="inherit" size={20} />
-                ) : null}
-                {params.InputProps.endAdornment}
-              </Fragment>
-            ),
-          }}
-        />
-      )}
+      renderInput={(params) => {
+        return (
+          <TextField
+            {...params}
+            error={!!error?.[name]}
+            label={caption}
+            helperText={error?.[name]}
+            InputProps={{
+              ...params.InputProps,
+              endAdornment: (
+                <Fragment>
+                  {loading ? (
+                    <CircularProgress color="inherit" size={20} />
+                  ) : null}
+                  {params.InputProps.endAdornment}
+                </Fragment>
+              ),
+            }}
+          />
+        );
+      }}
     />
   );
 }, areEqual);

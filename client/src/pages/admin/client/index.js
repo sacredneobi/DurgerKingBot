@@ -1,47 +1,47 @@
-import { memo, useEffect, useState, useCallback } from "react";
+import { memo, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Table } from "@components";
-import { useOrderGetById as useGet } from "@api";
+import { useClientGetById as useGet } from "@api";
 import { areEqualAlways } from "@utils/areRender";
 import {
   OrderSelect as Select,
   OrderContext as Context,
-  useOrderContext as useContext,
+  // useOrderContext as useContext,
 } from "@context/";
 import Header from "./header";
 import Details from "./details";
 import TopContainer from "./topContainer";
-import Dialogs from "./dialogs";
+// import Dialogs from "./dialogs";
 
 const Main = (props) => {
   let { id } = useParams();
 
-  const [order, setOrder] = useState({});
-  const [reload, setReload] = useState(true);
+  const [client, setClient] = useState({});
+  // const [reload, setReload] = useState(true);
   const [callbackGet, loading] = useGet();
 
-  const handleReload = useCallback(() => {
-    setReload((prev) => !prev);
-  }, []);
+  // const handleReload = useCallback(() => {
+  //   setReload((prev) => !prev);
+  // }, []);
 
   useEffect(() => {
-    callbackGet(id, setOrder);
-  }, [id, reload]);
+    callbackGet(id, setClient);
+  }, [id]);
 
   return (
     <>
       <Table
         loading={loading}
-        items={order.compositionOrders}
+        items={[]}
         userContext={Select}
-        topContainer={(props) => <TopContainer {...props} />}
+        topContainer={(props) => <TopContainer {...props} {...client} />}
         itemsRender={{
           header: (props) => <Header {...props} />,
           details: (props) => <Details {...props} />,
         }}
         showCheck
       />
-      <Dialogs useContext={useContext} reload={handleReload} id={id} />
+      {/* <Dialogs useContext={useContext} reload={handleReload} id={id} /> */}
     </>
   );
 };
@@ -56,4 +56,4 @@ const Default = memo((props) => {
   );
 }, areEqualAlways);
 
-export default { name: "order/:id", component: Default };
+export default { name: "client/:id", component: Default };

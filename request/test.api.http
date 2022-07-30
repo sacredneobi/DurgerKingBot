@@ -1,1 +1,1 @@
-POST http://localhost:4000/api/botAnswer/senInvoice
+GET http://localhost:4000/api/client?id=2

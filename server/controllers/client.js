@@ -1,7 +1,7 @@
 const models = require("../db/models");
-const { Op, HasMany } = require("sequelize");
+const { Op, HasMany, fn, col } = require("sequelize");
 
-const model = models.compositionOrder;
+const model = models.client;
 
 const get = (req, res) => {
   const { id, ...other } = req.query;
@@ -15,37 +15,32 @@ const get = (req, res) => {
       attributes: {
         exclude: ["createdAt", "updatedAt", "deletedAt", "clientId"],
       },
-      include: [
-        {
-          model: models.good,
-          as: "good",
-          attributes: {
-            exclude: ["createdAt", "updatedAt", "deletedAt", "chatId"],
-          },
-        },
-      ],
       order: [["id", "DESC"]],
       ...other,
       where: where,
     })
-    .then((data) => {
-      res.status(200).send(data);
+    .then(async (data) => {
+      const { id, first, last, description } = data;
+
+      const orders = await models.order.findAll({
+        where: { clientId: id },
+        subQuery: false,
+        attributes: [
+          "id",
+          [fn("SUM", col("compositionOrders.sale")), "saleSum"],
+        ],
+        group: ["order.id"],
+        include: [
+          {
+            association: new HasMany(models.order, models.compositionOrder, {}),
+            required: false,
+            attributes: [],
+          },
+        ],
+      });
+
+      res.status(200).send({ id, first, last, description, orders });
     });
-};
-
-const post = (req, res, promiseError) => {
-  const { orderId, count, sale, goodId } = req.body;
-
-  if (!orderId) {
-    throw new Error("Not found id in body");
-  }
-
-  model
-    .create({ count, sale, goodId: goodId?.id, orderId })
-    .then((data) => {
-      res.status(200).send(data);
-    })
-    .catch(promiseError);
 };
 
 const put = (req, res, promiseError) => {
@@ -55,10 +50,8 @@ const put = (req, res, promiseError) => {
     throw new Error("Not found id in body");
   }
 
-  const data = { sale: body.sale, count: body.count, goodId: body.goodId.id };
-
   model
-    .update(data, { where: { id: id } })
+    .update(body, { where: { id: id } })
     .then(() => {
       model
         .findOne({
@@ -95,6 +88,5 @@ const { checkMethod } = require("../utils");
 module.exports = (router, moduleName) => {
   router.get("/", checkMethod(get, moduleName));
   router.put("/", checkMethod(put, moduleName));
-  router.post("/", checkMethod(post, moduleName));
   router.delete("/", checkMethod(del, moduleName));
 };

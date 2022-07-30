@@ -22,7 +22,9 @@ const getInvoice = (id) => {
 };
 
 const test = async (ctx) => {
-  return ctx.replyWithInvoice(getInvoice(ctx.from.id));
+  return ctx.replyWithInvoice(getInvoice(ctx.from.id)).cath((error) => {
+    console.log("error keyboard", error);
+  });
 };
 
 module.exports = (bot) => {

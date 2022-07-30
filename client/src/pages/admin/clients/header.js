@@ -2,6 +2,7 @@ import { memo } from "react";
 import { Text, IconButton, Box } from "@components";
 import { areEqualObject } from "@utils/areRender";
 import { useClientsContext } from "@context";
+import { useNavigate } from "react-router-dom";
 
 const Default = memo((props) => {
   const { first, last, id } = props;
@@ -9,6 +10,7 @@ const Default = memo((props) => {
   const caption = `${first ?? ""} ${last ?? ""}`;
 
   const { dialog } = useClientsContext();
+  const navigate = useNavigate();
 
   const handleOnEdit = (event) => {
     dialog.setIsShowEdit(true, { select: id });
@@ -23,6 +25,11 @@ const Default = memo((props) => {
     event.stopPropagation();
   };
 
+  const handleOnAnalytics = (event) => {
+    navigate(`/admin/clients/client/${id}`);
+    event.stopPropagation();
+  };
+
   return (
     <Box
       sx={{
@@ -34,6 +41,11 @@ const Default = memo((props) => {
       }}
     >
       <Text sx={{ color: "text.secondary", flexGrow: 1 }} caption={caption} />
+      <IconButton
+        textIcon="analytics"
+        edge={false}
+        onClick={handleOnAnalytics}
+      />
       <IconButton
         textIcon="edit"
         color="primary"

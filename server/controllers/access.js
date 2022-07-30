@@ -1,7 +1,12 @@
 const defMenu = [
   { name: "goods", caption: "goods", icon: "inventory_2" },
   { name: "articles", caption: "articles", icon: "document_scanner" },
-  { name: "clients", caption: "clients", icon: "badge" },
+  {
+    name: "clients",
+    caption: "clients",
+    icon: "group",
+    route: [{ name: "client/:id", caption: "client", icon: "analytics" }],
+  },
   {
     name: "orders",
     caption: "orders",

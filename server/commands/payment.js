@@ -18,6 +18,8 @@ module.exports = (bot) => {
       } catch {}
     }
 
-    await ctx.reply("SuccessfulPayment");
+    await ctx.reply("SuccessfulPayment").cath((error) => {
+      console.log("error payment", error);
+    });
   });
 };

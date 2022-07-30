@@ -34,13 +34,15 @@ const img = [
   { isAnimate: false, img: coke },
 ];
 
+const urlBase = "/api/goods";
+
 const useGet = (countPerPage = 0, articleId, notIcon = false) => {
   const [page, setPage] = useState(1);
   const [search, setSearch] = useState(null);
   const [update, setUpdate] = useState(false);
 
   const { loading, data: { count: countPage = 0, rows = [] } = {} } = useFetch(
-    `/api/goods?${
+    `${urlBase}?${
       articleId ? `articleId=${articleId}&` : ""
     }limit=${countPerPage}&offset=${
       (page - 1) * (countPerPage ? countPerPage : 0)
@@ -85,7 +87,7 @@ const useGet = (countPerPage = 0, articleId, notIcon = false) => {
 
 const useDelete = (props = {}) => {
   const { reload } = props;
-  const { del, loading, response } = useParamsApi("/api/goods");
+  const { del, loading, response } = useParamsApi(urlBase);
   return [
     useCallback(
       (value) => {
@@ -114,7 +116,7 @@ const useGetById = (id) => {
 };
 
 const useGetById2 = (props = {}) => {
-  const { get, loading, response } = useParamsApi("/api/goods");
+  const { get, loading, response } = useParamsApi(urlBase);
   return [
     useCallback(
       (id, setData) => {
@@ -139,7 +141,7 @@ const useGetById2 = (props = {}) => {
 };
 
 const usePost = () => {
-  const { post, loading, response } = useParamsApi("/api/goods");
+  const { post, loading, response } = useParamsApi(urlBase);
   return [
     useCallback(
       (data) => {
@@ -152,7 +154,7 @@ const usePost = () => {
 };
 
 const useUpdate = () => {
-  const { put, loading, response } = useParamsApi("/api/goods");
+  const { put, loading, response } = useParamsApi(urlBase);
   return [
     useCallback(
       (data) => {
@@ -164,4 +166,29 @@ const useUpdate = () => {
   ];
 };
 
-export { useGet, useGetById, useGetById2, useDelete, usePost, useUpdate };
+const useGetAll = () => {
+  const { get, loading, response, abort } = useParamsApi(urlBase);
+
+  return [
+    useCallback(
+      (search, setData) => {
+        get(`?search=${search}&limit=200`).then((data) => {
+          setData(data?.rows);
+        });
+      },
+      [response, get]
+    ),
+    loading,
+    abort,
+  ];
+};
+
+export {
+  useGet,
+  useGetById,
+  useGetById2,
+  useDelete,
+  usePost,
+  useUpdate,
+  useGetAll,
+};

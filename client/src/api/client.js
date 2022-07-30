@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import useParamsApi from "./useParamsAPI";
 import { isFunc } from "@utils";
 
-const urlBase = "/api/goodComposition";
+const urlBase = "/api/client";
 
 const useGetById = (props = {}) => {
   const { get, loading, response } = useParamsApi(urlBase);
@@ -11,7 +11,7 @@ const useGetById = (props = {}) => {
       (id, setData) => {
         get(`?id=${id}`).then((data) => {
           if (response.ok) {
-            setData(data ? { ...data, goodId: data.good } : {});
+            setData(data ? data : {});
           }
         });
       },
@@ -34,19 +34,6 @@ const useUpdate = () => {
   ];
 };
 
-const usePost = () => {
-  const { post, loading, response } = useParamsApi(urlBase);
-  return [
-    useCallback(
-      (data) => {
-        post("", data);
-      },
-      [response, post]
-    ),
-    loading,
-  ];
-};
-
 const useDelete = (props = {}) => {
   const { reload } = props;
   const { del, loading, response } = useParamsApi(urlBase);
@@ -63,4 +50,4 @@ const useDelete = (props = {}) => {
   ];
 };
 
-export { useGetById, useUpdate, useDelete, usePost };
+export { useGetById, useUpdate, useDelete };

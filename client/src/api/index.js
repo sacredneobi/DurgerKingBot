@@ -7,6 +7,7 @@ import {
   useDelete as useGoodDelete,
   usePost as useGoodPost,
   useUpdate as useGoodUpdate,
+  useGetAll as useGoodGetAll,
 } from "./goods";
 import {
   useGet as useArticleGet,
@@ -38,6 +39,11 @@ import {
   useDelete as useOrderDelete,
 } from "./order";
 import {
+  useGetById as useClientGetById,
+  useUpdate as useClientUpdate,
+  useDelete as useClientDelete,
+} from "./client";
+import {
   useGetById as useGoodCompositionGetById,
   useUpdate as useGoodCompositionUpdate,
   useDelete as useGoodCompositionDelete,
@@ -55,6 +61,7 @@ export {
   useGoodGetById2,
   useGoodPost,
   useGoodUpdate,
+  useGoodGetAll,
   useArticleGetById,
   useArticleDelete,
   useArticlePost,
@@ -78,4 +85,7 @@ export {
   useGoodCompositionUpdate,
   useGoodCompositionDelete,
   useGoodCompositionPost,
+  useClientGetById,
+  useClientUpdate,
+  useClientDelete,
 };

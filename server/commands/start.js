@@ -22,7 +22,9 @@ const def = async (ctx) => {
     );
   }
 
-  ctx.reply("Привет youtube");
+  ctx.reply("Привет youtube").cath((error) => {
+    console.log("error start", error);
+  });
 };
 
 module.exports = (bot) => {

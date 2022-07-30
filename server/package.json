@@ -11,7 +11,7 @@
     "miUndo": "cross-env MIGRATE_TOOL=true npx sequelize-cli db:migrate:undo",
     "miCreate": "cross-env MIGRATE_TOOL=true npx sequelize-mig migration:make -n",
     "miPrev": "cross-env MIGRATE_TOOL=true npx sequelize-mig migration:make --preview",
-    "postinstall": "cd ../client && npm i"
+    "postinstall": "cd ../client && npm i  --legacy-peer-deps"
   },
   "keywords": [],
   "author": "",
