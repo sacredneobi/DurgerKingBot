@@ -23,14 +23,14 @@ loader(
 
 bot.telegram.setMyCommands(commands);
 
-bot.use((ctx, next) => {
+bot.use(async(ctx, next) => {
   // console.log(ctx);
-  next();
+  await next();
 });
 
-bot.on("pre_checkout_query", (ctx, test) => {
+bot.on("pre_checkout_query", async(ctx, test) => {
   // console.log("payment", ctx.update.pre_checkout_query);
-  ctx.answerPreCheckoutQuery(true);
+  await ctx.answerPreCheckoutQuery(true);
 });
 
 bot.catch(console.log);
