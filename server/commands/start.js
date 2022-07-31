@@ -22,7 +22,7 @@ const def = async (ctx) => {
     );
   }
 
-  ctx.reply("Привет youtube").cath((error) => {
+  ctx.reply("Привет youtube").catch((error) => {
     console.log("error start", error);
   });
 };

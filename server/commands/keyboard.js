@@ -22,7 +22,7 @@ const getInvoice = (id) => {
 };
 
 const test = async (ctx) => {
-  return ctx.replyWithInvoice(getInvoice(ctx.from.id)).cath((error) => {
+  return ctx.replyWithInvoice(getInvoice(ctx.from.id)).catch((error) => {
     console.log("error keyboard", error);
   });
 };

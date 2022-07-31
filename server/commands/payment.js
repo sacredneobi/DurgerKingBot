@@ -18,7 +18,7 @@ module.exports = (bot) => {
       } catch {}
     }
 
-    await ctx.reply("SuccessfulPayment").cath((error) => {
+    await ctx.reply("SuccessfulPayment").catch((error) => {
       console.log("error payment", error);
     });
   });

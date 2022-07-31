@@ -33,7 +33,7 @@ const test = async (ctx) => {
         Markup.button.webApp("Лайк подписка :)", `https://sacred.sytes.net/`),
       ]),
     })
-    .cath((error) => {
+    .catch((error) => {
       console.log("error test", error);
     });
 };
