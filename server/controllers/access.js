@@ -1,3 +1,5 @@
+const jwtCheck = require("../utils/jwtMiddleware");
+
 const defMenu = [
   { name: "goods", caption: "goods", icon: "inventory_2" },
   { name: "articles", caption: "articles", icon: "document_scanner" },
@@ -15,6 +17,7 @@ const defMenu = [
       { name: "order/:id", caption: "order", icon: "shopping_cart_checkout" },
     ],
   },
+  { name: "users", caption: "users", icon: "group" },
 ];
 
 const defSettings = [
@@ -26,5 +29,5 @@ const get = (req, res) => {
 };
 
 module.exports = (router) => {
-  router.get("/", get);
+  router.get("/", jwtCheck, get);
 };

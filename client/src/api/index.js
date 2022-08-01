@@ -1,4 +1,5 @@
 import useAccessGet from "./access";
+import { useAuth } from "./auth";
 import { post as sendMessagePost } from "./sendMessage";
 import {
   useGet as useGoodGet,
@@ -34,6 +35,13 @@ import {
   useUpdate as useOrdersUpdate,
 } from "./orders";
 import {
+  useGet as useUsersGet,
+  useGetById as useUsersGetById,
+  useDelete as useUsersDelete,
+  usePost as useUsersPost,
+  useUpdate as useUsersUpdate,
+} from "./users";
+import {
   useGetById as useOrderGetById,
   useUpdate as useOrderUpdate,
   useDelete as useOrderDelete,
@@ -52,6 +60,7 @@ import {
 
 export {
   sendMessagePost,
+  useAuth,
   useGoodGet,
   useArticleGet,
   useGoodGetById,
@@ -88,4 +97,9 @@ export {
   useClientGetById,
   useClientUpdate,
   useClientDelete,
+  useUsersGet,
+  useUsersGetById,
+  useUsersDelete,
+  useUsersPost,
+  useUsersUpdate,
 };

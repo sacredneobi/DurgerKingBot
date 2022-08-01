@@ -2,7 +2,7 @@ const models = require("../db/models");
 const { Op } = require("sequelize");
 const jwtCheck = require("../utils/jwtMiddleware");
 
-const model = models.article;
+const model = models.user;
 
 const post = (req, res, promiseError) => {
   model
@@ -18,7 +18,9 @@ const get = (req, res) => {
   const { search, id, ...other } = req.query;
 
   const searchCaption = search
-    ? { caption: { [Op.iLike]: `%${search}%` } }
+    ? {
+        [Op.or]: [{ name: { [Op.iLike]: `%${search}%` } }],
+      }
     : null;
 
   const searchId = id ? { id } : null;
@@ -29,9 +31,9 @@ const get = (req, res) => {
   model
     .findAndCountAll({
       attributes: {
-        exclude: ["createdAt", "updatedAt", "deletedAt"],
+        exclude: ["createdAt", "updatedAt", "deletedAt", "password"],
       },
-      order: [["id", "ASC"]],
+      order: [["id", "DESC"]],
       ...other,
       where: where,
     })
@@ -54,7 +56,7 @@ const put = (req, res, promiseError) => {
         .findOne({
           where: { id: id },
           attributes: {
-            exclude: ["createdAt", "updatedAt", "deletedAt"],
+            exclude: ["createdAt", "updatedAt", "deletedAt", "password"],
           },
         })
         .then((data) => {

@@ -6,6 +6,8 @@ import clients from "./admin/clients";
 import client from "./admin/client";
 import orders from "./admin/orders";
 import order from "./admin/order";
+import Login from "./admin/login";
+import users from "./admin/users";
 
 const adminPages = [
   translation,
@@ -15,6 +17,7 @@ const adminPages = [
   orders,
   order,
   client,
+  users,
 ];
 
-export { Main, adminPages };
+export { Main, adminPages, Login };

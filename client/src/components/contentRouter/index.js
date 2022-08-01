@@ -1,5 +1,4 @@
 import { Routes, Route, useParams, Navigate } from "react-router-dom";
-import Box from "../box";
 
 const flat = (items, array, baseName) => {
   if (Array.isArray(items)) {
@@ -11,6 +10,82 @@ const flat = (items, array, baseName) => {
       }
     });
   }
+};
+
+const Main = (props) => {
+  const { caption = "WINDOWS NOT FOUND" } = props;
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        flexDirection: "column",
+        height: "100%",
+      }}
+    >
+      {caption}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          flexDirection: "row",
+          flexWrap: "wrap",
+          width: 302,
+          gap: 4,
+        }}
+      >
+        <div
+          style={{
+            width: 100,
+            height: 100,
+            backgroundColor: "#8bbee2",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: 4,
+            flexGrow: 2,
+          }}
+        ></div>
+        <div
+          style={{
+            width: 100,
+            height: 100,
+            backgroundColor: "#8bbee2",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexGrow: 1,
+            borderRadius: 4,
+          }}
+        ></div>
+        <div
+          style={{
+            width: 100,
+            height: 100,
+            backgroundColor: "#8bbee2",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexGrow: 1,
+            borderRadius: 4,
+          }}
+        ></div>
+        <div
+          style={{
+            width: 100,
+            height: 100,
+            backgroundColor: "#8bbee2",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexGrow: 1,
+            borderRadius: 4,
+          }}
+        ></div>
+      </div>
+    </div>
+  );
 };
 
 const checkParams = (params) => {
@@ -34,7 +109,7 @@ const Render = (props) => {
     return item();
   }
 
-  return <Box>{`NOT FOUND COMPONENT PAGE FOR "${name}"`}</Box>;
+  return <Main caption={`NOT FOUND COMPONENT PAGE FOR "${name}"`} />;
 };
 
 const Default = (props) => {
@@ -50,7 +125,7 @@ const Default = (props) => {
 
   return (
     <Routes>
-      <Route path="/" element={<div>MAIN</div>} />
+      <Route path="/" element={<Main />} />
       {items.map((item, index) => {
         return (
           <Route
@@ -60,14 +135,7 @@ const Default = (props) => {
           />
         );
       })}
-      <Route
-        path="*"
-        element={
-          <main style={{ padding: "1rem" }}>
-            <p>ERROR not found route</p>
-          </main>
-        }
-      />
+      <Route path="*" element={<Main caption="ROUTERS NOT FOUND" />} />
     </Routes>
   );
 };

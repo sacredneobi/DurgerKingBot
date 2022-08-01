@@ -1,5 +1,6 @@
 const readXlsxFile = require("read-excel-file/node");
 const models = require("../db/models");
+const jwtCheck = require("../utils/jwtMiddleware");
 
 const good = models.good;
 const article = models.article;
@@ -57,5 +58,5 @@ const post = (req, res) => {
 };
 
 module.exports = (router) => {
-  router.post("/", post);
+  router.post("/", jwtCheck, post);
 };

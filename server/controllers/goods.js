@@ -1,6 +1,7 @@
 const models = require("../db/models");
 const { HasMany, HasOne, Op } = require("sequelize");
 const sleep = require("../utils/sleep");
+const jwtCheck = require("../utils/jwtMiddleware");
 
 const model = models.good;
 
@@ -142,8 +143,8 @@ const del = (req, res, promiseError) => {
 const { checkMethod } = require("../utils");
 
 module.exports = (router, moduleName) => {
-  router.post("/", checkMethod(post, moduleName));
+  router.post("/", jwtCheck, checkMethod(post, moduleName));
   router.get("/", checkMethod(get, moduleName));
-  router.put("/", checkMethod(put, moduleName));
-  router.delete("/", checkMethod(del, moduleName));
+  router.put("/", jwtCheck, checkMethod(put, moduleName));
+  router.delete("/", jwtCheck, checkMethod(del, moduleName));
 };

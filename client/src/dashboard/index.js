@@ -1,7 +1,9 @@
-import React, { useState, useEffect, memo } from "react";
+import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useAccessGet } from "@api";
 import { correctRouter } from "@utils";
+import { useUserContext as useContext } from "@context/";
+import { observer } from "mobx-react-lite";
 
 import {
   Drawer,
@@ -16,20 +18,20 @@ import {
 } from "@components";
 import style from "./style";
 
-function areEqual(prev, next) {
-  return true;
-}
+export default observer((props) => {
+  const { adminPages = [], login } = props;
 
-export default memo((props) => {
-  const { adminPages = [] } = props;
+  const dataUser = useContext();
 
   const [open, setOpen] = useState(true);
   const [access, setAccess] = useState({ route: [], routeSetting: [] });
   const [callbackGet, loading] = useAccessGet({ correctRouter, adminPages });
 
   useEffect(() => {
-    callbackGet(setAccess);
-  }, [callbackGet]);
+    if (dataUser.data.isUser) {
+      callbackGet(setAccess);
+    }
+  }, [callbackGet, dataUser.data.isUser]);
 
   const { t } = useTranslation();
 
@@ -37,7 +39,18 @@ export default memo((props) => {
     setOpen((prev) => !prev);
   };
 
+  const handleOnLogout = (event) => {
+    localStorage.removeItem("token");
+    dataUser.data.setIsUser(false);
+    event.stopPropagation();
+  };
+
   if (loading) return <div style={style}>LOADING...</div>;
+
+  if (!dataUser.data.isUser) {
+    const Login = login;
+    return <Login />;
+  }
 
   return (
     <Box sx={style.root}>
@@ -49,17 +62,24 @@ export default memo((props) => {
             textIcon="home"
             name={t("dashboard.menu")}
           />
-          <Text variant="h6" caption={t("dashboard.menu")} />
+          <Text
+            variant="h6"
+            caption={t("dashboard.menu")}
+            sx={{ flexGrow: 1 }}
+          />
+          <IconButton textIcon="logout" edge={false} onClick={handleOnLogout} />
         </Toolbar>
       </AppBar>
       <Drawer open={open}>
         <Toolbar />
-        <Navigation items={access.route} />
-        <Navigation items={access.routeSetting} fixedBottom />
+        <Navigation items={access?.route ?? []} />
+        <Navigation items={access?.routeSetting ?? []} fixedBottom />
       </Drawer>
       <Box component="main" sx={style.boxMain(true)}>
-        <ContentRouter routers={[...access.route, ...access.routeSetting]} />
+        <ContentRouter
+          routers={[...(access?.route ?? []), ...(access?.routeSetting ?? [])]}
+        />
       </Box>
     </Box>
   );
-}, areEqual);
+});
