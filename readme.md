@@ -1,6 +1,9 @@
 Проект реализуемый на:
 
+Поддержка автора https://www.buymeacoffee.com/sacredneobi
+
 Ссылка на видео инструкцию установку https://youtu.be/1DTiG4J9EsA
+
 YouTube канале https://www.youtube.com/c/SACREDDEVELOPER
 
 Telegram чат https://t.me/sacred_dev
