@@ -1,6 +1,5 @@
 const findItem = (id, shoppingCart) => {
   const find = shoppingCart.filter((itemCart) => itemCart.id === id);
-
   return { isFind: find.length > 0, item: find.length > 0 ? find[0] : null };
 };
 

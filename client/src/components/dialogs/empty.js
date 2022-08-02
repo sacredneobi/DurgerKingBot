@@ -14,9 +14,7 @@ const Default = (props) => {
       {...other}
     >
       {children}
-      {onClose ? (
-        <IconButton textIcon="close" edge={false} onClick={onClose} />
-      ) : null}
+      {onClose ? <IconButton textIcon="close" onClick={onClose} /> : null}
     </DialogTitle>
   );
 };

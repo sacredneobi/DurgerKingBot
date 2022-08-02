@@ -1,13 +1,16 @@
 import { memo } from "react";
 import { Table } from "@components";
 import { useOrdersGet as useGet } from "@api";
-import { areEqualAlways } from "@utils/areRender";
-import { OrdersSelect, OrdersContext, useOrdersContext } from "@context";
+import { areEqualAlways } from "@utils";
+import {
+  OrdersContext as Context,
+  useOrdersContext as useContext,
+  useContextSelect,
+} from "@context";
 import Header from "./header";
 import Details from "./details";
 import TopContainer from "./topContainer";
 import Dialogs from "./dialogs";
-import { Outlet } from "react-router-dom";
 
 const Orders = (props) => {
   const { reload, useSearch, ...other } = useGet(50, 1);
@@ -16,7 +19,7 @@ const Orders = (props) => {
     <>
       <Table
         {...other}
-        userContext={OrdersSelect}
+        userContext={useContextSelect}
         topContainer={(props) => (
           <TopContainer {...props} onSearch={useSearch} />
         )}
@@ -26,19 +29,16 @@ const Orders = (props) => {
         }}
         showCheck
       />
-      <Dialogs useContext={useOrdersContext} reload={reload} />
-      <Outlet />
+      <Dialogs useContext={useContext} reload={reload} />
     </>
   );
 };
 
 const Default = memo((props) => {
   return (
-    <OrdersSelect.Provider value={[]} name="SELECT FOR TABLE Orders">
-      <OrdersContext>
-        <Orders />
-      </OrdersContext>
-    </OrdersSelect.Provider>
+    <Context>
+      <Orders />
+    </Context>
   );
 }, areEqualAlways);
 

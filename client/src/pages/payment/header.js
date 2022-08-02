@@ -1,6 +1,6 @@
-import { Typography, Button } from "@mui/material";
-import { Box } from "../../components";
-import { isFunc } from "@utils/";
+import { Text, Box, Button } from "@components";
+import { isFunc } from "@utils";
+import styles from "./styles";
 
 const Default = (props) => {
   const { setShow, showShoppingCart } = props;
@@ -10,25 +10,15 @@ const Default = (props) => {
     isFunc(showShoppingCart, true);
   };
   return (
-    <Box
-      sx={{
-        padding: 2.5,
-        display: "flex",
-        justifyContent: "space-between",
-        backgroundColor: "#fff",
-        color: "#000",
-      }}
-    >
-      <Typography variant="h6" gutterBottom component="div">
-        YOUR ORDER
-      </Typography>
+    <Box sx={styles.rootHeader}>
+      <Text caption="YOUR ORDER" variant="h6" gutterBottom />
       <Button
+        caption="Edit..."
         color="secondary"
+        variant="default"
         onClick={handleOnClick}
-        sx={{ textTransform: "none" }}
-      >
-        Edit...
-      </Button>
+        sx={styles.headerButton}
+      />
     </Box>
   );
 };

@@ -1,5 +1,5 @@
 import { Box, IconButton, OutlinedInput } from "@components";
-import { isFunc } from "@utils/";
+import { isFunc } from "@utils";
 
 const Default = (props) => {
   const { sx, value = "", setValue, onSearch, onHide, ...other } = props;

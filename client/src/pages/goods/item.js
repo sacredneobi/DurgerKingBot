@@ -1,7 +1,6 @@
 import { useState, useContext, memo } from "react";
-import { Badge, Box, Text, Avatar, Skeleton } from "@components";
+import { Badge, Box, Text, Avatar, Skeleton, Button } from "@components";
 import { ShoppingCart } from "@context";
-import { convertToPrice } from "@utils";
 import {
   rootContainerButton,
   rootContainer,
@@ -9,10 +8,9 @@ import {
   containerButton,
   textContainer,
 } from "./styles";
-import Button from "../addons/grid/button";
 import { useLottie } from "lottie-react";
 import { finCountDef, setItemCount, areEqual } from "./utils";
-import { isFunc } from "@utils/";
+import { isFunc, convertToPrice } from "@utils/";
 
 const Default = memo((props) => {
   const {

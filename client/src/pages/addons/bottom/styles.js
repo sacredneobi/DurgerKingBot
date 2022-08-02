@@ -2,9 +2,6 @@ const root = {
   display: "flex",
   flexDirection: "row",
   alignItems: "center",
-  // minWidth: 400,
-  // overflowY: "hidden",
-  // overflowX: "auto",
 };
 
 const buttonInvisible = {

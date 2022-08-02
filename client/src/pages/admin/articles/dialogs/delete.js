@@ -1,11 +1,11 @@
 import { DialogDelete } from "@components";
 import { isFunc } from "@utils";
-import { useArticleDelete } from "@api";
+import { useArticleDelete as useDelete } from "@api";
 
 const Default = (props) => {
   const { reload, ...other } = props;
 
-  const [callbackDelete] = useArticleDelete({ reload });
+  const [callbackDelete] = useDelete({ reload });
 
   const handleOnDelete = function ({ select, onClear } = {}) {
     callbackDelete({ id: select });
@@ -18,7 +18,6 @@ const Default = (props) => {
       caption="Удалить выбранные элементы"
       onDelete={handleOnDelete}
       propsContext="isShowDelete"
-      text="СОЗДАНИЕ  YouTube"
     />
   );
 };

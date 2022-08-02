@@ -1,6 +1,6 @@
 import { IconButton } from "@mui/material";
 import Icon from "../icon";
-import { isFunc } from "@utils/";
+import { isFunc } from "@utils";
 
 const Default = (props) => {
   const {
@@ -10,7 +10,7 @@ const Default = (props) => {
     onClick,
     children,
     iconSx,
-    edge = "start",
+    edge,
     ...other
   } = props;
   const MyIcon = icon;

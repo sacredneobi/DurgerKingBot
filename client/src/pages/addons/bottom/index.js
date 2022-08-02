@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Box, Pagination, Icon, ButtonBase } from "@components";
 import { useSearchParams } from "react-router-dom";
 import { root, buttonContainer, buttonIcon, pagination } from "./styles";
-import { isFunc } from "@utils/";
+import { isFunc } from "@utils";
 
 const Default = (props) => {
   const {

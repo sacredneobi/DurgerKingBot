@@ -1,11 +1,11 @@
 import { memo } from "react";
 import { Table } from "@components";
 import { useUsersGet as useGet } from "@api";
-import { areEqualAlways } from "@utils/areRender";
+import { areEqualAlways } from "@utils";
 import {
-  UsersSelect as Select,
   UsersContext as Context,
   useUsersContext as useContext,
+  useContextSelect,
 } from "@context";
 import Header from "./header";
 import Details from "./details";
@@ -19,7 +19,7 @@ const Main = (props) => {
     <>
       <Table
         {...other}
-        userContext={Select}
+        userContext={useContextSelect}
         topContainer={(props) => (
           <TopContainer {...props} onSearch={useSearch} />
         )}
@@ -36,11 +36,9 @@ const Main = (props) => {
 
 const Default = memo((props) => {
   return (
-    <Select.Provider value={[]} name="SELECT FOR TABLE USERS">
-      <Context>
-        <Main />
-      </Context>
-    </Select.Provider>
+    <Context>
+      <Main />
+    </Context>
   );
 }, areEqualAlways);
 

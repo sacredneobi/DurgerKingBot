@@ -1,8 +1,9 @@
-import { TextField, Typography } from "@mui/material";
-import { Box } from "../../components";
+import { TextField } from "@mui/material";
+import { Box, Text } from "@components";
 import { styled } from "@mui/material/styles";
+import styles from "./styles";
 
-const CssTextField = styled(TextField)(({ theme }) => ({
+const CssTextField = styled(TextField)(() => ({
   "& label.Mui-focused": {
     color: "#fff",
   },
@@ -23,16 +24,9 @@ const CssTextField = styled(TextField)(({ theme }) => ({
 }));
 
 const Default = (props) => {
-  // const { caption } = props;
   return (
     <>
-      <Box
-        sx={{
-          marginTop: 2,
-          paddingLeft: 0.5,
-          backgroundColor: "#fff",
-        }}
-      >
+      <Box sx={styles.rootBottom}>
         <CssTextField
           id="comment"
           placeholder="Add comment"
@@ -40,14 +34,12 @@ const Default = (props) => {
           fullWidth
         />
       </Box>
-      <Typography
+      <Text
+        caption="Any special requests, details, final wishes etc."
         variant="subtitle2"
         gutterBottom
-        component="div"
-        sx={{ marginTop: 1, marginLeft: 2.5, color: "#74787a" }}
-      >
-        Any special requests, details, final wishes etc.
-      </Typography>
+        sx={styles.bottomComment}
+      />
     </>
   );
 };

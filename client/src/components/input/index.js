@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { TextField } from "@mui/material";
 import Skeleton from "../skeleton";
-import { getValue } from "@utils/utils";
+import { getValue } from "@utils";
 
 const Default = (props) => {
   const {

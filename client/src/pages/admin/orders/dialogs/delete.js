@@ -18,7 +18,6 @@ const Default = (props) => {
       caption="Удалить выбранные элементы"
       onDelete={handleOnDelete}
       propsContext="isShowDelete"
-      text="СОЗДАНИЕ  YouTube"
     />
   );
 };

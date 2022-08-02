@@ -1,14 +1,13 @@
 import { memo, useState, useCallback, useEffect } from "react";
 import { Box, IconButton, Autocomplete, Input } from "@components";
-import { areEqualObject } from "@utils/areRender";
-import { useGoodsContext } from "@context";
-import { useArticleGetAll } from "@api";
-import { isFunc } from "@utils";
+import { useGoodsContext as useContext } from "@context";
+import { useArticleGetAll as useGetAll } from "@api";
+import { isFunc, areEqualObject } from "@utils";
 
 const Default = memo((props) => {
   const { select, selectCount, onClear, setArticleId, onSearch } = props;
 
-  const { dialog } = useGoodsContext();
+  const { dialog } = useContext();
   const [data, setData] = useState({});
 
   useEffect(() => {
@@ -46,14 +45,11 @@ const Default = memo((props) => {
   };
 
   return (
-    <Box
-      sx={{ display: "flex", alignItems: "center", width: "100%" }}
-      name="TOP CONTAINER"
-    >
+    <Box sx={{ display: "flex", alignItems: "center", width: "100%" }}>
       <Autocomplete
         name="articleId"
         caption="Артикул"
-        useGet={useArticleGetAll}
+        useGet={useGetAll}
         data={data}
         onChange={handleChange}
         onClear={handleOnClear}
@@ -71,10 +67,9 @@ const Default = memo((props) => {
         textIcon="delete"
         color="error"
         onClick={handleOnDelete}
-        edge={false}
         disabled={selectCount === 0}
       />
-      <IconButton textIcon="add" onClick={handleOnCreate} edge={false} />
+      <IconButton textIcon="add" onClick={handleOnCreate} />
     </Box>
   );
 }, areEqualObject);

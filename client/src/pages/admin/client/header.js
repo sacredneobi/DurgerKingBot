@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { Text, IconButton, Box, Icon } from "@components";
-import { areEqualObject } from "@utils/areRender";
+import { areEqualObject } from "@utils";
 import { useNavigate } from "react-router-dom";
 
 const getDate = (stringDate) => {
@@ -37,22 +37,16 @@ const Default = memo((props) => {
       }}
     >
       <Box sx={{ display: "flex", flexDirection: "column", flexGrow: 1 }}>
-        <Text
-          sx={{ color: "text.secondary", flexGrow: 1 }}
-          caption={`Заказ #${id}`}
-        />
+        <Text sx={{ flexGrow: 1 }} caption={`Заказ #${id}`} />
         <Text
           variant="caption"
           display="block"
           gutterBottom
-          sx={{ color: "text.secondary", flexGrow: 1 }}
+          sx={{ flexGrow: 1 }}
           caption={`${getDate(updatedAt)}`}
         />
       </Box>
-      <Text
-        sx={{ flexShrink: 0, color: "text.secondary" }}
-        caption={`${saleSum.toFixed(2)} $`}
-      />
+      <Text sx={{ flexShrink: 0 }} caption={`${saleSum.toFixed(2)} $`} />
       <Icon
         textIcon={isPayment ? "paid" : "money_off"}
         color={isPayment ? "success" : "error"}
@@ -60,7 +54,6 @@ const Default = memo((props) => {
       <IconButton
         textIcon="shopping_cart_checkout"
         color="primary"
-        edge={false}
         onClick={handleOnShowOrder}
       />
     </Box>

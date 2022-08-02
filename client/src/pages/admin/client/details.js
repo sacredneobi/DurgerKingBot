@@ -1,6 +1,6 @@
 import { memo, useEffect, useState } from "react";
 import { Text, Box } from "@components";
-import { areEqualObject } from "@utils/areRender";
+import { areEqualObject } from "@utils";
 import { useOrderGetById as useGet } from "@api";
 
 const Default = memo((props) => {
@@ -32,12 +32,10 @@ const Default = memo((props) => {
         sx={{ display: "flex", justifyContent: "space-between", gap: 1 }}
       >
         <Text
-          sx={{ color: "text.secondary" }}
           caption={item.good?.caption}
           checkRender={() => !!item.good?.caption}
         />
         <Text
-          sx={{ color: "text.secondary" }}
           caption={`Количество :${item.count}`}
           checkRender={() => !!item.count}
         />

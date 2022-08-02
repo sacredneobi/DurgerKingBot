@@ -12,7 +12,6 @@ const RootItem = (props) => {
       <IconButton
         textIcon={rootOpen ? "expand_less" : "expand_more"}
         onClick={onClick}
-        edge={false}
       />
     </MainListItem>
   );

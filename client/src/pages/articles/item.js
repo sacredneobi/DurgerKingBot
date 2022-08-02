@@ -1,4 +1,4 @@
-import { Box, Text, Icon, Skeleton } from "@components";
+import { Box, Text, Icon, Skeleton, Button } from "@components";
 import {
   rootContainerButton,
   rootContainer,
@@ -8,14 +8,14 @@ import {
   textContainer,
 } from "./styles";
 import { useSearchParams } from "react-router-dom";
-import Button from "../addons/grid/button";
 
 const Default = (props) => {
   const { caption, loading, id, page } = props;
   const [, setSearchParams] = useSearchParams();
 
-  const handleOnClick = () => {
+  const handleOnClick = (event) => {
     setSearchParams({ articleId: id, pageArticle: page });
+    event.stopPropagation();
   };
 
   if (loading) {
@@ -29,11 +29,7 @@ const Default = (props) => {
         <Text {...rootTypography} caption={caption} />
       </Box>
       <Box sx={rootContainerButton}>
-        <Button
-          textIcon="exit_to_app"
-          sx={containerButton(true, true)}
-          onClick={handleOnClick}
-        />
+        <Button textIcon="exit_to_app" sx={containerButton(true, true)} />
       </Box>
     </Box>
   );

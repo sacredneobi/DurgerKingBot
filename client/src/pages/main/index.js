@@ -1,24 +1,21 @@
 import { memo } from "react";
 import { ShoppingCart } from "@context";
 import Container from "./container";
+import { areEqualAlways } from "@utils";
 
-function areEqual(prev, next) {
-  return true;
-}
-
-const Main = memo((props) => {
-  const data = localStorage.getItem("shoppingCart")
-    ? JSON.parse(localStorage.getItem("shoppingCart"))
-    : [];
+export default memo((props) => {
+  let data;
+  try {
+    data = localStorage.getItem("shoppingCart")
+      ? JSON.parse(localStorage.getItem("shoppingCart"))
+      : [];
+  } catch {
+    data = [];
+  }
 
   return (
-    <ShoppingCart.Provider
-      value={data.filter((item) => item.count > 0)}
-      name="MAIN CONTEXT"
-    >
+    <ShoppingCart.Provider value={data.filter((item) => item.count > 0)}>
       <Container {...props} />
     </ShoppingCart.Provider>
   );
-}, areEqual);
-
-export default Main;
+}, areEqualAlways);

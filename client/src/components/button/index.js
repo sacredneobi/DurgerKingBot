@@ -1,11 +1,18 @@
 import { Button } from "@mui/material";
+import Icon from "../icon";
 
 const Default = (props) => {
-  const { icon, ...other } = props;
+  const { icon, textIcon, caption, children, ...other } = props;
 
-  const Icon = icon;
+  const RenderIcon = icon;
 
-  return <Button variant="contained" endIcon={icon ? Icon : null} {...other} />;
+  return (
+    <Button variant="contained" endIcon={icon ? RenderIcon : null} {...other}>
+      {textIcon ? <Icon textIcon={textIcon} sx={{ fontSize: 35 }} /> : null}
+      {caption}
+      {children}
+    </Button>
+  );
 };
 
 export default Default;

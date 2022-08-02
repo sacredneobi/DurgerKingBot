@@ -11,7 +11,7 @@ const Default = (props) => {
     setExpanded(expanded);
   }, []);
 
-  const onlySelect = select.filter((item) => item.checked);
+  const onlySelect = select ? select.filter((item) => item.checked) : [];
 
   return (
     <Box sx={{ overflow: "auto", flexGrow: 1 }}>

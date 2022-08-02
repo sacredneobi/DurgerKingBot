@@ -6,7 +6,7 @@ const Default = (props) => {
   return (
     <Dialog open fullWidth maxWidth="md">
       <DialogTitle onClose={props?.onClose}>
-        {props.id ? "Edit good" : "Create good"}
+        {props.id ? "Edit order" : "Create order"}
       </DialogTitle>
       <Divider />
       <Container {...props} />

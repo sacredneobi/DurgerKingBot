@@ -1,16 +1,10 @@
-import { useEffect, useCallback, useState } from "react";
-import { sendMessagePost } from "@api";
-import {
-  shoppingCartNotEmpty,
-  shoppingCartFilter,
-  shoppingCartCalcSum,
-} from "@context";
+import { useEffect } from "react";
+import { shoppingCartFilter, shoppingCartCalcSum } from "@context";
 import { Box } from "@components";
 import Goods from "../goods";
 import Article from "../articles";
 import Payment from "../payment";
 import styles from "./styles";
-import { telegramButtonColor } from "./constParam";
 import useHooks from "./useHooks";
 
 export default (props) => {
@@ -21,20 +15,11 @@ export default (props) => {
     setShowPayment,
     isReady,
     telegram,
+    showShoppingCart,
+    callbackPost,
+    payment,
+    setPayment,
   } = useHooks();
-
-  const [callbackPost] = sendMessagePost();
-  const [payment, setPayment] = useState(null);
-
-  const showShoppingCart = useCallback(() => {
-    if (isReady) {
-      telegram.MainButton.setParams({
-        ...telegramButtonColor,
-        text: "VIEW ORDER",
-        is_visible: shoppingCartNotEmpty(shoppingCart),
-      });
-    }
-  }, [isReady, telegram, showPayment]);
 
   useEffect(() => {
     if (isReady && payment?.result) {
@@ -68,7 +53,7 @@ export default (props) => {
 
       if (showPayment) {
         telegram.MainButton.setParams({
-          ...telegramButtonColor,
+          color: "rgb(49, 181, 69)",
           text: `Payment ${shoppingCartCalcSum(shoppingCart)}`,
           is_visible: true,
         });

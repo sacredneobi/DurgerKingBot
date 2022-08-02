@@ -2,11 +2,11 @@ import { memo, useEffect, useState, useCallback } from "react";
 import { useParams } from "react-router-dom";
 import { Table } from "@components";
 import { useOrderGetById as useGet } from "@api";
-import { areEqualAlways } from "@utils/areRender";
+import { areEqualAlways } from "@utils";
 import {
-  OrderSelect as Select,
   OrderContext as Context,
   useOrderContext as useContext,
+  useContextSelect,
 } from "@context/";
 import Header from "./header";
 import Details from "./details";
@@ -33,7 +33,7 @@ const Main = (props) => {
       <Table
         loading={loading}
         items={order.compositionOrders}
-        userContext={Select}
+        userContext={useContextSelect}
         topContainer={(props) => <TopContainer {...props} />}
         itemsRender={{
           header: (props) => <Header {...props} />,
@@ -48,11 +48,9 @@ const Main = (props) => {
 
 const Default = memo((props) => {
   return (
-    <Select.Provider value={[]} name="SELECT FOR TABLE ORDER">
-      <Context>
-        <Main />
-      </Context>
-    </Select.Provider>
+    <Context>
+      <Main />
+    </Context>
   );
 }, areEqualAlways);
 

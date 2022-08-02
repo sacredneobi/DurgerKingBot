@@ -1,12 +1,12 @@
 import { memo } from "react";
 import { Text, IconButton, Box } from "@components";
-import { areEqualObject } from "@utils/areRender";
-import { useArticlesContext } from "@context";
+import { areEqualObject } from "@utils";
+import { useArticlesContext as useContext } from "@context";
 
 const Default = memo((props) => {
   const { caption, id } = props;
 
-  const { dialog } = useArticlesContext();
+  const { dialog } = useContext();
 
   const handleOnEdit = (event) => {
     dialog.setIsShowEdit(true, { select: id });
@@ -28,19 +28,9 @@ const Default = memo((props) => {
         padding: (them) => them.spacing(0, 1, 0, 1),
       }}
     >
-      <Text sx={{ color: "text.secondary", flexGrow: 1 }} caption={caption} />
-      <IconButton
-        textIcon="edit"
-        color="primary"
-        edge={false}
-        onClick={handleOnEdit}
-      />
-      <IconButton
-        textIcon="delete"
-        color="error"
-        edge={false}
-        onClick={handleOnDelete}
-      />
+      <Text sx={{ flexGrow: 1 }} caption={caption} />
+      <IconButton textIcon="edit" color="primary" onClick={handleOnEdit} />
+      <IconButton textIcon="delete" color="error" onClick={handleOnDelete} />
     </Box>
   );
 }, areEqualObject);

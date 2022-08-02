@@ -1,6 +1,6 @@
 import { memo } from "react";
 import { Pagination } from "@mui/material";
-import { areEqualObject } from "@utils/areRender";
+import { areEqualObject } from "@utils";
 
 const Default = memo((props) => {
   return (

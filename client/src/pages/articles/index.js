@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Box, Loading } from "@components";
-import { useArticleGet } from "@api";
+import { useArticleGet as useGet } from "@api";
 import Grid from "../addons/grid";
 import Bottom from "../addons/bottom";
 import { root, grid, baseLine } from "./styles";
@@ -11,7 +11,7 @@ const Default = (props) => {
   const { showPayment, setShow, defPage, countPerPage = 10 } = props;
 
   const { countPage, items, usePage, page, loading, useSearch } =
-    useArticleGet(countPerPage);
+    useGet(countPerPage);
 
   useEffect(() => {
     if (defPage && defPage !== page) {

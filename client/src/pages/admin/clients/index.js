@@ -1,8 +1,12 @@
 import { memo } from "react";
 import { Table } from "@components";
 import { useClientsGet as useGet } from "@api";
-import { areEqualAlways } from "@utils/areRender";
-import { ClientsSelect, ClientsContext, useClientsContext } from "@context";
+import { areEqualAlways } from "@utils";
+import {
+  ClientsContext as Context,
+  useClientsContext as useContext,
+  useContextSelect,
+} from "@context";
 import Header from "./header";
 import Details from "./details";
 import TopContainer from "./topContainer";
@@ -15,7 +19,7 @@ const Clients = (props) => {
     <>
       <Table
         {...other}
-        userContext={ClientsSelect}
+        userContext={useContextSelect}
         topContainer={(props) => (
           <TopContainer {...props} onSearch={useSearch} />
         )}
@@ -25,18 +29,16 @@ const Clients = (props) => {
         }}
         showCheck
       />
-      <Dialogs useContext={useClientsContext} reload={reload} />
+      <Dialogs useContext={useContext} reload={reload} />
     </>
   );
 };
 
 const Default = memo((props) => {
   return (
-    <ClientsSelect.Provider value={[]} name="SELECT FOR TABLE Clients">
-      <ClientsContext>
-        <Clients />
-      </ClientsContext>
-    </ClientsSelect.Provider>
+    <Context>
+      <Clients />
+    </Context>
   );
 }, areEqualAlways);
 

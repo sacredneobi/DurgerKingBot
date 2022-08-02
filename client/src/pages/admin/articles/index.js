@@ -1,21 +1,25 @@
 import { memo } from "react";
 import { Table } from "@components";
-import { useArticleGet } from "@api";
-import { areEqualAlways } from "@utils/areRender";
-import { SelectArticles, ArticlesContext, useArticlesContext } from "@context";
+import { useArticleGet as useGet } from "@api";
+import { areEqualAlways } from "@utils";
+import {
+  ArticlesContext as Context,
+  useArticlesContext as useContext,
+  useContextSelect,
+} from "@context";
 import Header from "./header";
 import Details from "./details";
 import TopContainer from "./topContainer";
 import Dialogs from "./dialogs";
 
 const Articles = (props) => {
-  const { reload, useSearch, ...other } = useArticleGet(50, 1);
+  const { reload, useSearch, ...other } = useGet(50, 1);
 
   return (
     <>
       <Table
         {...other}
-        userContext={SelectArticles}
+        userContext={useContextSelect}
         topContainer={(props) => (
           <TopContainer {...props} onSearch={useSearch} />
         )}
@@ -25,18 +29,16 @@ const Articles = (props) => {
         }}
         showCheck
       />
-      <Dialogs useContext={useArticlesContext} reload={reload} />
+      <Dialogs useContext={useContext} reload={reload} />
     </>
   );
 };
 
 const Default = memo((props) => {
   return (
-    <SelectArticles.Provider value={[]} name="SELECT FOR TABLE Articles">
-      <ArticlesContext>
-        <Articles />
-      </ArticlesContext>
-    </SelectArticles.Provider>
+    <Context>
+      <Articles />
+    </Context>
   );
 }, areEqualAlways);
 

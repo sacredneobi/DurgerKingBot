@@ -8,12 +8,6 @@ import {
   useDefContext as useUserContext,
 } from "./user";
 import MainButton from "./mainButton";
-import SelectGoods from "./goodsSelect";
-import SelectArticles from "./articlesSelect";
-import ClientsSelect from "./clientsSelect";
-import OrdersSelect from "./ordersSelect";
-import OrderSelect from "./orderSelect";
-import UsersSelect from "./usersSelect";
 import {
   Context as GoodsContext,
   useDefContext as useGoodsContext,
@@ -39,10 +33,16 @@ import {
   useDefContext as useUsersContext,
 } from "./users";
 
+import { contextSelect } from "./defaultSelect";
+import { useContext } from "react";
+
+const useContextSelect = () => {
+  return useContext(contextSelect);
+};
+
 export {
   ShoppingCart,
   MainButton,
-  SelectGoods,
   shoppingCartNotEmpty,
   shoppingCartFilter,
   shoppingCartCalcSum,
@@ -50,19 +50,15 @@ export {
   useGoodsContext,
   ArticlesContext,
   useArticlesContext,
-  SelectArticles,
   ClientsContext,
   useClientsContext,
-  ClientsSelect,
   OrdersContext,
   useOrdersContext,
-  OrdersSelect,
   OrderContext,
   useOrderContext,
-  OrderSelect,
   UserContext,
   useUserContext,
-  UsersSelect,
   UsersContext,
   useUsersContext,
+  useContextSelect,
 };

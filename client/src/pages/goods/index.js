@@ -1,6 +1,6 @@
 import { Box, Loading } from "@components";
 import { ShoppingCart } from "@context";
-import { useGoodGet } from "@api";
+import { useGoodGet as useGet } from "@api";
 import Grid from "../addons/grid";
 import Bottom from "../addons/bottom";
 import { root, grid, baseLine } from "./styles";
@@ -17,7 +17,7 @@ const Default = (props) => {
     countPerPage = 10,
   } = props;
 
-  const { countPage, items, loading, useSearch, usePage, page } = useGoodGet(
+  const { countPage, items, loading, useSearch, usePage, page } = useGet(
     countPerPage,
     articleId
   );

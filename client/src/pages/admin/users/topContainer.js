@@ -1,8 +1,7 @@
 import { memo, useState, useCallback, useEffect } from "react";
 import { Box, IconButton, Input } from "@components";
-import { areEqualObject } from "@utils/areRender";
 import { useUsersContext as useContext } from "@context";
-import { isFunc } from "@utils";
+import { isFunc, areEqualObject } from "@utils";
 
 const Default = memo((props) => {
   const { select, selectCount, onClear, setArticleId, onSearch } = props;
@@ -41,10 +40,7 @@ const Default = memo((props) => {
   };
 
   return (
-    <Box
-      sx={{ display: "flex", alignItems: "center", width: "100%" }}
-      name="TOP CONTAINER"
-    >
+    <Box sx={{ display: "flex", alignItems: "center", width: "100%" }}>
       <Input
         sx={{ marginLeft: 1 }}
         name="search"
@@ -58,10 +54,9 @@ const Default = memo((props) => {
         textIcon="delete"
         color="error"
         onClick={handleOnDelete}
-        edge={false}
         disabled={selectCount === 0}
       />
-      <IconButton textIcon="add" onClick={handleOnCreate} edge={false} />
+      <IconButton textIcon="add" onClick={handleOnCreate} />
     </Box>
   );
 }, areEqualObject);

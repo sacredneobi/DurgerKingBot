@@ -1,10 +1,9 @@
-import { useState, useCallback, useContext } from "react";
+import { useState, useCallback } from "react";
 import Box from "../box";
 import Text from "../text";
 import Divider from "../divider";
 import Rows from "./rows";
 import Pagination from "./pagination";
-import DefaultContext from "./context";
 import styles from "./styles";
 import { isFunc } from "@utils";
 
@@ -19,7 +18,7 @@ export default (props) => {
     topContainer,
     ...other
   } = props;
-  const select = useContext(userContext ? userContext : DefaultContext);
+  const select = userContext ? userContext() : null;
   const [, setReload] = useState(false);
 
   const handleOnChange = useCallback((event, page) => {
@@ -27,17 +26,25 @@ export default (props) => {
   }, []);
 
   const handleOnSelect = useCallback((item, checked) => {
-    const findGood = select.find((select) => select.id === item.id);
-    findGood ? (findGood.checked = checked) : select.push({ ...item, checked });
+    if (select) {
+      const findGood = select.find((select) => select.id === item.id);
+      findGood
+        ? (findGood.checked = checked)
+        : select.push({ ...item, checked });
+    }
     setReload((prev) => !prev);
   }, []);
 
   const handleOnClear = useCallback(() => {
-    select.forEach((item) => (item.checked = false));
+    if (select) {
+      select.forEach((item) => (item.checked = false));
+    }
     setReload((prev) => !prev);
   }, []);
 
-  const selectItems = select.filter((item) => item.checked === true);
+  const selectItems = select
+    ? select.filter((item) => item.checked === true)
+    : [];
   const countSelect = selectItems.length;
 
   return (

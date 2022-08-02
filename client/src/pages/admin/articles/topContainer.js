@@ -1,13 +1,12 @@
 import { memo, useState, useCallback, useEffect } from "react";
 import { Box, IconButton, Input } from "@components";
-import { areEqualObject } from "@utils/areRender";
-import { useArticlesContext } from "@context";
-import { isFunc } from "@utils";
+import { useArticlesContext as useContext } from "@context";
+import { isFunc, areEqualObject } from "@utils";
 
 const Default = memo((props) => {
   const { select, selectCount, onClear, onSearch } = props;
 
-  const { dialog } = useArticlesContext();
+  const { dialog } = useContext();
   const [data, setData] = useState({});
 
   useEffect(() => {
@@ -55,10 +54,9 @@ const Default = memo((props) => {
         textIcon="delete"
         color="error"
         onClick={handleOnDelete}
-        edge={false}
         disabled={selectCount === 0}
       />
-      <IconButton textIcon="add" onClick={handleOnCreate} edge={false} />
+      <IconButton textIcon="add" onClick={handleOnCreate} />
     </Box>
   );
 }, areEqualObject);

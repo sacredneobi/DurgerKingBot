@@ -3,7 +3,7 @@ import { isFunc, checkInput } from "@utils";
 import { useCallback, useState, useEffect } from "react";
 import { DialogContent } from "@mui/material";
 import Actions from "./actions";
-import { useArticleGetById } from "@api";
+import { useArticleGetById as useGetById } from "@api";
 
 export default (props) => {
   const { onClose, onSave, id } = props;
@@ -11,7 +11,7 @@ export default (props) => {
   const [data, setData] = useState({});
   const [save, setSave] = useState(false);
   const [error, setError] = useState({});
-  const [callbackGet, loading] = useArticleGetById();
+  const [callbackGet, loading] = useGetById();
 
   useEffect(() => {
     if (id) {

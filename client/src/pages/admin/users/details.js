@@ -1,6 +1,6 @@
 import { memo, useEffect } from "react";
 import { Text } from "@components";
-import { areEqualObject } from "@utils/areRender";
+import { areEqualObject } from "@utils";
 
 const Default = memo((props) => {
   const { name, id, description, expanded } = props;
@@ -16,9 +16,8 @@ const Default = memo((props) => {
 
   return (
     <>
-      <Text sx={{ width: "15%", flexShrink: 0 }} caption={id} />
-      <Text sx={{ color: "text.secondary" }} caption={description} />
-      <Text sx={{ color: "text.secondary" }} caption={name} />
+      <Text caption={description} />
+      <Text caption={name} />
     </>
   );
 }, areEqualObject);

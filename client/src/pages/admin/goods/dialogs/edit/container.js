@@ -3,7 +3,10 @@ import { isFunc, checkInput } from "@utils";
 import { useCallback, useState, useEffect } from "react";
 import { DialogContent } from "@mui/material";
 import Actions from "./actions";
-import { useArticleGetAll, useGoodGetById2 } from "@api";
+import {
+  useArticleGetAll as useGetAll,
+  useGoodGetById2 as UseGetById,
+} from "@api";
 
 export default (props) => {
   const { onClose, onSave, id } = props;
@@ -11,7 +14,7 @@ export default (props) => {
   const [data, setData] = useState({});
   const [save, setSave] = useState(false);
   const [error, setError] = useState({});
-  const [callbackGet, loading] = useGoodGetById2();
+  const [callbackGet, loading] = UseGetById();
 
   useEffect(() => {
     if (id) {
@@ -105,7 +108,7 @@ export default (props) => {
             <Autocomplete
               name="articleId"
               caption="Артикул"
-              useGet={useArticleGetAll}
+              useGet={useGetAll}
             />
           </Container>
         </Box>

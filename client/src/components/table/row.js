@@ -6,8 +6,7 @@ import {
   Checkbox,
 } from "@mui/material";
 import Icon from "../icon";
-import { areEqualObject } from "@utils/areRender";
-import { isFunc } from "@utils";
+import { isFunc, areEqualObject } from "@utils";
 
 const Default = memo((props) => {
   const {

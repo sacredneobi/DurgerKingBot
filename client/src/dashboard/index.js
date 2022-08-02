@@ -2,9 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useAccessGet } from "@api";
 import { correctRouter } from "@utils";
-import { useUserContext as useContext } from "@context/";
+import { useUserContext as useContext } from "@context";
 import { observer } from "mobx-react-lite";
-
 import {
   Drawer,
   IconButton,
@@ -67,7 +66,7 @@ export default observer((props) => {
             caption={t("dashboard.menu")}
             sx={{ flexGrow: 1 }}
           />
-          <IconButton textIcon="logout" edge={false} onClick={handleOnLogout} />
+          <IconButton textIcon="logout" onClick={handleOnLogout} />
         </Toolbar>
       </AppBar>
       <Drawer open={open}>

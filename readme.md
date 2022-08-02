@@ -1,6 +1,7 @@
 Проект реализуемый на:
 
 Поддержка автора https://www.buymeacoffee.com/sacredneobi
+Поддержка автора https://secure.wayforpay.com/donate/sacreddeveloper
 
 Ссылка на видео инструкцию установку https://youtu.be/1DTiG4J9EsA
 
@@ -68,14 +69,14 @@ someFunction("Привет YouTube");
 На стриме участвовали:
 
 - [x] 🍒🍒 Lucifer Morningstar
-- [x] 🍌🍌 🔥 FIRELORD ZUKO 🔥 White Lotus
-- [x] 🥠🥠 Marchenko 🇺🇦
 - [x] 🍎🍎 Marat o.o
 - [x] 🍻🍻 SV Orion
 - [x] 🍊🍊 Muzaffar Abidov
+- [x] 🍌🍌 🔥 FIRELORD ZUKO 🔥 White Lotus
 - [x] Ivan
-- [x] Dumitru BURAC
 - [x] Don Kihot
+- [x] 🥠🥠 Marchenko 🇺🇦
+- [x] Dumitru BURAC
 - [x] VV
 - [x] Kofeek
 - [x] Матвей Беликов

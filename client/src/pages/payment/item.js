@@ -1,71 +1,58 @@
-import { Box, Avatar, Badge } from "../../components";
+import { Box, Avatar, Badge, Divider, Skeleton, Text } from "@components";
 import { bottle } from "../../res/icons";
-import { Skeleton, Divider, Typography } from "@mui/material";
-import { useGoodGetById } from "../../api";
-import { convertToPrice } from "../../utils";
+import { useGoodGetById as useGetById } from "@api";
+import { convertToPrice } from "@utils";
+import styles from "./styles";
 
-const Loading = (props) => {
+const MyText = (props) => {
+  const { caption, ...other } = props;
   return (
-    <Skeleton variant="rectangular" animation="wave" width="100%" height={80} />
+    <Text
+      caption={caption}
+      variant="caption"
+      display="block"
+      gutterBottom
+      {...other}
+    />
   );
 };
 
 const Default = (props) => {
   const { count, isLast, id, sale = 0.0 } = props;
-
-  const { item, loading } = useGoodGetById(id);
+  const { item, loading } = useGetById(id);
 
   return (
     <>
-      <Box
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "stretch",
-          justifyContent: "space-between",
-          gap: 1.5,
-          paddingLeft: 1,
-          paddingRight: 1,
-          minHeight: 80,
-        }}
-      >
+      <Box sx={styles.rootItem}>
         {loading ? (
-          <Loading />
+          <Skeleton width="100%" height={80} />
         ) : (
           <>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                // flexWrap: "wrap",
-              }}
-            >
+            <div style={styles.containerItem}>
               <Badge counter={count}>
                 <Avatar src={bottle} sizeImage={80} />
               </Badge>
             </div>
-            <Box sx={{ flexGrow: 1, display: "flex", flexDirection: "column" }}>
+            <Box sx={styles.containerGood}>
               <Box>
-                <Typography variant="subtitle2" gutterBottom component="div">
-                  {item.caption}&nbsp;
-                </Typography>
+                <MyText
+                  caption={item.caption}
+                  variant="subtitle2"
+                  component="div"
+                />
               </Box>
               <Box>
-                <Typography variant="caption" display="block" gutterBottom>
-                  {item.description ? item.description : " 50ml"}
-                </Typography>
-                <Typography variant="caption" display="block" gutterBottom>
-                  {item.description ? item.description : " parfume"}
-                </Typography>
-                <Typography variant="caption" display="block" gutterBottom>
-                  {item.description ? item.description : " TESTER"}
-                </Typography>
+                <MyText caption={item.description} />
+                <MyText caption={item.description} />
+                <MyText caption={item.description} />
               </Box>
             </Box>
             <Box>
-              <Typography noWrap sx={{ fontWeight: "bold" }}>
-                {convertToPrice(sale * count)}
-              </Typography>
+              <Text
+                caption={convertToPrice(sale * count)}
+                noWrap
+                sx={styles.goodPrice}
+              />
             </Box>
           </>
         )}

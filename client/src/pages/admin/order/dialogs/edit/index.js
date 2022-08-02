@@ -19,11 +19,9 @@ const Default = observer((props) => {
     };
 
     const handleOnSave = (data) => {
-      if (data?.id) {
-        callbackUpdate({ ...data, orderId: id });
-      } else {
-        callbackPost({ ...data, orderId: id });
-      }
+      data?.id
+        ? callbackUpdate({ ...data, orderId: id })
+        : callbackPost({ ...data, orderId: id });
       handleOnClose();
       isFunc(reload);
     };

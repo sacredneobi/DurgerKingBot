@@ -1,5 +1,6 @@
 import React, { createContext, useContext } from "react";
 import { Order as Data } from "@data";
+import Select from "./defaultSelect";
 
 const context = createContext(null);
 
@@ -9,9 +10,11 @@ const useDefContext = () => {
 
 const Context = (props) => {
   return (
-    <context.Provider value={{ dialog: new Data() }} name="ORDER CONTEXT">
-      {props.children}
-    </context.Provider>
+    <Select>
+      <context.Provider value={{ dialog: new Data() }} name="ORDER CONTEXT">
+        {props.children}
+      </context.Provider>
+    </Select>
   );
 };
 
