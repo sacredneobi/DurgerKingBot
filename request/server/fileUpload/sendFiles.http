@@ -10,4 +10,4 @@ Content-Type: image/png
 
 
 ###
-GET http://localhost:4000/api/media?fileId=92905e2c639e2ae115cf3db575a2d05b.png
+GET http://localhost:4000/api/media?fileId=92905e2c639e2ae115cf3db575a2d05b

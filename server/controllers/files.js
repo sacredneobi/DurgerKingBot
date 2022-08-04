@@ -4,7 +4,7 @@ const jwtCheck = require("../utils/jwtMiddleware");
 const post = (req, res) => {
   Object.keys(req.files).forEach(async (file) => {
     var ext = path.extname(req.files[file].name || "");
-    const filePath = `${__dirname}/../../media/${req.files[file].md5}${ext}`;
+    const filePath = `${__dirname}/../../media/${req.files[file].md5}`;
     await req.files[file].mv(filePath);
   });
 
