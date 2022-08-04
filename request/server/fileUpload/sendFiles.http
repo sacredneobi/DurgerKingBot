@@ -1,0 +1,13 @@
+POST http://localhost:4000/api/files HTTP/1.1
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="1.png"
+Content-Type: image/png
+
+< ./1.png
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+###
+GET http://localhost:4000/api/media?fileId=92905e2c639e2ae115cf3db575a2d05b.png

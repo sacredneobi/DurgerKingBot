@@ -11,35 +11,6 @@ const def = () => {
     // await sleep(9000);
     next();
   });
-  // app.use(async (req, res, next) => {
-  //   if (req.url.includes("locales") || req.url.includes("auth")) {
-  //     next();
-  //   } else {
-  //     if (!req.headers.authorization) {
-  //       res.status(401).send({ error: "Auth failed" });
-  //     } else {
-  //       const jwtToken = req.headers?.authorization ?? "";
-  //       if (jwtToken && jwtToken.includes("JWT ")) {
-  //         jwt.verify(
-  //           jwtToken.split(" ")[1],
-  //           process.env["SECRET_TOKEN"],
-  //           function (err, decoded) {
-  //             isError = !!err;
-  //             error = err;
-  //             if (!err) {
-  //               req.user = decoded;
-  //               next();
-  //             } else {
-  //               res.status(401).send({ error: "Auth failed" });
-  //             }
-  //           }
-  //         );
-  //       } else {
-  //         res.status(401).send({ error: "Auth failed" });
-  //       }
-  //     }
-  //   }
-  // });
   app.use(
     fileUpload({
       useTempFiles: true,
