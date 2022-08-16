@@ -3,6 +3,15 @@
 Поддержка автора https://www.buymeacoffee.com/sacredneobi
 Поддержка автора https://secure.wayforpay.com/donate/sacreddeveloper
 
+Как установить:
+
+1. Склонировать репозиторий
+2. Выполнить команду для папки проекта npm i
+3. Выполнить команду для папки проекта npm run firstInit это создаст базу установить колонки и создаст пользователя admin с паролем admin для входа
+4. Перейти в папку server и выполнить настройку .env согласно примеру .env.example
+5. Перейти в папку client и выполнить настройку .env согласно примеру .env.example
+6. Запустить выполнение проекта npm start
+
 Ссылка на видео инструкцию установку https://youtu.be/1DTiG4J9EsA
 
 YouTube канале https://www.youtube.com/c/SACREDDEVELOPER
