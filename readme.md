@@ -83,6 +83,7 @@ someFunction("Привет YouTube");
 - [x] 🍊🍊 Muzaffar Abidov
 - [x] 🍌🍌 🔥 FIRELORD ZUKO 🔥 White Lotus
 - [x] Ivan
+- [x] Инквизитор
 - [x] Don Kihot
 - [x] 🥠🥠 Marchenko 🇺🇦
 - [x] Dumitru BURAC
