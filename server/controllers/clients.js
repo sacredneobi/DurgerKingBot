@@ -15,7 +15,7 @@ const post = (req, res, promiseError) => {
 };
 
 const get = (req, res) => {
-  const { search, id, ...other } = req.query;
+  const { search, id, limit, offset, ...other } = req.query;
 
   const searchCaption = search
     ? {
@@ -38,6 +38,8 @@ const get = (req, res) => {
         exclude: ["createdAt", "updatedAt", "deletedAt", "chatId"],
       },
       order: [["id", "ASC"]],
+      limit: parseInt(limit) ? parseInt(limit) : null,
+      offset: parseInt(offset) ? parseInt(offset) : null,
       ...other,
       where: where,
     })

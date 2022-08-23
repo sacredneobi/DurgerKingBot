@@ -30,7 +30,7 @@ const post = (req, res, promiseError) => {
 const get = async (req, res, promiseError) => {
   // await sleep(5000);
 
-  const { search, articleId, id, ...other } = req.query;
+  const { search, articleId, id, limit, offset, ...other } = req.query;
 
   const searchCaption = search
     ? { caption: { [Op.iLike]: `%${search}%` } }
@@ -79,6 +79,8 @@ const get = async (req, res, promiseError) => {
         },
       ],
       order: [["id", "ASC"]],
+      limit: parseInt(limit) ? parseInt(limit) : null,
+      offset: parseInt(offset) ? parseInt(offset) : null,
       ...other,
       where: where,
     })

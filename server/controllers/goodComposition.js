@@ -5,7 +5,7 @@ const jwtCheck = require("../utils/jwtMiddleware");
 const model = models.compositionOrder;
 
 const get = (req, res) => {
-  const { id, ...other } = req.query;
+  const { id, limit, offset, ...other } = req.query;
 
   const searchId = id ? { id } : null;
 
@@ -26,6 +26,8 @@ const get = (req, res) => {
         },
       ],
       order: [["id", "DESC"]],
+      limit: parseInt(limit) ? parseInt(limit) : null,
+      offset: parseInt(offset) ? parseInt(offset) : null,
       ...other,
       where: where,
     })
