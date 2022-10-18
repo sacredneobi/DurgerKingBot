@@ -1,5 +1,8 @@
+if (process.env.MIGRATE_TOOL) {
+  require("dotenv").config();
+}
+
 const {
-  MIGRATE_TOOL,
   DEV_USERNAME,
   DEV_PASSWORD,
   DEV_DATABASE,
@@ -7,10 +10,6 @@ const {
   DEV_PORT,
   DEV_DIALECT
 } = process.env
-
-if (MIGRATE_TOOL) {
-  require("dotenv").config();
-}
 
 const dev = {
   username: DEV_USERNAME,
