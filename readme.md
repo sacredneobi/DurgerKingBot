@@ -6,9 +6,6 @@ https://youtu.be/2ZYR-jo8QI4
 
 Проект реализуемый на:
 
-Поддержка автора https://www.buymeacoffee.com/sacredneobi
-Поддержка автора https://secure.wayforpay.com/donate/sacreddeveloper
-
 Как установить:
 
 1. Склонировать репозиторий
