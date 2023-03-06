@@ -1,6 +1,6 @@
 демо сервер с реализацией больших возможностей 
 
-https://sacredapp.us/root/bot 
+https://sacredapp.us/root
 
 логин и пароль admin
 
