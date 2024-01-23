@@ -1,4 +1,5 @@
 import { Routes, Route, useParams, Navigate } from "react-router-dom";
+import { Box } from "..";
 
 const flat = (items, array, baseName) => {
   if (Array.isArray(items)) {
@@ -13,7 +14,6 @@ const flat = (items, array, baseName) => {
 };
 
 const Main = (props) => {
-  const { caption = "WINDOWS NOT FOUND" } = props;
   return (
     <div
       style={{
@@ -24,65 +24,31 @@ const Main = (props) => {
         height: "100%",
       }}
     >
-      {caption}
       <div
         style={{
           display: "flex",
-          justifyContent: "flex-end",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          width: 302,
-          gap: 4,
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
-        <div
-          style={{
-            width: 100,
-            height: 100,
-            backgroundColor: "#8bbee2",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            borderRadius: 4,
-            flexGrow: 2,
+        <div>ПРИМЕР ПРОЕКТА</div>
+        <Box
+          sx={{
+            fontSize: 32,
+            backgroundColor: "primary.main",
+            p: 1,
+            borderRadius: 2,
+            color: "primary.contrastText",
           }}
-        ></div>
-        <div
-          style={{
-            width: 100,
-            height: 100,
-            backgroundColor: "#8bbee2",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexGrow: 1,
-            borderRadius: 4,
-          }}
-        ></div>
-        <div
-          style={{
-            width: 100,
-            height: 100,
-            backgroundColor: "#8bbee2",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexGrow: 1,
-            borderRadius: 4,
-          }}
-        ></div>
-        <div
-          style={{
-            width: 100,
-            height: 100,
-            backgroundColor: "#8bbee2",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexGrow: 1,
-            borderRadius: 4,
-          }}
-        ></div>
+        >
+          <a
+            href="https://sacredapp.us/root"
+            style={{ textDecoration: "none" }}
+          >
+            Полная версия
+          </a>
+        </Box>
       </div>
     </div>
   );

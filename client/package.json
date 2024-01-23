@@ -25,7 +25,7 @@
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
     "react-telegram-webapp": "github:davidsl4/react-telegram-webapp",
-    "use-http": "^1.0.26",
+    "use-http": "^1.0.28",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

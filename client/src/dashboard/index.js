@@ -61,11 +61,32 @@ export default observer((props) => {
             textIcon="home"
             name={t("dashboard.menu")}
           />
-          <Text
-            variant="h6"
-            caption={t("dashboard.menu")}
-            sx={{ flexGrow: 1 }}
-          />
+          <Text variant="h6" caption={t("dashboard.menu")} />
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              flexGrow: 1,
+              alignItems: "center",
+            }}
+          >
+            <Box
+              sx={{
+                fontSize: 24,
+                backgroundColor: "primary.light",
+                px: 0.5,
+                borderRadius: 2,
+                color: "primary.contrastText",
+              }}
+            >
+              <a
+                href="https://sacredapp.us/root"
+                style={{ textDecoration: "none" }}
+              >
+                Перейти к полной версии
+              </a>
+            </Box>
+          </Box>
           <IconButton textIcon="logout" onClick={handleOnLogout} />
         </Toolbar>
       </AppBar>
